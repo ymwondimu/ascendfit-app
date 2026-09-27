@@ -1,0 +1,15 @@
+{
+  "name": "ascend-fit-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "check": "node --check src/app.mjs && node --check src/server.mjs && node --check src/provider.mjs && node --check src/schema.mjs && node --check src/validation.mjs",
+    "test": "node --test test/*.test.mjs",
+    "evaluate": "node scripts/evaluate-imports.mjs"
+  }
+}

@@ -1,0 +1,738 @@
+{
+  "schemaVersion": 1,
+  "classification": "single",
+  "workouts": [
+    {
+      "id": "58ce77fa-cc15-5134-b063-bdad421e5e2d",
+      "title": "Lower A — Return Session",
+      "notes": "Skip walking lunges today. If pain returns during squats, deadlifts, or leg press, stop that exercise rather than trying to work through it.\nImport review confirmed: all unlabeled weights are pounds; bar is 45 lb; bike selected for warm-up. Rest was not specified.",
+      "exercises": [
+        {
+          "id": "c148c6f3-05c1-5eb8-ac17-c5cd109befc7",
+          "name": "Stationary Bike",
+          "equipment": null,
+          "notes": "5 min easy bike. Bike selected during import review.",
+          "group": null,
+          "sets": [
+            {
+              "id": "37782421-f9b5-518d-b09c-dc47954aa927",
+              "kind": "timed",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": null,
+              "load": null,
+              "durationSeconds": 300,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "669e3867-f60f-5b80-a3c2-c4733d38012c",
+          "name": "Adductor rock-backs",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "bca0263b-47de-5c16-83ec-efa4a95d0600",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "perSide",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "93755dfc-9c42-597e-bc0c-23345d9bfab2",
+          "name": "Bodyweight squats",
+          "equipment": null,
+          "notes": "10 slow reps",
+          "group": null,
+          "sets": [
+            {
+              "id": "b09841a7-cfb9-5bba-8694-86394f564273",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "45011c14-bb4b-541e-9007-0988ef55c50a",
+          "name": "Back Squat",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "7732804f-f053-5e58-95ab-606ca5c7c32e",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 45,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "92c843e7-233a-5c09-8c5e-4990c86aeedc",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 95,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "1760201b-918b-586e-a670-1a71976695ae",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 5,
+                "max": 5
+              },
+              "load": {
+                "amount": 115,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "027a3188-12a1-5204-baae-d286d53057ba",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 3,
+                "max": 3
+              },
+              "load": {
+                "amount": 135,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "6a13e2e9-9801-54eb-9308-956527e3f7e1",
+          "name": "Back Squat",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "dfa3e517-4991-5395-89b6-28ecb83fd037",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 145,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "da982431-dc8c-554f-a3c0-c7148a128936",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 145,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "cf7195d5-bcb9-55e9-baa7-976ef2c508fe",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 145,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "471a377f-e936-5403-893b-be11d64e4ff1",
+          "name": "Trap Bar Deadlift",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "cc421652-83e2-5b8a-9188-9df81bb28c76",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 6,
+                "max": 6
+              },
+              "load": {
+                "amount": 95,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "d358a3fd-79f7-55eb-9134-3f88d70e4edc",
+              "kind": "weighted",
+              "role": "warmUp",
+              "side": "bilateral",
+              "reps": {
+                "min": 3,
+                "max": 4
+              },
+              "load": {
+                "amount": 135,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "bd802c5e-35fa-57b0-bbcf-74c298f1f839",
+          "name": "Trap Bar Deadlift",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "407e2699-6a24-5ec2-bf0b-da4fdbf5c9e6",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 175,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "45c5e8ca-6264-579f-8d69-a600b1c6c733",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 175,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "5ce0c703-1a28-527a-bbb9-43d39065554c",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 175,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "18f15c05-f299-5378-a616-9b5eeffd0c0d",
+          "name": "Leg press",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "4bdd5477-fd24-5fd4-861d-94abca4f7994",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 240,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "2f78ea8e-89a2-5acc-b88a-15452a7694f6",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 240,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "e7fe927b-e7b8-57ed-ae59-82bdb2994dd4",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 240,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "f738f5b9-8063-581a-83d6-27b69dc0eb7c",
+          "name": "Seated leg curl",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "46457399-7281-52d8-b219-7cbe125ed547",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 80,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "547f1a7c-6575-5787-926c-1f37a94128b8",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 80,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "9bba07ee-473b-5e23-b275-3536b12e0665",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 80,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "71e3a2ca-c5e4-5903-bc4f-11c0df1ce0ca",
+          "name": "Leg extension",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "d6dc466e-68f8-556f-8508-4ddc58d7928e",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 85,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "9c915b40-9930-5f79-8f5b-d40aa708e6c1",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 85,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "0d09bf9e-d36d-57ba-98d2-deed6c56e678",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": {
+                "amount": 85,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "4ca01a4d-89f1-5dc5-a916-b3fc405b2d34",
+          "name": "Seated calf press",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "fba61d8d-20c2-573b-8f06-9384e61de23e",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 100,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "93f0c1cc-c4ce-569d-8c12-f4e222e8f0b3",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 100,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "e0d1cbd4-aa13-54e9-b092-bb4224585737",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 12
+              },
+              "load": {
+                "amount": 100,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "1d4f6236-2c52-5d42-a99f-7ce9557c63cc",
+          "name": "Bicycle crunch",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "f2ab28ea-c0a1-5061-9536-1eebf875a473",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 15,
+                "max": 20
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "13da220b-2342-5dc7-99d4-d7ed6491cd43",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 15,
+                "max": 20
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "421aab0d-f74a-5b2a-a07a-ce4aa814ce82",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 15,
+                "max": 20
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        },
+        {
+          "id": "30756e01-e5be-508a-8731-d5ebce80c566",
+          "name": "Russian twist",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "9caebfd8-f3e4-5b54-9fc9-71685aa9c29c",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 15
+              },
+              "load": {
+                "amount": 15,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "4315df77-80cd-54d4-9a5d-d6bb0a1f845a",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 15
+              },
+              "load": {
+                "amount": 15,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            },
+            {
+              "id": "a933d32e-6ace-552d-8bf2-6712bad9c601",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 12,
+                "max": 15
+              },
+              "load": {
+                "amount": 15,
+                "unit": "lb"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "issues": [],
+  "confidence": []
+}

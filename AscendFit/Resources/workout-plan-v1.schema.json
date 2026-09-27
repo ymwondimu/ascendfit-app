@@ -1,0 +1,582 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ascendfit:workout-plan:v1",
+  "title": "Ascend Fit WorkoutPlan v1 import envelope",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "none",
+        "single",
+        "multiple"
+      ]
+    },
+    "workouts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 12000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exercises": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "equipment": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 12000
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "notes": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 12000
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "group": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                        },
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "superset",
+                            "circuit"
+                          ]
+                        },
+                        "position": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 29
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "kind",
+                        "position"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "sets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "weighted",
+                          "bodyweight",
+                          "assistedBodyweight",
+                          "amrap",
+                          "timed",
+                          "distance"
+                        ]
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "warmUp",
+                          "working",
+                          "drop",
+                          "failure"
+                        ]
+                      },
+                      "side": {
+                        "type": "string",
+                        "enum": [
+                          "bilateral",
+                          "left",
+                          "right",
+                          "alternating",
+                          "perSide"
+                        ]
+                      },
+                      "reps": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "min": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 10000
+                              },
+                              "max": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 10000
+                              }
+                            },
+                            "required": [
+                              "min",
+                              "max"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "load": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "amount": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 100000
+                              },
+                              "unit": {
+                                "anyOf": [
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "kg",
+                                      "lb"
+                                    ]
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "amount",
+                              "unit"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "durationSeconds": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 86400
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "distance": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "amount": {
+                                "type": "number",
+                                "minimum": 0.000001,
+                                "maximum": 1000000
+                              },
+                              "unit": {
+                                "anyOf": [
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "m",
+                                      "km",
+                                      "mi"
+                                    ]
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "amount",
+                              "unit"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "effort": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "type": "string",
+                                "enum": [
+                                  "rpe",
+                                  "rir"
+                                ]
+                              },
+                              "value": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 10
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "value"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "tempo": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "eccentric": {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "enum": [
+                                      "controlled",
+                                      "explosive"
+                                    ]
+                                  },
+                                  "seconds": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 600
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "seconds"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "bottomPause": {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "enum": [
+                                      "controlled",
+                                      "explosive"
+                                    ]
+                                  },
+                                  "seconds": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 600
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "seconds"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "concentric": {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "enum": [
+                                      "controlled",
+                                      "explosive"
+                                    ]
+                                  },
+                                  "seconds": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 600
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "seconds"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "topPause": {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "type": "string",
+                                    "enum": [
+                                      "controlled",
+                                      "explosive"
+                                    ]
+                                  },
+                                  "seconds": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 600
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "seconds"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "required": [
+                              "eccentric",
+                              "bottomPause",
+                              "concentric",
+                              "topPause"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "restSeconds": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 86400
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "kind",
+                      "role",
+                      "side",
+                      "reps",
+                      "load",
+                      "durationSeconds",
+                      "distance",
+                      "effort",
+                      "tempo",
+                      "restSeconds"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1,
+                  "maxItems": 50
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "equipment",
+                "notes",
+                "group",
+                "sets"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 30
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "notes",
+          "exercises"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 5
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          "path": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 12000
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "sourceQuote": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 12000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "code",
+          "message",
+          "blocking",
+          "sourceQuote"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 300
+    },
+    "confidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "sourceQuote": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 12000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "level",
+          "sourceQuote"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 500
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "classification",
+    "workouts",
+    "issues",
+    "confidence"
+  ],
+  "additionalProperties": false
+}

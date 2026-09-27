@@ -1,0 +1,46 @@
+.DS_Store
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Local workout data, exports, and private configuration
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.db3
+*.private.json
+*.local.json
+workout-history-*.json
+Exports/
+LocalData/
+Secrets/
+.secrets/
+
+# Signing material and generated Apple artifacts
+*.p8
+*.p12
+*.pem
+*.key
+*.mobileprovision
+*.xcarchive/
+*.xcresult/
+*.ipa
+*.dSYM/
+.swiftpm/
+
+# Logs and coverage output
+*.log
+coverage/

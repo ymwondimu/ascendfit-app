@@ -1,0 +1,113 @@
+name: AscendFit
+
+options:
+  bundleIdPrefix: com.ascendfit
+  deploymentTarget:
+    iOS: "18.0"
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+targets:
+  AscendFit:
+    type: application
+    platform: iOS
+    sources:
+      - path: AscendFit
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ascendfit.app
+        PRODUCT_NAME: AscendFit
+        PRODUCT_MODULE_NAME: AscendFit
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Ascend Fit
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.healthcare-fitness
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+    entitlements:
+      path: AscendFitShare/App.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.ascendfit.app]
+    dependencies:
+      - target: AscendFitShare
+        embed: true
+      - sdk: libsqlite3.tbd
+
+  AscendFitShare:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: AscendFitShare
+      - path: Shared
+    entitlements:
+      path: AscendFitShare/Share.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.ascendfit.app]
+    info:
+      path: AscendFitShare/Info.plist
+      properties:
+        CFBundleDisplayName: Add to Ascend Fit
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsText: true
+              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+              NSExtensionActivationSupportsFileWithMaxCount: 1
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShareViewController
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ascendfit.app.share
+        PRODUCT_NAME: AscendFitShare
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+        TARGETED_DEVICE_FAMILY: "1"
+
+  AscendFitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AscendFitTests
+    dependencies:
+      - target: AscendFit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ascendfit.app.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+  AscendFitUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AscendFitUITests
+    dependencies:
+      - target: AscendFit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ascendfit.app.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: AscendFit
+
+schemes:
+  AscendFit:
+    build:
+      targets:
+        AscendFit: all
+        AscendFitShare: all
+        AscendFitTests: [test]
+        AscendFitUITests: [test]
+    test:
+      gatherCoverageData: true
+      targets:
+        - AscendFitTests
+        - AscendFitUITests

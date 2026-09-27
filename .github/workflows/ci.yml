@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Backend/package-lock.json
+      - run: npm ci
+        working-directory: Backend
+      - run: npm run check
+        working-directory: Backend
+      - run: npm test
+        working-directory: Backend
+
+  ios:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test iOS app
+        run: >-
+          xcodebuild test
+          -project AscendFit.xcodeproj
+          -scheme AscendFit
+          -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro'
+          -derivedDataPath .build/DerivedData
+          CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=-

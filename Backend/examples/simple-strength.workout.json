@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "classification": "single",
+  "workouts": [
+    {
+      "id": "527888c7-3621-514e-addd-df15ab84f743",
+      "title": "Simple strength",
+      "notes": "A synthetic, fully specified format example; not a training recommendation.",
+      "exercises": [
+        {
+          "id": "a9e8eab3-e630-5207-8f65-a4d814bc1a09",
+          "name": "Back Squat",
+          "equipment": "Barbell",
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "3b677e87-25f0-57b1-9dd8-91fff55ae141",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 50,
+                "unit": "kg"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": 90
+            },
+            {
+              "id": "ba9fea93-3317-507f-a97e-687478811f0f",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 50,
+                "unit": "kg"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": 90
+            },
+            {
+              "id": "b98a0029-4803-5c80-8c41-4020a65122cf",
+              "kind": "weighted",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 8,
+                "max": 8
+              },
+              "load": {
+                "amount": 50,
+                "unit": "kg"
+              },
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": 90
+            }
+          ]
+        },
+        {
+          "id": "3749e883-d3f0-598f-93d6-d9d0b5e8fd82",
+          "name": "Push-Up",
+          "equipment": null,
+          "notes": null,
+          "group": null,
+          "sets": [
+            {
+              "id": "7b516111-80ad-5887-9d00-19f87a6bf45d",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": 60
+            },
+            {
+              "id": "b1289f73-c745-53a4-8b93-e7a908144503",
+              "kind": "bodyweight",
+              "role": "working",
+              "side": "bilateral",
+              "reps": {
+                "min": 10,
+                "max": 10
+              },
+              "load": null,
+              "durationSeconds": null,
+              "distance": null,
+              "effort": null,
+              "tempo": null,
+              "restSeconds": 60
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "issues": [],
+  "confidence": []
+}

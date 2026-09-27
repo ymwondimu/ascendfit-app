@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><style>body{margin:0;background:#E9E6E0;font-family:-apple-system,"SF Pro Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#1a1a1a}a:hover{color:#C85F1A}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-grp{font:600 11px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(0,0,0,.45);margin:36px 0 16px}.dv-opts{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px;width:393px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:500 12px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.7)}.dv-note{margin:0;font:400 11.5px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.58);text-wrap:pretty}.dv-note b{color:rgba(0,0,0,.8);font-weight:600}.dv-opt:target .dv-oid{background:#C85F1A;color:#fff}.dv-next{margin:28px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}.dv-intro{max-width:760px;font:400 13px/1.55 system-ui,sans-serif;color:rgba(0,0,0,.7);margin:0 0 8px}.dv-intro b{font-weight:600;color:#1a1a1a}@keyframes prpulse{0%{box-shadow:0 0 0 0 rgba(183,164,255,.55)}100%{box-shadow:0 0 0 14px rgba(183,164,255,0)}}</style></helmet>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Color scheme options — same UI as <a class="dv-oid" href="#1a">1a</a> / <a class="dv-oid" href="#1h">1h</a>, only the palette changes</span></div>
+<div class="dv-opts" style="flex-direction:column;gap:44px">
+<div class="dv-opt" id="2a" style="width:auto"><div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Sage on moss-black</div>
+<div style="display:flex;gap:20px;align-items:flex-start"><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0C0E0D;color:#EEF2EE">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(238,242,238,0.62);letter-spacing:0.02em">24:18</div>
+    <div style="font-size:13px;color:rgba(238,242,238,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(238,242,238,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(238,242,238,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(238,242,238,0.4)">lb</span><span style="font-size:36px;color:rgba(238,242,238,0.4);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(238,242,238,0.62);margin-top:14px">Set 2 of 4 · <span style="color:#93CFA6">Working</span></div>
+    <div style="font-size:13px;color:rgba(238,242,238,0.4);margin-top:6px">Last time: 150 × 8, 8, 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+    <div style="background:#151917;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#EEF2EE">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(238,242,238,0.4);margin-top:-2px">lb · 5</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#EEF2EE">+</div>
+    </div>
+    <div style="background:#151917;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#EEF2EE">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(238,242,238,0.4);margin-top:-2px">reps</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#EEF2EE">+</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#93CFA6;color:#0B1A11;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(238,242,238,0.62);text-align:center;margin-top:18px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="display:flex;font-size:11px;color:rgba(238,242,238,0.4);padding:0 0 6px;gap:12px;text-transform:uppercase;letter-spacing:0.06em"><div style="width:24px">Set</div><div style="flex:1">Planned</div><div style="width:84px">Actual</div><div style="width:20px"></div></div>
+    <sc-for list="{{ setsA }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(238,242,238,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#93CFA6;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0C0E0D;color:#EEF2EE">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(238,242,238,0.4)">Thursday, Sep 5</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#1F2622;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(238,242,238,0.62)">YW</div>
+  </div>
+  <div style="margin-top:28px;background:#151917;border-radius:20px;padding:22px 20px 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(238,242,238,0.08);font-size:12px;color:rgba(238,242,238,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(238,242,238,0.62)"></span>from Claude · today</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:14px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(238,242,238,0.62);margin-top:8px">7 exercises · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(238,242,238,0.62);margin-top:14px;line-height:1.4">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding.”</div>
+    <div style="margin-top:22px;height:60px;border-radius:18px;background:#93CFA6;color:#0B1A11;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Start</div>
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(238,242,238,0.62);margin-top:4px">Preview workout</div>
+  </div>
+  <div style="margin-top:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(238,242,238,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(238,242,238,0.4)">3 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ weekA }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(238,242,238,0.4)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;border-top:1px solid rgba(238,242,238,0.09);padding-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:600">Pull Day A</div><div style="font-size:13px;color:rgba(238,242,238,0.4)">Tuesday</div></div>
+    <div style="display:flex;gap:28px;margin-top:12px">
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">48<span style="font-size:13px;font-weight:400;color:rgba(238,242,238,0.4)"> min</span></div><div style="font-size:11px;color:rgba(238,242,238,0.4)">Duration</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">14,320<span style="font-size:13px;font-weight:400;color:rgba(238,242,238,0.4)"> lb</span></div><div style="font-size:11px;color:rgba(238,242,238,0.4)">Volume</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600;color:#93CFA6">1</div><div style="font-size:11px;color:rgba(238,242,238,0.4)">PR · Row</div></div>
+    </div>
+  </div>
+</div>
+</x-import></div>
+<p class="dv-note" style="max-width:806px"><b>Accent #93CFA6</b> (oklch 80% · 0.08 · 155). Ground #0C0E0D with faintly green-leaning charcoals (#151917 → #293029) so the accent feels grown from the surface, not stuck on. Ink #EEF2EE. Calm, botanical, reads as “recovery/health” without the neon-green trope — chroma is deliberately low.</p></div>
+<div class="dv-opt" id="2b" style="width:auto"><div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Ivory on graphite (near-monochrome)</div>
+<div style="display:flex;gap:20px;align-items:flex-start"><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0E0E0E;color:#F2EFE9">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(242,239,233,0.62);letter-spacing:0.02em">24:18</div>
+    <div style="font-size:13px;color:rgba(242,239,233,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(242,239,233,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(242,239,233,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(242,239,233,0.4)">lb</span><span style="font-size:36px;color:rgba(242,239,233,0.4);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(242,239,233,0.62);margin-top:14px">Set 2 of 4 · <span style="color:#E9DFC8">Working</span></div>
+    <div style="font-size:13px;color:rgba(242,239,233,0.4);margin-top:6px">Last time: 150 × 8, 8, 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+    <div style="background:#1A1A19;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F2EFE9">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(242,239,233,0.4);margin-top:-2px">lb · 5</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F2EFE9">+</div>
+    </div>
+    <div style="background:#1A1A19;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F2EFE9">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(242,239,233,0.4);margin-top:-2px">reps</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F2EFE9">+</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#E9DFC8;color:#1A1712;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(242,239,233,0.62);text-align:center;margin-top:18px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="display:flex;font-size:11px;color:rgba(242,239,233,0.4);padding:0 0 6px;gap:12px;text-transform:uppercase;letter-spacing:0.06em"><div style="width:24px">Set</div><div style="flex:1">Planned</div><div style="width:84px">Actual</div><div style="width:20px"></div></div>
+    <sc-for list="{{ setsB }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(242,239,233,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#E9DFC8;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0E0E0E;color:#F2EFE9">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(242,239,233,0.4)">Thursday, Sep 5</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#262624;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(242,239,233,0.62)">YW</div>
+  </div>
+  <div style="margin-top:28px;background:#1A1A19;border-radius:20px;padding:22px 20px 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(242,239,233,0.08);font-size:12px;color:rgba(242,239,233,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(242,239,233,0.62)"></span>from Claude · today</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:14px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(242,239,233,0.62);margin-top:8px">7 exercises · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(242,239,233,0.62);margin-top:14px;line-height:1.4">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding.”</div>
+    <div style="margin-top:22px;height:60px;border-radius:18px;background:#E9DFC8;color:#1A1712;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Start</div>
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(242,239,233,0.62);margin-top:4px">Preview workout</div>
+  </div>
+  <div style="margin-top:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(242,239,233,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(242,239,233,0.4)">3 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ weekB }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(242,239,233,0.4)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;border-top:1px solid rgba(242,239,233,0.09);padding-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:600">Pull Day A</div><div style="font-size:13px;color:rgba(242,239,233,0.4)">Tuesday</div></div>
+    <div style="display:flex;gap:28px;margin-top:12px">
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">48<span style="font-size:13px;font-weight:400;color:rgba(242,239,233,0.4)"> min</span></div><div style="font-size:11px;color:rgba(242,239,233,0.4)">Duration</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">14,320<span style="font-size:13px;font-weight:400;color:rgba(242,239,233,0.4)"> lb</span></div><div style="font-size:11px;color:rgba(242,239,233,0.4)">Volume</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600;color:#E9DFC8">1</div><div style="font-size:11px;color:rgba(242,239,233,0.4)">PR · Row</div></div>
+    </div>
+  </div>
+</div>
+</x-import></div>
+<p class="dv-note" style="max-width:806px"><b>Accent #E9DFC8</b> — the “next thing” is simply the brightest, warmest thing on screen: bone ivory against true graphite (#0E0E0E → #30302E), all other ink cooler and dimmer. Most editorial and the hardest to mistake for any fitness app; the trade-off is that PR/active states lean on brightness rather than hue, so the 10–16 % accent fills matter more.</p></div>
+<div class="dv-opt" id="2c" style="width:auto"><div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Lilac on ink-violet</div>
+<div style="display:flex;gap:20px;align-items:flex-start"><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62);letter-spacing:0.02em">24:18</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(240,238,245,0.4)">lb</span><span style="font-size:36px;color:rgba(240,238,245,0.4);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:14px">Set 2 of 4 · <span style="color:#B7A4FF">Working</span></div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">Last time: 150 × 8, 8, 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">lb · 5</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">+</div>
+    </div>
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">reps</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">+</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);text-align:center;margin-top:18px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="display:flex;font-size:11px;color:rgba(240,238,245,0.4);padding:0 0 6px;gap:12px;text-transform:uppercase;letter-spacing:0.06em"><div style="width:24px">Set</div><div style="flex:1">Planned</div><div style="width:84px">Actual</div><div style="width:20px"></div></div>
+    <sc-for list="{{ setsC }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#B7A4FF;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import><x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Thursday, Sep 5</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(240,238,245,0.62)">YW</div>
+  </div>
+  <div style="margin-top:28px;background:#15151B;border-radius:20px;padding:22px 20px 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(240,238,245,0.62)"></span>from Claude · today</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:14px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:8px">7 exercises · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);margin-top:14px;line-height:1.4">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding.”</div>
+    <div style="margin-top:22px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Start</div>
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(240,238,245,0.62);margin-top:4px">Preview workout</div>
+  </div>
+  <div style="margin-top:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">3 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ weekC }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(240,238,245,0.4)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;border-top:1px solid rgba(240,238,245,0.09);padding-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:600">Pull Day A</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Tuesday</div></div>
+    <div style="display:flex;gap:28px;margin-top:12px">
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">48<span style="font-size:13px;font-weight:400;color:rgba(240,238,245,0.4)"> min</span></div><div style="font-size:11px;color:rgba(240,238,245,0.4)">Duration</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">14,320<span style="font-size:13px;font-weight:400;color:rgba(240,238,245,0.4)"> lb</span></div><div style="font-size:11px;color:rgba(240,238,245,0.4)">Volume</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600;color:#B7A4FF">1</div><div style="font-size:11px;color:rgba(240,238,245,0.4)">PR · Row</div></div>
+    </div>
+  </div>
+</div>
+</x-import></div>
+<p class="dv-note" style="max-width:806px"><b>Accent #B7A4FF</b> (oklch 78% · 0.12 · 295). Ground #0B0B0F with barely-violet graphites (#15151B → #2A2932). Distinct from Strong’s blue and every red/orange competitor; nocturnal and premium. Note this relaxes the original “never blue-tinted” rule — the tint is ~1 % chroma, visible only next to a true neutral.</p></div>
+</div>
+<p class="dv-next">Try next: "go with <a class="dv-oid" href="#2a">2a</a>, recolor everything in turn 1" · "try <a class="dv-oid" href="#2b">2b</a> with a slightly warmer ivory" · "show <a class="dv-oid" href="#2c">2c</a> in light mode"</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">AscendFit — iOS 18 mockups, 393 × 852 pt · recolored to <a class="dv-oid" href="#2c">2c</a> lilac</span></div>
+<p class="dv-intro"><b>Assumptions.</b> Dark-first; one accent (#B7A4FF) reserved for the next action, the active set, the timer ring and PRs. Numerals in SF Pro Rounded (falls back to ui-rounded here), everything else SF Pro Text. Grouped tonal fills (r16–20, no borders, no shadows) instead of card stacks. In-session tap targets ≥56 pt. Units: lb. Sample workout is "Push Day A" from Claude. <b>Handoff:</b> every screen is inline-styled with literal token values; the token/type/spacing sheet at the bottom (<a class="dv-oid" href="#1w">1w</a>) names them for SwiftUI.</p>
+<p class="dv-intro"><b>Three Active Workout directions</b> differ only in how the hero and steppers are arranged — <a class="dv-oid" href="#1a">1a</a> stacked hero with paired steppers, <a class="dv-oid" href="#1b">1b</a> split columns with vertical steppers, <a class="dv-oid" href="#1c">1c</a> ledger (hero sits inside the set table). The remaining states (<a class="dv-oid" href="#1d">1d</a>–<a class="dv-oid" href="#1g">1g</a>) are built on <a class="dv-oid" href="#1a">1a</a>.</p>
+
+<div class="dv-grp">01 · Active Workout — three directions</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a"><div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Stacked hero · paired steppers</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62);letter-spacing:0.02em">24:18</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(240,238,245,0.4)">lb</span><span style="font-size:36px;color:rgba(240,238,245,0.4);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:14px">Set 2 of 4 · <span style="color:#B7A4FF">Working</span></div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">Last time: 150 × 8, 8, 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">lb · 5</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">+</div>
+    </div>
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center">
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">−</div>
+      <div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">reps</div></div>
+      <div style="height:64px;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px;color:#F0EEF5">+</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);text-align:center;margin-top:18px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="display:flex;font-size:11px;color:rgba(240,238,245,0.4);padding:0 0 6px;gap:12px;text-transform:uppercase;letter-spacing:0.06em"><div style="width:24px">Set</div><div style="flex:1">Planned</div><div style="width:84px">Actual</div><div style="width:20px"></div></div>
+    <sc-for list="{{ sets }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#B7A4FF;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Interaction.</b> Steppers: ±5 lb / ±1 rep per tap, long-press to repeat, tap the centre value to type. Set rows swipe left to skip, right to add a set. Overflow (···) holds Swap exercise, Edit plan, End workout. <b>Motion.</b> On Log set the hero numerals slide up 24 pt and fade, set 3 slides in from below (spring 0.35 s); the logged row gets its ✓ with a 120 ms ease. Rest bar then rises (see <a class="dv-oid" href="#1d">1d</a>).</p></div>
+
+<div class="dv-opt" id="1b"><div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Split columns · vertical steppers</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">24:18</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps &nbsp;·&nbsp; Set 2 of 4 · <span style="color:#B7A4FF">Working</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px">
+    <div style="background:#15151B;border-radius:20px;display:flex;flex-direction:column;align-items:center;padding:8px 0">
+      <div style="height:60px;width:100%;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div>
+      <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:64px;font-weight:600;line-height:1;letter-spacing:-0.02em">155</div>
+      <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">lb</div>
+      <div style="height:60px;width:100%;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div>
+    </div>
+    <div style="background:#15151B;border-radius:20px;display:flex;flex-direction:column;align-items:center;padding:8px 0">
+      <div style="height:60px;width:100%;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div>
+      <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:64px;font-weight:600;line-height:1;letter-spacing:-0.02em">8</div>
+      <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">reps</div>
+      <div style="height:60px;width:100%;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:rgba(240,238,245,0.4);text-align:center;margin-top:12px">Last time: 150 × 8, 8, 7</div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);text-align:center;margin-top:16px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <sc-for list="{{ sets }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#B7A4FF;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Why.</b> Weight and reps become two independent thumb columns — the + is always above the number, − below, so muscle memory works without looking. Costs 8 pt of numeral size vs <a class="dv-oid" href="#1a">1a</a>. <b>Motion.</b> Numerals tick with a vertical digit roll (0.18 s) on each tap.</p></div>
+
+<div class="dv-opt" id="1c"><div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Ledger · hero inside the set table</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">24:18</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:22px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;height:40px;gap:12px;color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui;font-size:15px"><div style="width:24px;font-size:13px">1</div><div style="flex:1;text-decoration:line-through;text-decoration-color:rgba(240,238,245,0.25)">155 × 8</div><div style="color:rgba(240,238,245,0.62)">155 × 8</div><div style="width:20px;text-align:right;color:#B7A4FF">✓</div></div>
+    <div style="background:#15151B;border-radius:20px;padding:18px 16px 16px;margin:4px -4px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><div style="font-size:13px;color:#B7A4FF;font-weight:600">Set 2 of 4 · Working</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Last: 150 × 8</div></div>
+      <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:64px;font-weight:600;line-height:1;letter-spacing:-0.02em;margin-top:10px;display:flex;align-items:baseline;gap:8px"><span>155</span><span style="font-size:18px;color:rgba(240,238,245,0.4);font-weight:500">lb</span><span style="font-size:30px;color:rgba(240,238,245,0.4);font-weight:400;margin-left:8px">×</span><span>8</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:16px">
+        <div style="height:56px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:17px;font-weight:600">−5</div>
+        <div style="height:56px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:17px;font-weight:600">+5</div>
+        <div style="height:56px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:17px;font-weight:600">−1</div>
+        <div style="height:56px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-family:ui-rounded,-apple-system,system-ui;font-size:17px;font-weight:600">+1</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:6px;font-size:11px;color:rgba(240,238,245,0.4);text-align:center"><div style="grid-column:span 2">weight, lb</div><div style="grid-column:span 2">reps</div></div>
+    </div>
+    <div style="display:flex;align-items:center;height:40px;gap:12px;color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui;font-size:15px;border-top:1px solid rgba(240,238,245,0.09)"><div style="width:24px;font-size:13px">3</div><div style="flex:1">155 × 8</div><div style="width:20px"></div></div>
+    <div style="display:flex;align-items:center;height:40px;gap:12px;color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui;font-size:15px;border-top:1px solid rgba(240,238,245,0.09)"><div style="width:24px;font-size:13px">4</div><div style="flex:1">165 × 6</div><div style="width:20px"></div></div>
+  </div>
+  <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);text-align:center;margin-top:22px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Why.</b> The hero is literally the current row of the ledger, expanded — done sets above, pending below, so position in the exercise is spatial, not a caption. Log set is pinned to the thumb zone. <b>Motion.</b> On log, the expanded block collapses to a 40 pt row and the next row inflates beneath it (0.4 s spring, shared-element).</p></div>
+</div>
+
+<div class="dv-grp">02 · Active Workout — states (built on 1a)</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1d"><div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Resting · collapsed rest bar</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">25:02</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center;opacity:0.55">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(240,238,245,0.4)">lb</span><span style="font-size:36px;color:rgba(240,238,245,0.4);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:14px">Set 3 of 4 · Up next</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">Last time: 150 × 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;opacity:0.55">
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center"><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div><div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">lb · 5</div></div><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div></div>
+    <div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center"><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div><div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">reps</div></div><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div></div>
+  </div>
+  <div style="margin-top:14px;padding-bottom:34px">
+    <sc-for list="{{ setsRest }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#B7A4FF;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;bottom:12px;height:72px;border-radius:22px;background:#201F27;display:flex;align-items:center;padding:0 12px 0 14px;gap:14px">
+    <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(240,238,245,0.12)" stroke-width="3"></circle><circle cx="22" cy="22" r="19" fill="none" stroke="#B7A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="43" transform="rotate(-90 22 22)"></circle></svg>
+    <div style="flex:1"><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:26px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums">1:12</div><div style="font-size:12px;color:rgba(240,238,245,0.62);margin-top:4px">Rest · next 155 × 8</div></div>
+    <div style="height:48px;padding:0 14px;border-radius:14px;background:rgba(240,238,245,0.08);display:flex;align-items:center;font-size:15px;font-weight:600">+30s</div>
+    <div style="height:48px;padding:0 14px;border-radius:14px;background:rgba(240,238,245,0.08);display:flex;align-items:center;font-size:15px;font-weight:600">Skip</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Motion.</b> Immediately after Log set the bar rises from below the safe area (spring, 0.45 s) and the hero/steppers dim to 55 % — the rest is now “the next thing”, so it owns the accent. Ring drains clockwise. Drag the bar up or tap the time to expand (<a class="dv-oid" href="#1e">1e</a>). Timer also posts a Live Activity (<a class="dv-oid" href="#1u">1u</a>). At 0:00 the bar slides away and the hero returns to full opacity; a single haptic, no sound by default.</p></div>
+
+<div class="dv-opt" id="1e"><div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Resting · expanded sheet</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px;opacity:0.35">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">25:02</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62);text-align:right">···</div>
+  </div>
+  <div style="margin-top:12px;opacity:0.35">
+    <div style="font-size:22px;font-weight:600">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;top:250px;border-radius:38px 38px 0 0;background:#15151B;padding:10px 20px 0;display:flex;flex-direction:column;align-items:center">
+    <div style="width:36px;height:5px;border-radius:3px;background:rgba(240,238,245,0.2)"></div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:22px">Rest</div>
+    <div style="position:relative;width:240px;height:240px;margin-top:18px;display:flex;align-items:center;justify-content:center">
+      <svg width="240" height="240" viewBox="0 0 240 240" style="position:absolute;inset:0"><circle cx="120" cy="120" r="112" fill="none" stroke="rgba(240,238,245,0.1)" stroke-width="6"></circle><circle cx="120" cy="120" r="112" fill="none" stroke="#B7A4FF" stroke-width="6" stroke-linecap="round" stroke-dasharray="703.7" stroke-dashoffset="253" transform="rotate(-90 120 120)"></circle></svg>
+      <div style="text-align:center"><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">1:12</div><div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:8px">of 2:00</div></div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:28px;width:100%">
+      <div style="flex:1;height:60px;border-radius:18px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600">−30s</div>
+      <div style="flex:1;height:60px;border-radius:18px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600">+30s</div>
+    </div>
+    <div style="width:100%;margin-top:28px;border-top:1px solid rgba(240,238,245,0.09);padding-top:16px">
+      <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Up next</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:6px"><div style="font-size:17px;font-weight:600">Set 3 of 4</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">155 <span style="font-size:15px;color:rgba(240,238,245,0.4);font-weight:400">lb ×</span> 8</div></div>
+      <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);margin-top:8px">“Same bar speed as set one. If it slows, drop to 150.”</div>
+    </div>
+    <div style="margin-top:auto;width:100%;padding-bottom:34px"><div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Skip rest</div></div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Interaction.</b> A native .presentationDetents sheet (medium/large). Skip rest is primary here because it is the only thing the user wants sooner than the timer. Swipe down or tap outside returns to the collapsed bar with the ring shrinking into the 44 pt version (matched geometry).</p></div>
+
+<div class="dv-opt" id="1f"><div class="dv-olabel"><a class="dv-oid" href="#1f">1f</a>PR · logged set beat previous best</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">31:47</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:13px;background:rgba(183,164,255,0.16);color:#B7A4FF;font-size:12px;font-weight:600;letter-spacing:0.04em;animation:prpulse 1.2s ease-out 1">NEW BEST · 165 × 6</div>
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px;margin-top:14px;color:#B7A4FF"><span>165</span><span style="font-size:22px;font-weight:500;color:rgba(183,164,255,0.55)">lb</span><span style="font-size:36px;color:rgba(183,164,255,0.55);font-weight:400">×</span><span>6</span></div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:14px">Set 4 of 4 · Logged</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:6px">Previous best: 160 × 6 · 3 weeks ago</div>
+  </div>
+  <div style="margin-top:28px;padding-bottom:34px">
+    <sc-for list="{{ setsPR }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#B7A4FF;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:auto;padding-bottom:34px;display:flex;flex-direction:column;gap:10px">
+    <div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Next exercise · Incline DB Press</div>
+    <div style="height:48px;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(240,238,245,0.62)">Add another set</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Motion.</b> The logged numerals tint to accent over 0.25 s and the NEW BEST pill emits one 14 pt ring pulse (1.2 s, ease-out) — then everything settles; no confetti, no sound. The PR row keeps a faint accent fill so it is findable in History. The rest bar still rises beneath as usual unless this was the final set.</p></div>
+
+<div class="dv-opt" id="1g"><div class="dv-olabel"><a class="dv-oid" href="#1g">1g</a>Active Workout · light mode</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#F2F1F5;color:#18161F">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+    <div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(24,22,31,0.62)">24:18</div>
+    <div style="font-size:13px;color:rgba(24,22,31,0.62)">Exercise 3 of 7</div>
+    <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:22px;letter-spacing:1px;color:rgba(24,22,31,0.62)">···</div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div>
+    <div style="font-size:13px;color:rgba(24,22,31,0.42);margin-top:2px">Chest · Triceps</div>
+  </div>
+  <div style="margin-top:28px;text-align:center">
+    <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em;display:flex;align-items:baseline;justify-content:center;gap:10px"><span>155</span><span style="font-size:22px;font-weight:500;color:rgba(24,22,31,0.42)">lb</span><span style="font-size:36px;color:rgba(24,22,31,0.42);font-weight:400">×</span><span>8</span></div>
+    <div style="font-size:15px;color:rgba(24,22,31,0.62);margin-top:14px">Set 2 of 4 · <span style="color:#6A4FD6">Working</span></div>
+    <div style="font-size:13px;color:rgba(24,22,31,0.42);margin-top:6px">Last time: 150 × 8, 8, 7</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+    <div style="background:#FFFFFF;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center"><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div><div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(24,22,31,0.42);margin-top:-2px">lb · 5</div></div><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div></div>
+    <div style="background:#FFFFFF;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center"><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div><div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">8</div><div style="font-size:11px;color:rgba(24,22,31,0.42);margin-top:-2px">reps</div></div><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div></div>
+  </div>
+  <div style="margin-top:14px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div>
+  <div style="font-size:14px;font-style:italic;color:rgba(24,22,31,0.62);text-align:center;margin-top:18px">“Touch chest, pause one count.”</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <sc-for list="{{ setsLight }}" as="s" hint-placeholder-count="4">
+      <div style="display:flex;align-items:center;height:46px;gap:12px;border-top:1px solid rgba(24,22,31,0.1);border-radius:10px;padding:0 4px;margin:0 -4px;background:{{ s.bg }}">
+        <div style="width:24px;font-size:13px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.numColor }}">{{ s.n }}</div>
+        <div style="flex:1;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.plan }}</div>
+        <div style="width:84px;font-size:15px;font-family:ui-rounded,-apple-system,system-ui;color:{{ s.color }}">{{ s.actual }}</div>
+        <div style="width:20px;text-align:right;color:#6A4FD6;font-size:15px">{{ s.mark }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Light tokens.</b> Background #F2F1F5 (warm, not blue), surfaces #FFFFFF, secondary surface #E8E6EE. Accent fill stays #B7A4FF with near-black label; accent used as text darkens to #6A4FD6 to hold 4.5:1.</p></div>
+</div>
+
+<div class="dv-grp">03 · Today (Home)</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1h"><div class="dv-olabel"><a class="dv-oid" href="#1h">1h</a>Today · workout queued</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Thursday, Sep 5</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(240,238,245,0.62)">YW</div>
+  </div>
+  <div style="margin-top:28px;background:#15151B;border-radius:20px;padding:22px 20px 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(240,238,245,0.62)"></span>from Claude · today</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:14px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:8px">7 exercises · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);margin-top:14px;line-height:1.4">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding.”</div>
+    <div style="margin-top:22px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Start</div>
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(240,238,245,0.62);margin-top:4px">Preview workout</div>
+  </div>
+  <div style="margin-top:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">3 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ week }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(240,238,245,0.4)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;border-top:1px solid rgba(240,238,245,0.09);padding-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:600">Pull Day A</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Tuesday</div></div>
+    <div style="display:flex;gap:28px;margin-top:12px">
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">48<span style="font-size:13px;font-weight:400;color:rgba(240,238,245,0.4)"> min</span></div><div style="font-size:11px;color:rgba(240,238,245,0.4)">Duration</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">14,320<span style="font-size:13px;font-weight:400;color:rgba(240,238,245,0.4)"> lb</span></div><div style="font-size:11px;color:rgba(240,238,245,0.4)">Volume</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600;color:#B7A4FF">1</div><div style="font-size:11px;color:rgba(240,238,245,0.4)">PR · Row</div></div>
+    </div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Structure.</b> One tonal hero, then grouped sections split by thin dividers — no card stack. The week strip marks done days with ✓, today with an accent outline. <b>Motion.</b> Start pushes to Active Workout with the hero title morphing into the exercise title (navigation transition zoom).</p></div>
+
+<div class="dv-opt" id="1i"><div class="dv-olabel"><a class="dv-oid" href="#1i">1i</a>Today · nothing planned</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Saturday, Sep 7</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(240,238,245,0.62)">YW</div>
+  </div>
+  <div style="margin-top:72px;text-align:center;padding:0 12px">
+    <div style="font-size:26px;font-weight:600;letter-spacing:-0.02em;line-height:1.2">Nothing on the bench yet.</div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:10px;line-height:1.4">You trained Tuesday and Thursday. Legs are due.</div>
+  </div>
+  <div style="margin-top:36px;display:flex;flex-direction:column;gap:10px">
+    <div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Ask your trainer</div>
+    <div style="height:60px;border-radius:18px;background:#15151B;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Pick a workout</div>
+  </div>
+  <div style="margin-top:14px;text-align:center;font-size:13px;color:rgba(240,238,245,0.4)">or share a plan from ChatGPT, Claude or Gemini</div>
+  <div style="margin-top:auto;padding-bottom:34px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(240,238,245,0.4)">2 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ weekEmpty }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(240,238,245,0.4)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Tone.</b> The empty state states a fact (“Legs are due”) rather than nagging. Ask your trainer opens <a class="dv-oid" href="#1l">1l</a> with “Plan today” pre-filled; Pick a workout opens a sheet of recent templates.</p></div>
+
+<div class="dv-opt" id="1j"><div class="dv-olabel"><a class="dv-oid" href="#1j">1j</a>Today · light mode</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#F2F1F5;color:#18161F">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px">
+    <div><div style="font-size:13px;color:rgba(24,22,31,0.42)">Thursday, Sep 5</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">Today</div></div>
+    <div style="width:36px;height:36px;border-radius:18px;background:#E8E6EE;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:rgba(24,22,31,0.62)">YW</div>
+  </div>
+  <div style="margin-top:28px;background:#FFFFFF;border-radius:20px;padding:22px 20px 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:#E8E6EE;font-size:12px;color:rgba(24,22,31,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(24,22,31,0.62)"></span>from Claude · today</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:14px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(24,22,31,0.62);margin-top:8px">7 exercises · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(24,22,31,0.62);margin-top:14px;line-height:1.4">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding.”</div>
+    <div style="margin-top:22px;height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Start</div>
+    <div style="height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(24,22,31,0.62);margin-top:4px">Preview workout</div>
+  </div>
+  <div style="margin-top:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:13px;color:rgba(24,22,31,0.42);text-transform:uppercase;letter-spacing:0.06em">This week</div><div style="font-size:13px;color:rgba(24,22,31,0.42)">3 of 4 sessions</div></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px">
+      <sc-for list="{{ weekLight }}" as="d" hint-placeholder-count="7">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="font-size:11px;color:rgba(24,22,31,0.42)">{{ d.l }}</div><div style="width:100%;height:40px;border-radius:12px;background:{{ d.bg }};display:flex;align-items:center;justify-content:center;font-size:13px;color:{{ d.color }}">{{ d.mark }}</div></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;border-top:1px solid rgba(24,22,31,0.1);padding-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:600">Pull Day A</div><div style="font-size:13px;color:rgba(24,22,31,0.42)">Tuesday</div></div>
+    <div style="display:flex;gap:28px;margin-top:12px">
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">48<span style="font-size:13px;font-weight:400;color:rgba(24,22,31,0.42)"> min</span></div><div style="font-size:11px;color:rgba(24,22,31,0.42)">Duration</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600">14,320<span style="font-size:13px;font-weight:400;color:rgba(24,22,31,0.42)"> lb</span></div><div style="font-size:11px;color:rgba(24,22,31,0.42)">Volume</div></div>
+      <div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:22px;font-weight:600;color:#6A4FD6">1</div><div style="font-size:11px;color:rgba(24,22,31,0.42)">PR · Row</div></div>
+    </div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note">Same structure as <a class="dv-oid" href="#1h">1h</a>; hero surface goes white on the warm ground so it still reads as “one level up” without a border.</p></div>
+</div>
+
+<div class="dv-grp">04 · Workout Preview (trust screen)</div>
+<div class="dv-opts">
+<div class="dv-opt" id="1k"><div class="dv-olabel"><a class="dv-oid" href="#1k">1k</a>Workout Preview · after import</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 0 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px">
+    <div style="font-size:17px;color:rgba(240,238,245,0.62)">Close</div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62)">Edit all</div>
+  </div>
+  <div style="flex:1;overflow:hidden;padding:0 20px">
+    <div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62);margin-top:8px"><span style="width:6px;height:6px;border-radius:3px;background:rgba(240,238,245,0.62)"></span>from Claude · Opus · just now</div>
+    <div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;margin-top:12px;line-height:1.1">Push Day A</div>
+    <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:6px">7 exercises · 24 sets · ~52 min</div>
+    <div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62);margin-top:14px;line-height:1.45;padding-bottom:18px;border-bottom:1px solid rgba(240,238,245,0.09)">“Bench is up 5 from last week. Keep the top set to 6 clean reps — no grinding. Everything after is volume work, leave one rep in the tank.”</div>
+    <sc-for list="{{ preview }}" as="e" hint-placeholder-count="4">
+      <div style="padding:16px 0 14px;border-bottom:1px solid rgba(240,238,245,0.09)">
+        <div style="display:flex;align-items:center;gap:10px"><div style="font-size:13px;color:rgba(240,238,245,0.4);width:16px;font-family:ui-rounded,-apple-system,system-ui">{{ e.n }}</div><div style="flex:1;font-size:17px;font-weight:600">{{ e.name }}</div><div style="font-size:13px;color:rgba(240,238,245,0.62);height:32px;padding:0 10px;display:flex;align-items:center;border-radius:10px;background:rgba(240,238,245,0.06)">Edit</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-left:26px">
+          <sc-for list="{{ e.pills }}" as="p" hint-placeholder-count="3">
+            <div style="height:30px;padding:0 11px;border-radius:15px;background:#201F27;display:flex;align-items:center;font-family:ui-rounded,-apple-system,system-ui;font-size:14px;font-weight:600;color:{{ p.color }}">{{ p.t }}</div>
+          </sc-for>
+        </div>
+        <div style="font-size:13px;font-style:italic;color:rgba(240,238,245,0.62);margin-top:10px;padding-left:26px">{{ e.cue }}</div>
+      </div>
+    </sc-for>
+    <div style="height:64px;display:flex;align-items:center;gap:10px;color:rgba(240,238,245,0.4);font-size:13px;padding-left:26px">+ 3 more · Lateral Raise, Cable Fly, Rope Pushdown</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 34px;background:linear-gradient(rgba(11,11,15,0),#0B0B0F 40%)">
+    <div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Looks good — Start</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Interaction.</b> Tap any pill to edit reps/weight inline (pill becomes a stepper row). Edit opens per-exercise sets; long-press or swipe an exercise row for Swap (searches by muscle group, keeps the set scheme). The top-set pill (“6 × 165”) is tinted accent because it is the one that matters today. Edits are recorded as “changed from plan” and included when results are shared back.</p></div>
+</div>
+
+<div class="dv-grp">05 · Trainer (in-app chat)</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1l"><div class="dv-olabel"><a class="dv-oid" href="#1l">1l</a>Trainer · workout card in chat</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 0 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px">
+    <div style="font-size:17px;color:rgba(240,238,245,0.62)">‹ Today</div>
+    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:#201F27;font-size:13px;font-weight:600">Claude · Opus <span style="color:rgba(240,238,245,0.4);font-size:11px">⌄</span></div>
+    <div style="width:44px;text-align:right;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="flex:1;padding:12px 20px 0;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+    <div style="align-self:flex-end;max-width:280px;background:#2A2932;border-radius:20px 20px 6px 20px;padding:11px 15px;font-size:15px;line-height:1.35">Plan today. Chest felt fine after Tuesday.</div>
+    <div style="align-self:flex-start;max-width:300px;font-size:15px;line-height:1.4;color:rgba(240,238,245,0.85)">Good — bench moved well last week, so we add 5 lb on the top set. Here’s Push Day A:</div>
+    <div style="align-self:flex-start;width:300px;background:#15151B;border-radius:20px;padding:16px 16px 12px">
+      <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Workout</div>
+      <div style="font-size:20px;font-weight:600;margin-top:4px">Push Day A</div>
+      <div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:2px">7 exercises · ~52 min</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;font-size:14px;height:30px;align-items:center;border-top:1px solid rgba(240,238,245,0.09)"><span>Barbell Bench Press</span><span style="color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui">4 sets</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;height:30px;align-items:center;border-top:1px solid rgba(240,238,245,0.09)"><span>Incline DB Press</span><span style="color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui">3 sets</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;height:30px;align-items:center;border-top:1px solid rgba(240,238,245,0.09)"><span>Overhead Press</span><span style="color:rgba(240,238,245,0.4);font-family:ui-rounded,-apple-system,system-ui">3 sets</span></div>
+        <div style="font-size:13px;color:rgba(240,238,245,0.4);height:26px;display:flex;align-items:center">+ 4 more</div>
+      </div>
+      <div style="height:48px;border-radius:14px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-top:6px">Review &amp; Start</div>
+    </div>
+    <div style="align-self:flex-start;font-size:12px;color:rgba(240,238,245,0.4);margin-top:-6px">Claude · Opus · 0.4¢</div>
+  </div>
+  <div style="display:flex;gap:8px;padding:10px 20px;overflow:hidden;white-space:nowrap">
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">Plan today</div>
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">I only have 30 min</div>
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">Swap for dumbbells</div>
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">How did last</div>
+  </div>
+  <div style="display:flex;gap:10px;padding:0 20px 12px;align-items:center">
+    <div style="flex:1;height:44px;border-radius:22px;background:#15151B;display:flex;align-items:center;padding:0 16px;font-size:16px;color:rgba(240,238,245,0.4)">Message your trainer</div>
+    <div style="width:44px;height:44px;border-radius:22px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(240,238,245,0.62)">↑</div>
+  </div>
+  <div style="height:236px;background:#15151B;margin:0 8px;border-radius:24px 24px 0 0;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(240,238,245,0.3);font-family:ui-monospace,Menlo,monospace">system keyboard</div>
+</div>
+</x-import>
+<p class="dv-note"><b>Key idea.</b> Anything the model returns in the workout JSON schema renders as a card, never prose. User bubbles are tonal; trainer replies have no bubble (it is the room, not a participant). The tiny “0.4¢” line is the per-message cost from the picker (<a class="dv-oid" href="#1m">1m</a>). Quick prompts scroll horizontally above the keyboard. <b>Motion.</b> Card fades and rises 12 pt as it streams in; Review &amp; Start pushes <a class="dv-oid" href="#1k">1k</a>.</p></div>
+
+<div class="dv-opt" id="1m"><div class="dv-olabel"><a class="dv-oid" href="#1m">1m</a>Trainer · provider picker sheet</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 0 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px;opacity:0.35">
+    <div style="font-size:17px;color:rgba(240,238,245,0.62)">‹ Today</div>
+    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:#201F27;font-size:13px;font-weight:600">Claude · Opus</div>
+    <div style="width:44px;text-align:right;font-size:22px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;top:170px;border-radius:38px 38px 0 0;background:#15151B;padding:10px 20px 0;display:flex;flex-direction:column">
+    <div style="width:36px;height:5px;border-radius:3px;background:rgba(240,238,245,0.2);align-self:center"></div>
+    <div style="font-size:22px;font-weight:600;margin-top:22px">Trainer model</div>
+    <div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:4px">Cost is an estimate per message, billed to your own key.</div>
+    <div style="margin-top:20px;flex:1;overflow:hidden">
+      <sc-for list="{{ providers }}" as="p" hint-placeholder-count="3">
+        <div style="padding:14px 0 6px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">{{ p.name }}</div><div style="font-size:12px;color:{{ p.statusColor }}">{{ p.status }}</div></div>
+          <sc-for list="{{ p.models }}" as="m" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;height:52px;gap:12px;border-bottom:1px solid rgba(240,238,245,0.09);opacity:{{ m.op }}">
+              <div style="width:20px;color:#B7A4FF;font-size:16px">{{ m.mark }}</div>
+              <div style="flex:1"><div style="font-size:16px;font-weight:500">{{ m.name }}</div><div style="font-size:12px;color:rgba(240,238,245,0.4)">{{ m.desc }}</div></div>
+              <div style="font-family:ui-rounded,-apple-system,system-ui;font-size:15px;color:rgba(240,238,245,0.62)">{{ m.cost }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:12px 0 34px"><div style="height:52px;border-radius:16px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600">Manage keys in Connections</div></div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Interaction.</b> The chip in the nav bar is a picker: tapping opens this medium-detent sheet. Selected model shows the accent check; providers without a key are shown at 35 % with “Set up” instead of a cost, tapping them deep-links to Connections (<a class="dv-oid" href="#1s">1s</a>). Costs are computed from the provider’s published rate × typical message size.</p></div>
+
+<div class="dv-opt" id="1n"><div class="dv-olabel"><a class="dv-oid" href="#1n">1n</a>Trainer · rate-limit error + fallback</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 0 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 20px">
+    <div style="font-size:17px;color:rgba(240,238,245,0.62)">‹ Today</div>
+    <div style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:#201F27;font-size:13px;font-weight:600">ChatGPT · GPT-5 <span style="color:rgba(240,238,245,0.4);font-size:11px">⌄</span></div>
+    <div style="width:44px;text-align:right;font-size:22px;letter-spacing:1px;color:rgba(240,238,245,0.62)">···</div>
+  </div>
+  <div style="flex:1;padding:12px 20px 0;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+    <div style="align-self:flex-end;max-width:280px;background:#2A2932;border-radius:20px 20px 6px 20px;padding:11px 15px;font-size:15px;line-height:1.35">I only have 30 min today</div>
+    <div style="align-self:flex-start;width:300px;background:#15151B;border-radius:20px;padding:16px">
+      <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:4px;background:rgba(240,238,245,0.4)"></div><div style="font-size:15px;font-weight:600">ChatGPT is rate-limited</div></div>
+      <div style="font-size:14px;color:rgba(240,238,245,0.62);margin-top:6px;line-height:1.4">Your OpenAI key hit its per-minute quota. It usually clears in about a minute. Your message is saved.</div>
+      <div style="height:52px;border-radius:14px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-top:14px">Retry with Claude · Sonnet</div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <div style="flex:1;height:44px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Retry in 0:48</div>
+        <div style="flex:1;height:44px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Use Gemini</div>
+      </div>
+    </div>
+    <div style="align-self:flex-start;font-size:12px;color:rgba(240,238,245,0.4);margin-top:-6px">Error 429 · 10:42</div>
+  </div>
+  <div style="display:flex;gap:8px;padding:10px 20px;overflow:hidden;white-space:nowrap">
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">Plan today</div>
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">I only have 30 min</div>
+    <div style="height:36px;padding:0 14px;border-radius:18px;background:#201F27;display:flex;align-items:center;font-size:14px;flex:none">Swap for dumbbells</div>
+  </div>
+  <div style="display:flex;gap:10px;padding:0 20px 12px;align-items:center">
+    <div style="flex:1;height:44px;border-radius:22px;background:#15151B;display:flex;align-items:center;padding:0 16px;font-size:16px;color:rgba(240,238,245,0.4)">Message your trainer</div>
+    <div style="width:44px;height:44px;border-radius:22px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(240,238,245,0.62)">↑</div>
+  </div>
+  <div style="height:236px;background:#15151B;margin:0 8px;border-radius:24px 24px 0 0;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(240,238,245,0.3);font-family:ui-monospace,Menlo,monospace">system keyboard</div>
+</div>
+</x-import>
+<p class="dv-note"><b>Behaviour.</b> The error is an inline system card, same shape as the workout card — not an alert. Primary action is the best <i>connected</i> fallback (same tier or one below), with the countdown retry and other provider secondary. The transcript so far is forwarded so the fallback model has context. No red: the state is calm, the accent still means “do this”.</p></div>
+</div>
+
+<div class="dv-grp">06 · Workout Complete</div>
+<div class="dv-opts">
+<div class="dv-opt" id="1o"><div class="dv-olabel"><a class="dv-oid" href="#1o">1o</a>Workout Complete</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="height:44px;display:flex;align-items:center;justify-content:flex-end;font-size:17px;color:rgba(240,238,245,0.62)">Done</div>
+  <div style="margin-top:8px"><div style="font-size:13px;color:rgba(240,238,245,0.4)">Push Day A · from Claude</div><div style="font-size:30px;font-weight:600;letter-spacing:-0.02em;line-height:1.1;margin-top:4px">Done for today.</div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:28px;gap:12px">
+    <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1">54<span style="font-size:15px;color:rgba(240,238,245,0.4);font-weight:400"> min</span></div><div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:6px">Duration</div></div>
+    <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1">16.1<span style="font-size:15px;color:rgba(240,238,245,0.4);font-weight:400">k lb</span></div><div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:6px">Volume</div></div>
+    <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1">23<span style="font-size:15px;color:rgba(240,238,245,0.4);font-weight:400">/24</span></div><div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:6px">Sets</div></div>
+  </div>
+  <div style="margin-top:30px">
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Personal records</div>
+    <div style="margin-top:6px;border-radius:14px;background:rgba(183,164,255,0.1);padding:0 12px;margin-left:-12px;margin-right:-12px">
+      <div style="display:flex;align-items:center;height:52px;gap:12px"><div style="flex:1;font-size:16px;font-weight:600">Barbell Bench Press</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:16px;color:rgba(240,238,245,0.62)">160 × 6</div><div style="color:rgba(240,238,245,0.4)">→</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:16px;font-weight:600;color:#B7A4FF">165 × 6</div></div>
+      <div style="display:flex;align-items:center;height:52px;gap:12px;border-top:1px solid rgba(183,164,255,0.15)"><div style="flex:1;font-size:16px;font-weight:600">Overhead Press</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:16px;color:rgba(240,238,245,0.62)">95 × 8</div><div style="color:rgba(240,238,245,0.4)">→</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:16px;font-weight:600;color:#B7A4FF">100 × 8</div></div>
+    </div>
+  </div>
+  <div style="margin-top:24px;border-top:1px solid rgba(240,238,245,0.09);padding-top:14px">
+    <div style="display:flex;justify-content:space-between;font-size:15px;height:36px;align-items:center"><span style="color:rgba(240,238,245,0.62)">Skipped</span><span>Cable Fly · set 3</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:15px;height:36px;align-items:center"><span style="color:rgba(240,238,245,0.62)">Changed from plan</span><span>Incline DB 55 → 50</span></div>
+  </div>
+  <div style="margin-top:20px;min-height:72px;border-radius:16px;background:#15151B;padding:12px 14px;font-size:15px;color:rgba(240,238,245,0.4);line-height:1.4">Note for your trainer — how did it feel?</div>
+  <div style="margin-top:auto;padding-bottom:34px;display:flex;flex-direction:column;gap:10px">
+    <div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Share with trainer</div>
+    <div style="height:48px;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(240,238,245,0.62)">Done</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Behaviour.</b> Share with trainer posts a structured result (sets, PRs, skips, changes, note) back to the provider that authored the plan and opens the reply in Trainer. Only the PR block carries accent; everything else is neutral. <b>Motion.</b> The three numerals count up over 0.6 s on appear; PR rows fade in last.</p></div>
+</div>
+
+<div class="dv-grp">07 · History</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1p"><div class="dv-olabel"><a class="dv-oid" href="#1p">1p</a>History</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px"><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">History</div><div style="font-size:15px;color:rgba(240,238,245,0.62)">Exercises</div></div>
+  <div style="margin-top:24px">
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(240,238,245,0.4)"><span>12 weeks</span><span>41 sessions</span></div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:4px;margin-top:10px">
+      <sc-for list="{{ heat }}" as="c" hint-placeholder-count="84">
+        <div style="aspect-ratio:1;border-radius:4px;background:{{ c.bg }}"></div>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(240,238,245,0.4);margin-top:6px"><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div>
+  </div>
+  <div style="margin-top:28px;flex:1;overflow:hidden">
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">This week</div>
+    <sc-for list="{{ sessions }}" as="s" hint-placeholder-count="5">
+      <div style="display:flex;align-items:center;height:64px;gap:14px;border-bottom:1px solid rgba(240,238,245,0.09)">
+        <div style="width:40px;text-align:center"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase">{{ s.dow }}</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600;line-height:1.1">{{ s.day }}</div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px">{{ s.title }}<span style="height:18px;padding:0 7px;border-radius:9px;background:rgba(240,238,245,0.08);font-size:10px;font-weight:500;color:rgba(240,238,245,0.62);display:inline-flex;align-items:center">{{ s.src }}</span></div><div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:3px">{{ s.meta }}</div></div>
+        <div style="font-size:13px;color:#B7A4FF;font-weight:600">{{ s.pr }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="height:83px;margin:0 -20px;border-top:1px solid rgba(240,238,245,0.09);display:grid;grid-template-columns:1fr 1fr 1fr;padding-top:8px;font-size:10px;color:rgba(240,238,245,0.4)">
+    <div style="text-align:center"><div style="width:26px;height:26px;border-radius:8px;background:rgba(240,238,245,0.12);margin:0 auto 4px"></div>Today</div>
+    <div style="text-align:center;color:#F0EEF5"><div style="width:26px;height:26px;border-radius:8px;background:#F0EEF5;margin:0 auto 4px"></div>History</div>
+    <div style="text-align:center"><div style="width:26px;height:26px;border-radius:8px;background:rgba(240,238,245,0.12);margin:0 auto 4px"></div>Trainer</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Heat strip.</b> 12 weeks × 7 days, columns are weeks; intensity = volume quartile, in accent alpha steps (0.12/0.3/0.55/0.9). No streak count anywhere. Rows show provenance as a monochrome pill; PR count in accent when &gt; 0. Tap a row → session detail; “Exercises” → the per-lift list feeding <a class="dv-oid" href="#1q">1q</a>. Tab bar uses SF Symbols (calendar, clock, bubble) — placeholders here.</p></div>
+
+<div class="dv-opt" id="1q"><div class="dv-olabel"><a class="dv-oid" href="#1q">1q</a>Exercise Detail · Bench Press</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="height:44px;display:flex;align-items:center;font-size:17px;color:rgba(240,238,245,0.62)">‹ Exercises</div>
+  <div style="margin-top:8px"><div style="font-size:26px;font-weight:600;letter-spacing:-0.02em">Barbell Bench Press</div><div style="font-size:13px;color:rgba(240,238,245,0.4);margin-top:2px">Chest · Triceps · 38 sessions</div></div>
+  <div style="margin-top:28px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Estimated 1RM</div><div style="font-size:13px;color:rgba(240,238,245,0.62)">6 months</div></div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:44px;font-weight:600;letter-spacing:-0.02em;line-height:1">198<span style="font-size:17px;color:rgba(240,238,245,0.4);font-weight:400"> lb</span></div><div style="font-size:14px;color:#B7A4FF;font-weight:600">+12 since Jun</div></div>
+    <div style="position:relative;height:120px;margin-top:14px">
+      <svg width="353" height="120" viewBox="0 0 353 120" style="display:block"><polyline points="{{ trendPts }}" fill="none" stroke="rgba(240,238,245,0.62)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline><circle cx="345" cy="12" r="5" fill="#B7A4FF"></circle></svg>
+      <div style="position:absolute;left:0;bottom:-16px;font-size:11px;color:rgba(240,238,245,0.4)">Mar</div><div style="position:absolute;right:0;bottom:-16px;font-size:11px;color:rgba(240,238,245,0.4)">Sep</div>
+    </div>
+  </div>
+  <div style="margin-top:40px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Volume per session</div><div style="font-size:13px;color:rgba(240,238,245,0.62)">lb</div></div>
+    <div style="display:flex;align-items:flex-end;gap:5px;height:64px;margin-top:12px">
+      <sc-for list="{{ bars }}" as="b" hint-placeholder-count="16">
+        <div style="flex:1;border-radius:3px;height:{{ b.h }}px;background:{{ b.bg }}"></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:32px;flex:1">
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Best sets</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:1px solid rgba(240,238,245,0.09);font-size:15px"><span style="color:rgba(240,238,245,0.62)">Heaviest</span><span style="font-family:ui-rounded,-apple-system,system-ui;font-weight:600">165 × 6 <span style="font-size:12px;color:rgba(240,238,245,0.4);font-weight:400;margin-left:6px">today</span></span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:1px solid rgba(240,238,245,0.09);font-size:15px"><span style="color:rgba(240,238,245,0.62)">Best 8</span><span style="font-family:ui-rounded,-apple-system,system-ui;font-weight:600">155 × 8 <span style="font-size:12px;color:rgba(240,238,245,0.4);font-weight:400;margin-left:6px">Aug 29</span></span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;height:48px;font-size:15px"><span style="color:rgba(240,238,245,0.62)">Most reps</span><span style="font-family:ui-rounded,-apple-system,system-ui;font-weight:600">135 × 14 <span style="font-size:12px;color:rgba(240,238,245,0.4);font-weight:400;margin-left:6px">Jul 3</span></span></div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Charts.</b> Thin 2 pt line, no gridlines, one accent dot on the latest point; axis labels only at the ends. Bars are neutral except the most recent session. Scrubbing the line shows a single value label above the finger (Swift Charts .chartOverlay).</p></div>
+
+<div class="dv-opt" id="1r"><div class="dv-olabel"><a class="dv-oid" href="#1r">1r</a>History · light mode</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#F2F1F5;color:#18161F">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;height:52px"><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">History</div><div style="font-size:15px;color:rgba(24,22,31,0.62)">Exercises</div></div>
+  <div style="margin-top:24px">
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(24,22,31,0.42)"><span>12 weeks</span><span>41 sessions</span></div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:4px;margin-top:10px">
+      <sc-for list="{{ heatLight }}" as="c" hint-placeholder-count="84">
+        <div style="aspect-ratio:1;border-radius:4px;background:{{ c.bg }}"></div>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(24,22,31,0.42);margin-top:6px"><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div>
+  </div>
+  <div style="margin-top:28px;flex:1;overflow:hidden">
+    <div style="font-size:11px;color:rgba(24,22,31,0.42);text-transform:uppercase;letter-spacing:0.06em">This week</div>
+    <sc-for list="{{ sessions }}" as="s" hint-placeholder-count="5">
+      <div style="display:flex;align-items:center;height:64px;gap:14px;border-bottom:1px solid rgba(24,22,31,0.1)">
+        <div style="width:40px;text-align:center"><div style="font-size:11px;color:rgba(24,22,31,0.42);text-transform:uppercase">{{ s.dow }}</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600;line-height:1.1">{{ s.day }}</div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px">{{ s.title }}<span style="height:18px;padding:0 7px;border-radius:9px;background:#E8E6EE;font-size:10px;font-weight:500;color:rgba(24,22,31,0.62);display:inline-flex;align-items:center">{{ s.src }}</span></div><div style="font-size:13px;color:rgba(24,22,31,0.42);margin-top:3px">{{ s.meta }}</div></div>
+        <div style="font-size:13px;color:#6A4FD6;font-weight:600">{{ s.pr }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="height:83px;margin:0 -20px;border-top:1px solid rgba(24,22,31,0.1);display:grid;grid-template-columns:1fr 1fr 1fr;padding-top:8px;font-size:10px;color:rgba(24,22,31,0.42)">
+    <div style="text-align:center"><div style="width:26px;height:26px;border-radius:8px;background:rgba(24,22,31,0.12);margin:0 auto 4px"></div>Today</div>
+    <div style="text-align:center;color:#18161F"><div style="width:26px;height:26px;border-radius:8px;background:#18161F;margin:0 auto 4px"></div>History</div>
+    <div style="text-align:center"><div style="width:26px;height:26px;border-radius:8px;background:rgba(24,22,31,0.12);margin:0 auto 4px"></div>Trainer</div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note">Heat cells in light mode use the same accent alphas over #E8E6EE so the scale reads identically across modes.</p></div>
+</div>
+
+<div class="dv-grp">08 · Connections (Settings)</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1s"><div class="dv-olabel"><a class="dv-oid" href="#1s">1s</a>Connections</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5">
+  <div style="height:44px;display:flex;align-items:center;font-size:17px;color:rgba(240,238,245,0.62)">‹ Settings</div>
+  <div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;margin-top:4px">Connections</div>
+  <div style="font-size:15px;color:rgba(240,238,245,0.62);margin-top:6px;line-height:1.4">How workouts get into AscendFit, and which trainers can write them.</div>
+  <div style="margin-top:28px"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em;padding:0 0 8px">Trainers</div>
+    <div style="background:#15151B;border-radius:18px;overflow:hidden">
+      <sc-for list="{{ connections }}" as="c" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;height:60px;padding:0 16px;gap:12px;border-top:1px solid rgba(240,238,245,0.07)">
+          <div style="width:28px;height:28px;border-radius:14px;background:#2A2932;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(240,238,245,0.62)">{{ c.g }}</div>
+          <div style="flex:1"><div style="font-size:16px">{{ c.name }}</div><div style="font-size:12px;color:rgba(240,238,245,0.4)">{{ c.sub }}</div></div>
+          <div style="font-size:14px;color:{{ c.stColor }};font-weight:{{ c.stWeight }}">{{ c.status }}</div>
+          <div style="color:rgba(240,238,245,0.3);font-size:14px">›</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="margin-top:24px"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em;padding:0 0 8px">Import</div>
+    <div style="background:#15151B;border-radius:18px;overflow:hidden">
+      <div style="display:flex;align-items:center;height:60px;padding:0 16px;gap:12px"><div style="width:28px;height:28px;border-radius:14px;background:#2A2932;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(240,238,245,0.62)">↑</div><div style="flex:1"><div style="font-size:16px">Share Sheet</div><div style="font-size:12px;color:rgba(240,238,245,0.4)">Share any plan text from another app</div></div><div style="font-size:14px;color:rgba(240,238,245,0.62)">On</div><div style="color:rgba(240,238,245,0.3)">›</div></div>
+      </div>
+  </div>
+  <div style="margin-top:20px"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em;padding:0 0 8px">API keys</div>
+    <div style="background:#15151B;border-radius:18px;overflow:hidden">
+      <div style="display:flex;align-items:center;height:60px;padding:0 16px;gap:12px"><div style="flex:1;min-width:0"><div style="font-size:16px">Anthropic</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">sk-ant-····9f2a · Aug 12</div></div><div style="font-size:13px;color:rgba(240,238,245,0.62);flex:none">In Keychain</div></div>
+      <div style="display:flex;align-items:center;height:60px;padding:0 16px;gap:12px;border-top:1px solid rgba(240,238,245,0.07)"><div style="flex:1;min-width:0"><div style="font-size:16px">OpenAI</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">sk-····c41d · Jul 30</div></div><div style="font-size:13px;color:rgba(240,238,245,0.62);flex:none">In Keychain</div></div>
+      <div style="display:flex;align-items:center;height:56px;padding:0 16px;border-top:1px solid rgba(240,238,245,0.07);font-size:16px;color:#B7A4FF;font-weight:600">Add a key…</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:12px;line-height:1.4;padding-bottom:34px">Keys never leave this device. Spend this month: $1.84.</div>
+</div>
+</x-import>
+<p class="dv-note"><b>Structure.</b> Standard inset-grouped lists on the warm surface, 60 pt rows. Status text is the only variable: “Connected” in primary weight, “Set up” in accent (it is the next thing to do). Provider glyphs are monochrome initials, never logos.</p></div>
+
+<div class="dv-opt" id="1t"><div class="dv-olabel"><a class="dv-oid" href="#1t">1t</a>Connect ChatGPT · 3-step sheet</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 0 0;box-sizing:border-box;background:#0B0B0F;color:#F0EEF5;position:relative">
+  <div style="padding:0 20px;opacity:0.35"><div style="height:44px;display:flex;align-items:center;font-size:17px;color:rgba(240,238,245,0.62)">‹ Settings</div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em">Connections</div></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;top:150px;border-radius:38px 38px 0 0;background:#15151B;padding:10px 20px 0;display:flex;flex-direction:column">
+    <div style="width:36px;height:5px;border-radius:3px;background:rgba(240,238,245,0.2);align-self:center"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px"><div style="font-size:22px;font-weight:600">Connect ChatGPT</div><div style="font-size:15px;color:rgba(240,238,245,0.62)">Cancel</div></div>
+    <div style="display:flex;gap:6px;margin-top:18px"><div style="flex:1;height:3px;border-radius:2px;background:#B7A4FF"></div><div style="flex:1;height:3px;border-radius:2px;background:#B7A4FF"></div><div style="flex:1;height:3px;border-radius:2px;background:rgba(240,238,245,0.12)"></div></div>
+    <div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:8px">Step 2 of 3</div>
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;gap:14px;opacity:0.5"><div style="width:28px;height:28px;border-radius:14px;background:#2A2932;display:flex;align-items:center;justify-content:center;font-size:13px;color:#B7A4FF;flex:none">✓</div><div><div style="font-size:16px;font-weight:600">Add your OpenAI key</div><div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:2px;font-family:ui-monospace,Menlo,monospace">sk-····c41d</div></div></div>
+      <div style="display:flex;gap:14px"><div style="width:28px;height:28px;border-radius:14px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none">2</div><div style="flex:1"><div style="font-size:16px;font-weight:600">Give ChatGPT the recipe</div><div style="font-size:14px;color:rgba(240,238,245,0.62);margin-top:4px;line-height:1.4">Paste this into a ChatGPT project or custom instructions so it can send workouts to AscendFit.</div>
+        <div style="margin-top:12px;border-radius:14px;background:#0B0B0F;padding:12px 14px;font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.5;color:rgba(240,238,245,0.62)">When you write a workout, output it as AscendFit JSON (schema v1) and end with the link ascendfit://import?…</div>
+        <div style="display:flex;gap:8px;margin-top:10px"><div style="flex:1;height:44px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Copy</div><div style="flex:1;height:44px;border-radius:14px;background:#201F27;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Open ChatGPT</div></div></div></div>
+      <div style="display:flex;gap:14px;opacity:0.5"><div style="width:28px;height:28px;border-radius:14px;background:#2A2932;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(240,238,245,0.62);flex:none">3</div><div><div style="font-size:16px;font-weight:600">Send a test workout</div><div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:2px">We’ll confirm when it lands.</div></div></div>
+    </div>
+    <div style="margin-top:auto;padding-bottom:34px"><div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">I’ve pasted it</div></div>
+  </div>
+</div>
+</x-import>
+<p class="dv-note"><b>Flow.</b> Large-detent sheet; the three steps stay visible and the active one expands (0.3 s). Step 3 listens for the first inbound import and auto-completes with a checkmark. Claude and Gemini use the same sheet with provider-specific copy.</p></div>
+</div>
+
+<div class="dv-grp">09 · Lock Screen Live Activity + Dynamic Island</div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1u"><div class="dv-olabel"><a class="dv-oid" href="#1u">1u</a>Lock Screen · rest timer Live Activity</div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ pw }}" height="{{ ph }}" dark="{{ true }}" hint-size="393px,852px">
+<div style="height:100%;display:flex;flex-direction:column;padding:60px 20px 0;box-sizing:border-box;background:#121117;color:#F0EEF5;align-items:center">
+  <div style="font-size:22px;font-weight:500;margin-top:40px;color:rgba(240,238,245,0.85)">Thursday, September 5</div>
+  <div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:88px;font-weight:600;letter-spacing:-0.03em;line-height:1;margin-top:4px;color:rgba(240,238,245,0.92)">10:42</div>
+  <div style="margin-top:auto;width:100%;padding-bottom:110px">
+    <div style="width:100%;border-radius:24px;background:rgba(28,27,34,0.92);padding:16px 18px;display:flex;align-items:center;gap:16px;box-sizing:border-box">
+      <div style="position:relative;width:64px;height:64px;flex:none;display:flex;align-items:center;justify-content:center">
+        <svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;inset:0"><circle cx="32" cy="32" r="28" fill="none" stroke="rgba(240,238,245,0.12)" stroke-width="4"></circle><circle cx="32" cy="32" r="28" fill="none" stroke="#B7A4FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="175.9" stroke-dashoffset="62" transform="rotate(-90 32 32)"></circle></svg>
+        <div style="font-family:ui-rounded,-apple-system,system-ui;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums">1:12</div>
+      </div>
+      <div style="flex:1;min-width:0"><div style="font-size:12px;color:rgba(240,238,245,0.62);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Rest · Bench Press</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:24px;font-weight:600;margin-top:2px;line-height:1.1">Next: 155 × 8</div><div style="font-size:12px;color:rgba(240,238,245,0.4);margin-top:3px">Set 3 of 4 · AscendFit</div></div>
+      <div style="height:44px;padding:0 14px;border-radius:14px;background:rgba(240,238,245,0.1);display:flex;align-items:center;font-size:14px;font-weight:600;flex:none">+30s</div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:60px;left:0;right:0;display:flex;justify-content:space-between;padding:0 44px"><div style="width:50px;height:50px;border-radius:25px;background:rgba(240,238,245,0.1)"></div><div style="width:50px;height:50px;border-radius:25px;background:rgba(240,238,245,0.1)"></div></div>
+</div>
+</x-import>
+<p class="dv-note"><b>Live Activity.</b> Uses .timer text so the countdown ticks without updates; the ring is a ProgressView(timerInterval:). +30s is an App Intent button. Ends with a brief “Go” state (ring full accent, 3 s) then dismisses. No sound; one haptic on the watch/phone.</p></div>
+
+<div class="dv-opt" id="1v"><div class="dv-olabel"><a class="dv-oid" href="#1v">1v</a>Dynamic Island · compact + expanded</div>
+<div style="width:393px;background:#0B0B0F;border-radius:32px;padding:28px 0 32px;display:flex;flex-direction:column;align-items:center;gap:36px;color:#F0EEF5">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div style="height:37px;width:230px;border-radius:20px;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 12px;box-sizing:border-box">
+      <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="rgba(240,238,245,0.15)" stroke-width="2.5"></circle><circle cx="11" cy="11" r="9" fill="none" stroke="#B7A4FF" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="56.5" stroke-dashoffset="20" transform="rotate(-90 11 11)"></circle></svg>
+      <div style="width:70px"></div>
+      <div style="font-family:ui-rounded,-apple-system,system-ui;font-size:15px;font-weight:600;color:#B7A4FF;font-variant-numeric:tabular-nums">1:12</div>
+    </div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace">compact · leading ring, trailing time</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div style="width:371px;border-radius:44px;background:#000;padding:16px 20px 18px;box-sizing:border-box">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="position:relative;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex:none"><svg width="52" height="52" viewBox="0 0 52 52" style="position:absolute;inset:0"><circle cx="26" cy="26" r="22" fill="none" stroke="rgba(240,238,245,0.12)" stroke-width="3.5"></circle><circle cx="26" cy="26" r="22" fill="none" stroke="#B7A4FF" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="49" transform="rotate(-90 26 26)"></circle></svg></div>
+        <div style="flex:1"><div style="font-size:12px;color:rgba(240,238,245,0.62)">Rest · Bench Press</div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:40px;font-weight:600;line-height:1;letter-spacing:-0.02em;margin-top:2px;font-variant-numeric:tabular-nums">1:12</div></div>
+        <div style="text-align:right"><div style="font-size:11px;color:rgba(240,238,245,0.4)">Next</div><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155 × 8</div></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <div style="flex:1;height:44px;border-radius:14px;background:rgba(240,238,245,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">−30s</div>
+        <div style="flex:1;height:44px;border-radius:14px;background:rgba(240,238,245,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">+30s</div>
+        <div style="flex:1;height:44px;border-radius:14px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">Skip</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace">expanded · long-press the island</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+    <div style="height:37px;width:64px;border-radius:20px;background:#000;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="rgba(240,238,245,0.15)" stroke-width="2.5"></circle><circle cx="11" cy="11" r="9" fill="none" stroke="#B7A4FF" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="56.5" stroke-dashoffset="20" transform="rotate(-90 11 11)"></circle></svg></div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace">minimal · when another activity is present</div>
+  </div>
+</div>
+<p class="dv-note"><b>States.</b> Compact: accent ring leading, tabular time trailing — the only accent on an otherwise black island. Expanded: same three actions as the in-app bar. Minimal: ring only. Numerals in SF Pro Rounded to match the app.</p></div>
+</div>
+
+<div class="dv-grp">10 · Design system sheet</div>
+<div class="dv-opts">
+<div class="dv-opt" id="1w" style="width:1180px"><div class="dv-olabel"><a class="dv-oid" href="#1w">1w</a>Tokens · type · spacing · components</div>
+<div style="width:1180px;background:#0B0B0F;border-radius:24px;padding:40px 44px;box-sizing:border-box;color:#F0EEF5;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px 48px">
+  <div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.08em;font-family:ui-monospace,Menlo,monospace">Color · dark</div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ darkTokens }}" as="t" hint-placeholder-count="8"><div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:28px;border-radius:8px;background:{{ t.v }};box-shadow:inset 0 0 0 1px rgba(240,238,245,0.08)"></div><div style="flex:1;font-size:13px;font-family:ui-monospace,Menlo,monospace">{{ t.n }}</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace">{{ t.v }}</div></div></sc-for>
+    </div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.08em;font-family:ui-monospace,Menlo,monospace;margin-top:32px">Color · light</div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;background:#F2F1F5;border-radius:14px;padding:14px;color:#18161F">
+      <sc-for list="{{ lightTokens }}" as="t" hint-placeholder-count="8"><div style="display:flex;align-items:center;gap:12px"><div style="width:40px;height:28px;border-radius:8px;background:{{ t.v }};box-shadow:inset 0 0 0 1px rgba(24,22,31,0.1)"></div><div style="flex:1;font-size:13px;font-family:ui-monospace,Menlo,monospace">{{ t.n }}</div><div style="font-size:12px;color:rgba(24,22,31,0.5);font-family:ui-monospace,Menlo,monospace">{{ t.v }}</div></div></sc-for>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.08em;font-family:ui-monospace,Menlo,monospace">Type scale</div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:14px">
+      <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:72px;font-weight:600;line-height:1;letter-spacing:-0.02em">155</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">hero · SF Pro Rounded 72/76 semibold −2% · in-workout hero</div></div>
+      <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:44px;font-weight:600;line-height:1;letter-spacing:-0.02em">198</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">display · Rounded 44/48 semibold · stats, 1RM</div></div>
+      <div><div style="font-family:ui-rounded,'SF Pro Rounded',-apple-system,system-ui;font-size:22px;font-weight:600;line-height:1.1">14,320 lb</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">numeral · Rounded 22/26 semibold · inline metrics, set pills 14</div></div>
+      <div><div style="font-size:34px;font-weight:700;letter-spacing:-0.02em;line-height:1.1">History</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">large title · SF Pro 34/41 bold</div></div>
+      <div><div style="font-size:22px;font-weight:600;letter-spacing:-0.01em">Barbell Bench Press</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">title · SF Pro 22/28 semibold (30 for workout titles)</div></div>
+      <div><div style="font-size:17px;font-weight:600">Log set · Looks good — Start</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">button · SF Pro 19 semibold (primary) / 16 (secondary)</div></div>
+      <div><div style="font-size:15px">Set 2 of 4 · Working</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">body · SF Pro 15/20 regular (17 for chat)</div></div>
+      <div><div style="font-size:14px;font-style:italic;color:rgba(240,238,245,0.62)">“Touch chest, pause one count.”</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">coach cue · SF Pro 14 italic · secondary</div></div>
+      <div><div style="font-size:13px;color:rgba(240,238,245,0.4)">Last time: 150 × 8, 8, 7</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">caption · SF Pro 13/18 · tertiary; section labels 11 caps +6%</div></div>
+      <div><div style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;color:rgba(240,238,245,0.62)">24:18</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">elapsed · SF Mono 15 · secondary</div></div>
+    </div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.08em;font-family:ui-monospace,Menlo,monospace;margin-top:32px">Spacing · radii</div>
+    <div style="margin-top:12px;font-size:13px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;color:rgba(240,238,245,0.62)">space: 4 · 8 · 12 · 16 · 20 · 24 · 28 · 32<br>screen inset 20 · section gap 28–32 · row 46–64<br>radius: pill 9999 · chip 14 · control 18 · surface 20 · sheet 38<br>hit targets: nav 44 · in-session ≥56 · primary 60</div>
+  </div>
+  <div>
+    <div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.08em;font-family:ui-monospace,Menlo,monospace">Components</div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:18px">
+      <div><div style="height:60px;border-radius:18px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600">Log set</div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">PrimaryButton · 60 · accent / onAccent · pressed: scale .98, 90% opacity</div></div>
+      <div><div style="background:#15151B;border-radius:18px;height:64px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center"><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">−</div><div style="text-align:center"><div style="font-family:ui-rounded,-apple-system,system-ui;font-size:20px;font-weight:600">155</div><div style="font-size:11px;color:rgba(240,238,245,0.4);margin-top:-2px">lb · 5</div></div><div style="text-align:center;font-family:ui-rounded,-apple-system,system-ui;font-size:30px">+</div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">Stepper · 64 · 64pt hit zones · long-press repeats · tap value to type</div></div>
+      <div><div style="display:flex;gap:6px"><div style="height:30px;padding:0 11px;border-radius:15px;background:#201F27;display:flex;align-items:center;font-family:ui-rounded,-apple-system,system-ui;font-size:14px;font-weight:600">8 × 155</div><div style="height:30px;padding:0 11px;border-radius:15px;background:#201F27;display:flex;align-items:center;font-family:ui-rounded,-apple-system,system-ui;font-size:14px;font-weight:600;color:#B7A4FF">6 × 165</div><div style="height:30px;padding:0 11px;border-radius:15px;background:rgba(240,238,245,0.06);display:flex;align-items:center;font-family:ui-rounded,-apple-system,system-ui;font-size:14px;color:rgba(240,238,245,0.4)">8 × 155</div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">SetPill · 30 · default / top-set (accent) / skipped</div></div>
+      <div><div style="display:flex;flex-direction:column"><div style="display:flex;align-items:center;height:46px;gap:12px;font-family:ui-rounded,-apple-system,system-ui;font-size:15px;color:rgba(240,238,245,0.4)"><div style="width:24px;font-size:13px">1</div><div style="flex:1">155 × 8</div><div style="width:84px;color:rgba(240,238,245,0.62)">155 × 8</div><div style="width:20px;text-align:right;color:#B7A4FF">✓</div></div><div style="display:flex;align-items:center;height:46px;gap:12px;font-family:ui-rounded,-apple-system,system-ui;font-size:15px;border-top:1px solid rgba(240,238,245,0.09);border-radius:10px;padding:0 4px;margin:0 -4px;background:rgba(183,164,255,0.1)"><div style="width:24px;font-size:13px;color:#B7A4FF">2</div><div style="flex:1">155 × 8</div><div style="width:84px;color:rgba(240,238,245,0.4)">—</div><div style="width:20px"></div></div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">SetRow · 46 · done / current (accent 10% fill) / pending · swipe L skip, R add</div></div>
+      <div><div style="display:flex;align-items:center;gap:16px"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(240,238,245,0.12)" stroke-width="3"></circle><circle cx="22" cy="22" r="19" fill="none" stroke="#B7A4FF" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="43" transform="rotate(-90 22 22)"></circle></svg><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="none" stroke="rgba(240,238,245,0.12)" stroke-width="4"></circle><circle cx="32" cy="32" r="28" fill="none" stroke="#B7A4FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="175.9" stroke-dashoffset="62" transform="rotate(-90 32 32)"></circle></svg><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace">TimerRing · 44 (bar) · 64 (activity) · 240 (sheet) · stroke 3/4/6 · drains clockwise from 12</div></div></div>
+      <div><div style="display:flex;gap:8px"><div style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)"><span style="width:6px;height:6px;border-radius:3px;background:rgba(240,238,245,0.62)"></span>from Claude · today</div><div style="display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)">ChatGPT</div><div style="display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)">Gemini</div><div style="display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;background:rgba(240,238,245,0.08);font-size:12px;color:rgba(240,238,245,0.62)">AscendFit</div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">ProvenanceBadge · 24 · monochrome, 8% fill, never a logo</div></div>
+      <div><div style="width:300px;background:#15151B;border-radius:20px;padding:14px 16px 12px"><div style="font-size:11px;color:rgba(240,238,245,0.4);text-transform:uppercase;letter-spacing:0.06em">Workout</div><div style="font-size:20px;font-weight:600;margin-top:4px">Push Day A</div><div style="font-size:13px;color:rgba(240,238,245,0.62);margin-top:2px">7 exercises · ~52 min</div><div style="height:48px;border-radius:14px;background:#B7A4FF;color:#140F2A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-top:12px">Review &amp; Start</div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">WorkoutCard · surface1 · r20 · used in chat, Today hero variant</div></div>
+      <div><div style="display:flex;flex-direction:column;gap:8px"><div style="align-self:flex-end;max-width:240px;background:#2A2932;border-radius:20px 20px 6px 20px;padding:10px 14px;font-size:15px">Plan today.</div><div style="align-self:flex-start;max-width:280px;font-size:15px;color:rgba(240,238,245,0.85)">Bench moved well — adding 5 lb.</div></div><div style="font-size:12px;color:rgba(240,238,245,0.4);font-family:ui-monospace,Menlo,monospace;margin-top:6px">ChatBubble · user: surface3 r20/6 · trainer: no bubble, 85% ink</div></div>
+    </div>
+  </div>
+</div>
+<p class="dv-note"><b>For Claude Code.</b> Map each token to a Color asset with dark/light appearances (bg, surface1–3, ink, ink2, ink3, divider, accent, onAccent). Numerals: <code>.font(.system(size: 72, weight: .semibold, design: .rounded))</code>. Motion: <code>.spring(response: 0.35, dampingFraction: 0.85)</code> for the hero swap and rest bar; PR pulse is a 1.2 s ease-out ring, once.</p></div>
+</div>
+
+<p class="dv-next">Try next: "build a clickable prototype of <a class="dv-oid" href="#1a">1a</a> → <a class="dv-oid" href="#1d">1d</a> → <a class="dv-oid" href="#1f">1f</a> → <a class="dv-oid" href="#1o">1o</a>" · "rebuild the states on <a class="dv-oid" href="#1c">1c</a> instead of <a class="dv-oid" href="#1a">1a</a>" · "show the session detail screen and the Exercises list"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const ACC = '#B7A4FF', T1 = '#F0EEF5', T2 = 'rgba(240,238,245,0.62)', T3 = 'rgba(240,238,245,0.4)';
+    const L1 = '#18161F', L2 = 'rgba(24,22,31,0.62)', L3 = 'rgba(24,22,31,0.42)', LACC = '#6A4FD6';
+    const row = (n, plan, actual, state, light) => {
+      const done = state === 'done', cur = state === 'current', pr = state === 'pr';
+      const ink = light ? [L1, L2, L3, LACC] : [T1, T2, T3, ACC];
+      return {
+        n, plan, actual: actual || '—', mark: done || pr ? '✓' : '',
+        bg: cur || pr ? 'rgba(183,164,255,0.1)' : 'transparent',
+        numColor: cur || pr ? ink[3] : ink[2],
+        color: cur ? ink[0] : done || pr ? ink[1] : ink[2],
+      };
+    };
+    const sets = [row(1, '155 × 8', '155 × 8', 'done'), row(2, '155 × 8', '', 'current'), row(3, '155 × 8', '', ''), row(4, '165 × 6', '', '')];
+    const setsRest = [row(1, '155 × 8', '155 × 8', 'done'), row(2, '155 × 8', '155 × 8', 'done'), row(3, '155 × 8', '', 'current'), row(4, '165 × 6', '', '')];
+    const setsPR = [row(1, '155 × 8', '155 × 8', 'done'), row(2, '155 × 8', '155 × 8', 'done'), row(3, '155 × 8', '155 × 7', 'done'), row(4, '165 × 6', '165 × 6', 'pr')];
+    const setsLight = [row(1, '155 × 8', '155 × 8', 'done', true), row(2, '155 × 8', '', 'current', true), row(3, '155 × 8', '', '', true), row(4, '165 × 6', '', '', true)];
+    const wk = (states, light) => ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((l, i) => {
+      const s = states[i];
+      const ink = light ? [L1, L3, LACC, '#FFFFFF', '#E8E6EE'] : [T1, T3, ACC, '#15151B', 'rgba(240,238,245,0.06)'];
+      return {
+        l, mark: s === 'done' ? '✓' : s === 'today' ? '·' : '',
+        bg: s === 'done' ? ink[3] : s === 'today' ? 'rgba(183,164,255,0.14)' : ink[4],
+        color: s === 'done' ? ink[0] : s === 'today' ? ink[2] : ink[1],
+      };
+    });
+    const week = wk(['done', 'done', '', 'done', 'today', '', '']);
+    const weekEmpty = wk(['', 'done', '', 'done', '', 'today', '']);
+    const weekLight = wk(['done', 'done', '', 'done', 'today', '', ''], true);
+    const pill = (t, top) => ({ t, color: top ? ACC : T1 });
+    const preview = [
+      { n: 1, name: 'Barbell Bench Press', pills: [pill('8 × 155'), pill('8 × 155'), pill('8 × 155'), pill('6 × 165', true)], cue: '“Touch chest, pause one count.”' },
+      { n: 2, name: 'Incline DB Press', pills: [pill('10 × 55'), pill('10 × 55'), pill('10 × 55')], cue: '“Elbows at 45°, don’t flare.”' },
+      { n: 3, name: 'Overhead Press', pills: [pill('8 × 95'), pill('8 × 95'), pill('8 × 95')], cue: '“Brace before every rep.”' },
+      { n: 4, name: 'Dips', pills: [pill('AMRAP'), pill('AMRAP')], cue: '“Stop two reps short of failure.”' },
+    ];
+    const providers = [
+      { name: 'Claude', status: 'Connected', statusColor: T2, models: [
+        { name: 'Opus 4.1', desc: 'Best reasoning · slower', cost: '0.4¢', mark: '✓', op: 1 },
+        { name: 'Sonnet 4.5', desc: 'Fast · great for edits', cost: '0.1¢', mark: '', op: 1 }] },
+      { name: 'ChatGPT', status: 'Connected', statusColor: T2, models: [
+        { name: 'GPT-5', desc: 'Balanced', cost: '0.3¢', mark: '', op: 1 },
+        { name: 'GPT-5 mini', desc: 'Cheapest', cost: '0.05¢', mark: '', op: 1 }] },
+      { name: 'Gemini', status: 'Set up in Connections', statusColor: ACC, models: [
+        { name: 'Gemini 2.5 Pro', desc: 'No API key', cost: '', mark: '', op: 0.35 }] },
+    ];
+    const rnd = (seed) => { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; };
+    const r = rnd(7);
+    const levels = [0, 0.12, 0.3, 0.55, 0.9];
+    const heatL = Array.from({ length: 84 }, (_, i) => { const v = r(); const dow = i % 7; if (i > 81) return 0; if (dow === 6) return 0; return v < 0.45 ? 0 : v < 0.6 ? 1 : v < 0.78 ? 2 : v < 0.92 ? 3 : 4; });
+    const heat = heatL.map(l => ({ bg: l ? `rgba(183,164,255,${levels[l]})` : 'rgba(240,238,245,0.06)' }));
+    const heatLight = heatL.map(l => ({ bg: l ? `rgba(183,164,255,${levels[l]})` : '#E8E6EE' }));
+    const sessions = [
+      { dow: 'Thu', day: '5', title: 'Push Day A', src: 'Claude', meta: '54 min · 16.1k lb · 23 sets', pr: '2 PR' },
+      { dow: 'Tue', day: '3', title: 'Pull Day A', src: 'Claude', meta: '48 min · 14.3k lb · 21 sets', pr: '1 PR' },
+      { dow: 'Sun', day: '1', title: 'Legs', src: 'ChatGPT', meta: '61 min · 21.8k lb · 20 sets', pr: '' },
+      { dow: 'Fri', day: '30', title: 'Upper · 30 min', src: 'AscendFit', meta: '31 min · 9.2k lb · 14 sets', pr: '' },
+      { dow: 'Wed', day: '28', title: 'Push Day B', src: 'Gemini', meta: '52 min · 15.4k lb · 22 sets', pr: '' },
+    ];
+    const trend = [78, 82, 80, 74, 70, 72, 66, 60, 62, 55, 50, 46, 44, 38, 34, 30, 26, 22, 20, 12];
+    const trendPts = trend.map((y, i) => `${Math.round(8 + i * (337 / 19))},${y + 10}`).join(' ');
+    const bh = [28, 32, 30, 36, 34, 40, 38, 42, 44, 41, 48, 46, 52, 50, 56, 60];
+    const bars = bh.map((h, i) => ({ h, bg: i === bh.length - 1 ? ACC : 'rgba(240,238,245,0.2)' }));
+    const connections = [
+      { g: 'C', name: 'Claude', sub: 'Anthropic key · Opus, Sonnet', status: 'Connected', stColor: T2, stWeight: 400 },
+      { g: 'G', name: 'ChatGPT', sub: 'OpenAI key · GPT-5', status: 'Connected', stColor: T2, stWeight: 400 },
+      { g: 'Ge', name: 'Gemini', sub: 'Google AI key', status: 'Set up', stColor: ACC, stWeight: 600 },
+    ];
+    const darkTokens = [
+      { n: 'bg', v: '#0B0B0F' }, { n: 'surface1', v: '#15151B' }, { n: 'surface2', v: '#201F27' }, { n: 'surface3', v: '#2A2932' },
+      { n: 'ink', v: '#F0EEF5' }, { n: 'ink2 · 62%', v: 'rgba(240,238,245,0.62)' }, { n: 'ink3 · 40%', v: 'rgba(240,238,245,0.4)' }, { n: 'divider · 9%', v: 'rgba(240,238,245,0.09)' },
+      { n: 'accent', v: '#B7A4FF' }, { n: 'accentFill · 10%', v: 'rgba(183,164,255,0.1)' }, { n: 'onAccent', v: '#140F2A' },
+    ];
+    const lightTokens = [
+      { n: 'bg', v: '#F2F1F5' }, { n: 'surface1', v: '#FFFFFF' }, { n: 'surface2', v: '#E8E6EE' }, { n: 'surface3', v: '#DAD7E2' },
+      { n: 'ink', v: '#18161F' }, { n: 'ink2 · 62%', v: 'rgba(24,22,31,0.62)' }, { n: 'ink3 · 42%', v: 'rgba(24,22,31,0.42)' }, { n: 'divider · 10%', v: 'rgba(24,22,31,0.1)' },
+      { n: 'accent (fill)', v: '#B7A4FF' }, { n: 'accentText', v: '#6A4FD6' }, { n: 'onAccent', v: '#140F2A' },
+    ];
+    const pals = { A: { acc: '#93CFA6', accA: 'rgba(147,207,166,', ink: '#EEF2EE', inkA: 'rgba(238,242,238,', s1: '#151917' }, B: { acc: '#E9DFC8', accA: 'rgba(233,223,200,', ink: '#F2EFE9', inkA: 'rgba(242,239,233,', s1: '#1A1A19' }, C: { acc: '#B7A4FF', accA: 'rgba(183,164,255,', ink: '#F0EEF5', inkA: 'rgba(240,238,245,', s1: '#15151B' } };
+    const prow = (p) => (n, plan, actual, state) => {
+      const done = state === 'done', cur = state === 'current';
+      return { n, plan, actual: actual || '—', mark: done ? '✓' : '', bg: cur ? p.accA + '0.1)' : 'transparent', numColor: cur ? p.acc : p.inkA + '0.4)', color: cur ? p.ink : done ? p.inkA + '0.62)' : p.inkA + '0.4)' };
+    };
+    const pweek = (p) => ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((l, i) => {
+      const s = ['done', 'done', '', 'done', 'today', '', ''][i];
+      return { l, mark: s === 'done' ? '✓' : s === 'today' ? '·' : '', bg: s === 'done' ? p.s1 : s === 'today' ? p.accA + '0.14)' : p.inkA + '0.06)', color: s === 'done' ? p.ink : s === 'today' ? p.acc : p.inkA + '0.4)' };
+    });
+    const mk = (p) => { const r = prow(p); return [r(1, '155 × 8', '155 × 8', 'done'), r(2, '155 × 8', '', 'current'), r(3, '155 × 8', '', ''), r(4, '165 × 6', '', '')]; };
+    return { pw: 393, ph: 852, setsA: mk(pals.A), setsB: mk(pals.B), setsC: mk(pals.C), weekA: pweek(pals.A), weekB: pweek(pals.B), weekC: pweek(pals.C), sets, setsRest, setsPR, setsLight, week, weekEmpty, weekLight, preview, providers, heat, heatLight, sessions, trendPts, bars, connections, darkTokens, lightTokens };
+  }
+}
+</script>
+</body>
+</html>
