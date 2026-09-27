@@ -32,7 +32,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Verify Xcode version
-        run: xcodebuild -version
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes
+          xcrun simctl list devices available
       - name: Test iOS app
         run: >-
           xcodebuild test
