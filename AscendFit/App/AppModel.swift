@@ -585,7 +585,11 @@ private actor LocalRestNotificationScheduler: RestNotificationScheduling {
             allowPermissionRequest: allowPermissionRequest
         ) {
         case .request:
-            isAuthorized = (try? await center.requestAuthorization(options: [.alert])) ?? false
+            isAuthorized = await withCheckedContinuation { continuation in
+                center.requestAuthorization(options: [.alert]) { granted, error in
+                    continuation.resume(returning: granted && error == nil)
+                }
+            }
         case .schedule:
             isAuthorized = true
         case .cancel:
@@ -609,7 +613,11 @@ private actor LocalRestNotificationScheduler: RestNotificationScheduling {
                 repeats: false
             )
         )
-        try? await center.add(request)
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            center.add(request) { _ in
+                continuation.resume()
+            }
+        }
         if token != generation {
             center.removePendingNotificationRequests(withIdentifiers: [requestID])
         }
