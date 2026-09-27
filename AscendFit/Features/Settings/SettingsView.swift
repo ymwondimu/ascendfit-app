@@ -227,19 +227,15 @@ struct SettingsView: View {
     }
 
     private func refreshNotificationStatus() async {
-        let status: Int = await withCheckedContinuation { continuation in
-            UNUserNotificationCenter.current().getNotificationSettings { settings in
-                continuation.resume(returning: settings.authorizationStatus.rawValue)
-            }
-        }
-        canRequestNotificationPermission = status == UNAuthorizationStatus.notDetermined.rawValue
-        switch status {
-        case UNAuthorizationStatus.notDetermined.rawValue: notificationStatus = "Not requested"
-        case UNAuthorizationStatus.denied.rawValue: notificationStatus = "Off in Settings"
-        case UNAuthorizationStatus.authorized.rawValue: notificationStatus = "Allowed"
-        case UNAuthorizationStatus.provisional.rawValue: notificationStatus = "Quiet delivery"
-        case UNAuthorizationStatus.ephemeral.rawValue: notificationStatus = "Temporary permission"
-        default: notificationStatus = "Unavailable"
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        canRequestNotificationPermission = settings.authorizationStatus == .notDetermined
+        switch settings.authorizationStatus {
+        case .notDetermined: notificationStatus = "Not requested"
+        case .denied: notificationStatus = "Off in Settings"
+        case .authorized: notificationStatus = "Allowed"
+        case .provisional: notificationStatus = "Quiet delivery"
+        case .ephemeral: notificationStatus = "Temporary permission"
+        @unknown default: notificationStatus = "Unavailable"
         }
     }
 

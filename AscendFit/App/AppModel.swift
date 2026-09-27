@@ -569,27 +569,19 @@ private actor LocalRestNotificationScheduler: RestNotificationScheduling {
         guard !ProcessInfo.processInfo.arguments.contains("--ui-testing") else { return }
         generation += 1
         let token = generation
-        let pending = await pendingRestNotificationIdentifiers()
+        let pending = await center.pendingNotificationRequests()
         guard token == generation else { return }
-        center.removePendingNotificationRequests(withIdentifiers: pending)
+        center.removePendingNotificationRequests(withIdentifiers: pending.filter { $0.identifier.hasPrefix(requestPrefix) }.map(\.identifier))
 
-        let statusCode: Int = await withCheckedContinuation { continuation in
-            center.getNotificationSettings { settings in
-                continuation.resume(returning: settings.authorizationStatus.rawValue)
-            }
-        }
+        let settings = await center.notificationSettings()
         guard token == generation else { return }
         let isAuthorized: Bool
         switch RestNotificationPermissionPolicy.action(
-            status: UNAuthorizationStatus(rawValue: statusCode) ?? .denied,
+            status: settings.authorizationStatus,
             allowPermissionRequest: allowPermissionRequest
         ) {
         case .request:
-            isAuthorized = await withCheckedContinuation { continuation in
-                center.requestAuthorization(options: [.alert]) { granted, error in
-                    continuation.resume(returning: granted && error == nil)
-                }
-            }
+            isAuthorized = (try? await center.requestAuthorization(options: [.alert])) ?? false
         case .schedule:
             isAuthorized = true
         case .cancel:
@@ -613,11 +605,7 @@ private actor LocalRestNotificationScheduler: RestNotificationScheduling {
                 repeats: false
             )
         )
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            center.add(request) { _ in
-                continuation.resume()
-            }
-        }
+        try? await center.add(request)
         if token != generation {
             center.removePendingNotificationRequests(withIdentifiers: [requestID])
         }
@@ -626,30 +614,12 @@ private actor LocalRestNotificationScheduler: RestNotificationScheduling {
     func cancel() async {
         generation += 1
         let token = generation
-        let pending = await pendingRestNotificationIdentifiers()
+        let pending = await center.pendingNotificationRequests()
         guard token == generation else { return }
-        center.removePendingNotificationRequests(withIdentifiers: pending)
-        let delivered = await deliveredRestNotificationIdentifiers()
+        center.removePendingNotificationRequests(withIdentifiers: pending.filter { $0.identifier.hasPrefix(requestPrefix) }.map(\.identifier))
+        let delivered = await center.deliveredNotifications()
         guard token == generation else { return }
-        center.removeDeliveredNotifications(withIdentifiers: delivered)
-    }
-
-    private func pendingRestNotificationIdentifiers() async -> [String] {
-        let prefix = requestPrefix
-        return await withCheckedContinuation { continuation in
-            center.getPendingNotificationRequests { requests in
-                continuation.resume(returning: requests.map(\.identifier).filter { $0.hasPrefix(prefix) })
-            }
-        }
-    }
-
-    private func deliveredRestNotificationIdentifiers() async -> [String] {
-        let prefix = requestPrefix
-        return await withCheckedContinuation { continuation in
-            center.getDeliveredNotifications { notifications in
-                continuation.resume(returning: notifications.map(\.request.identifier).filter { $0.hasPrefix(prefix) })
-            }
-        }
+        center.removeDeliveredNotifications(withIdentifiers: delivered.map(\.request.identifier).filter { $0.hasPrefix(requestPrefix) })
     }
 }
 

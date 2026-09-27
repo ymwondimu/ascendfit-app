@@ -27,13 +27,17 @@ jobs:
 
   ios:
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     steps:
       - uses: actions/checkout@v4
+      - name: Verify Xcode version
+        run: xcodebuild -version
       - name: Test iOS app
         run: >-
           xcodebuild test
           -project AscendFit.xcodeproj
           -scheme AscendFit
-          -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16 Pro'
+          -destination 'platform=iOS Simulator,OS=26.2,name=iPhone 17 Pro'
           -derivedDataPath .build/DerivedData
           CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=-
