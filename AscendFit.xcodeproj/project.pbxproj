@@ -64,6 +64,7 @@
 		9DCA3080FABF4DDE57A56AB5 /* SharedWorkoutInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292F5F0DC25338A47F2D7955 /* SharedWorkoutInbox.swift */; };
 		A2D1653E20EC54BECBAE2E6F /* WorkoutImportFormatHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD62B17EBDD3792FA87925E /* WorkoutImportFormatHelp.swift */; };
 		A4E981C8C84E1D9779901936 /* WorkoutImportSchemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDF88009A2A777957D16D7B /* WorkoutImportSchemaTests.swift */; };
+		A8E32136D31A0848E4118351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223612D09CB155273DB052C6 /* Assets.xcassets */; };
 		A9799304FF37AE450A5A8B16 /* WorkoutImportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9E1F469E42FE774DC2F497 /* WorkoutImportStore.swift */; };
 		AA2296B5E164FDAC9AEC371E /* PreviousPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A279C1A323121BEEECB5D3 /* PreviousPerformanceTests.swift */; };
 		ADC038DB8A91BC096A58BA57 /* HistoryProgressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CF229BD537A3FD2935C5F8 /* HistoryProgressUITests.swift */; };
@@ -143,6 +144,7 @@
 		20794AF0115B7665031DCE42 /* AppearanceAccessibilityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceAccessibilityUITests.swift; sourceTree = "<group>"; };
 		209580DDBBE552372E352BD7 /* WorkoutDomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDomainTests.swift; sourceTree = "<group>"; };
 		2111B53EFB90B544FB18B5F9 /* AscendFitShare.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = AscendFitShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		223612D09CB155273DB052C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		236C27787E95786C6FC40BEF /* ExpandedWorkoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedWorkoutUITests.swift; sourceTree = "<group>"; };
 		238F5B15A53D04E6EBB29766 /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutView.swift; sourceTree = "<group>"; };
 		255C4FA195116F50420DDDE5 /* CHATGPT-WORKOUT-PROMPT.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "CHATGPT-WORKOUT-PROMPT.txt"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		27B06872DB6BA74D060F48DD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				223612D09CB155273DB052C6 /* Assets.xcassets */,
 				255C4FA195116F50420DDDE5 /* CHATGPT-WORKOUT-PROMPT.txt */,
 				D02C29F4E51C6DF2B88A6B51 /* workout-plan-v1.schema.json */,
 			);
@@ -610,6 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E32136D31A0848E4118351 /* Assets.xcassets in Resources */,
 				B19A651BDBCBD0CEA1D83595 /* CHATGPT-WORKOUT-PROMPT.txt in Resources */,
 				70EBF7F5DC9D7D681B4185E8 /* workout-plan-v1.schema.json in Resources */,
 			);

@@ -57,7 +57,7 @@ final class AscendFitUITests: XCTestCase {
         app.launchArguments = ["--ui-testing-onboarding"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Set up your training profile"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Set your baseline."].waitForExistence(timeout: 3))
         XCTAssertTrue(app.staticTexts["Sex"].exists)
         XCTAssertTrue(app.textFields["Height, in"].exists)
         XCTAssertTrue(app.textFields["Body weight, lb"].exists)
@@ -69,7 +69,7 @@ final class AscendFitUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Nothing on the bench yet."].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Your next session starts here."].waitForExistence(timeout: 3))
         XCTAssertTrue(app.buttons["Import workout"].exists)
         XCTAssertTrue(app.buttons["Build manually"].exists)
     }
@@ -161,8 +161,21 @@ final class AscendFitUITests: XCTestCase {
         XCTAssertFalse(previous.exists)
         XCTAssertTrue(app.buttons["exercise-rest-default"].label.contains("120 sec"))
         XCTAssertTrue(app.staticTexts["Exercise 1 of 2"].exists)
-        XCTAssertTrue(app.staticTexts["1 exercise after this"].exists)
         XCTAssertTrue(app.staticTexts["1 of 3 complete"].exists)
+    }
+
+    func testEverySetCanBeReachedWithLogActionPinned() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing", "--ui-testing-seed-plan"]
+        app.launch()
+        app.buttons["Start workout"].tap()
+
+        let thirdSet = app.staticTexts["3"]
+        for _ in 0..<5 where !thirdSet.isHittable {
+            app.swipeUp()
+        }
+        XCTAssertTrue(thirdSet.isHittable)
+        XCTAssertTrue(app.buttons["Log set"].isHittable)
     }
 
     func testGymControlsEditAddDeleteShowInfoPauseAndResume() {
@@ -180,7 +193,8 @@ final class AscendFitUITests: XCTestCase {
         app.buttons["add-set"].tap()
         XCTAssertTrue(app.staticTexts["Set 1 of 4"].waitForExistence(timeout: 2))
 
-        let currentRow = app.collectionViews.cells.element(boundBy: 0)
+        let currentRow = app.buttons["set-details"]
+        for _ in 0..<4 where !currentRow.isHittable { app.swipeUp() }
         currentRow.swipeLeft()
         app.buttons["Delete"].tap()
         XCTAssertTrue(app.staticTexts["Set 1 of 3"].waitForExistence(timeout: 2))
@@ -237,6 +251,8 @@ final class AscendFitUITests: XCTestCase {
         XCTAssertTrue(app.buttons["Log set"].waitForExistence(timeout: 3))
         app.buttons["Log set"].tap()
 
+        XCTAssertTrue(app.staticTexts["How many more reps could you have done?"].waitForExistence(timeout: 3))
+        app.buttons["Four or more reps left"].tap()
         XCTAssertTrue(app.staticTexts["All sets logged"].waitForExistence(timeout: 3))
         app.buttons["Finish workout"].tap()
         XCTAssertTrue(app.staticTexts["Workout complete"].waitForExistence(timeout: 3))
@@ -247,5 +263,6 @@ final class AscendFitUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Push Session"].waitForExistence(timeout: 3))
         app.staticTexts["Push Session"].tap()
         XCTAssertTrue(app.buttons["copy-coach-summary"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["4+ reps left"].exists)
     }
 }

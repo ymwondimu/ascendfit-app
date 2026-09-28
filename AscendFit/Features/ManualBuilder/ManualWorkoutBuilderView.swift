@@ -805,6 +805,8 @@ private struct ManualGroupingEditor: View {
                     dismiss()
                 }.disabled(selected.isEmpty)
             }
+            .scrollContentBackground(.hidden)
+            .background(AppTheme.background)
             .navigationTitle("Supersets & circuits")
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }.tint(AppTheme.accentContent)

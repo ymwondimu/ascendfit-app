@@ -2,7 +2,7 @@
 
 The offline v0 accepts one versioned JSON format through paste or `.json` upload. The app validates the same [WorkoutPlan v1 schema](schema/workout-plan-v1.schema.json), previews it, and requires confirmation before saving to Today. No provider connection is needed.
 
-Use [the ChatGPT prompt](examples/CHATGPT-WORKOUT-PROMPT.md) in your coaching conversation. Resolve missing mandatory data and alternative exercises before asking for the final file. [Simple strength](examples/simple-strength.workout.json) is a small complete example. [Lower A](examples/lower-a-ready.workout.json) uses the user's confirmed pounds, 45 lb bar, and a single bike warm-up; it preserves rep ranges and stop/skip notes. Unspecified rest is null, not an invented recommendation.
+Use [the ChatGPT prompt](examples/CHATGPT-WORKOUT-PROMPT.md) in your coaching conversation. Resolve missing mandatory data and alternative exercises before asking for the final file. The app determines a default workout name from the exercises during review; a user can enter a personal name before saving. Unspecified rest is null, not an invented recommendation.
 
 Every field has the same spelling and type. Nullable fields must be present as null; unknown fields and future schema versions are rejected. Missing units, incompatible targets, duplicate IDs and invalid grouping cannot become runnable plans. Import review can explicitly keep an exact source exercise name as custom instead of forcing a library match. Source JSON is retained inside the saved local plan and included in exports. JSON interchange and archival history export are different formats.
 

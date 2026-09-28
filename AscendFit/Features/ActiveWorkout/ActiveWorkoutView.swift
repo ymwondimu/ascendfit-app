@@ -7,6 +7,7 @@ struct ActiveWorkoutView: View {
     @State private var manuallyAdjustedSetIDs: Set<UUID> = []
     @State private var invalidResultIDs: Set<UUID> = []
     @State private var editorRequest: SetEditorRequest?
+    @State private var effortPrompt: ExerciseEffortPromptRequest?
     @State private var setDetails: [UUID: SetDetailsDraft] = [:]
     @State private var editorRevision = 0
     @State private var isShowingOverview = false
@@ -27,7 +28,7 @@ struct ActiveWorkoutView: View {
                     ProgressView()
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, AppTheme.Spacing.screenInset)
             .padding(.top, 12)
             .padding(.bottom, 16)
@@ -54,6 +55,21 @@ struct ActiveWorkoutView: View {
                 }
             }
             .presentationDetents([.large])
+        }
+        .sheet(item: $effortPrompt) { request in
+            ExerciseEffortSheet(exerciseName: request.exerciseName) { repsLeft in
+                guard let repsLeft else { return true }
+                guard let value = try? RIR(repsLeft) else { return false }
+                let effort: EffortTarget = repsLeft == 4 ? .rirAtLeast(value) : .rir(value)
+                return await model.editCompletedSet(
+                    request.completedSetID,
+                    result: request.result,
+                    effort: effort,
+                    notes: request.notes
+                )
+            }
+            .presentationDetents([.height(390)])
+            .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $isShowingOverview) {
             WorkoutOverviewView().environmentObject(model)
@@ -105,18 +121,28 @@ struct ActiveWorkoutView: View {
         } else if let context = model.currentSetContext {
             VStack(spacing: 0) {
                 workoutProgressHeader(session: session, context: context)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
 
                 if case let .resting(deadline) = session.status {
                     rest(deadline: deadline, context: context, session: session)
                 } else if case .paused = session.status {
                     paused(context: context, session: session)
                 } else {
-                    if dynamicTypeSize.isAccessibilitySize {
-                        ScrollView { activeSet(context, session: session) }
-                            .scrollDismissesKeyboard(.interactively)
-                    } else {
+                    List {
                         activeSet(context, session: session)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(AppTheme.background)
+                            .listRowSeparator(.hidden)
+                        activeLedger(context: context, session: session).listSection
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .scrollDismissesKeyboard(.interactively)
+                    .safeAreaInset(edge: .bottom, spacing: 0) {
+                        logSetButton(context: context, session: session)
+                            .padding(.top, 12)
+                            .padding(.bottom, 8)
+                            .background(AppTheme.background)
                     }
                 }
 
@@ -197,41 +223,56 @@ struct ActiveWorkoutView: View {
         session: WorkoutSession
     ) -> some View {
         VStack(spacing: 0) {
-            HStack(alignment: .top, spacing: 10) {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(currentExercise(context, session: session).name)
-                        .font(.title2.weight(.semibold))
-                        .tracking(-0.2)
-                        .foregroundStyle(AppTheme.contentPrimary)
-                    if let muscles = currentExercise(context, session: session).primaryMuscles, !muscles.isEmpty {
-                        Text(muscles.joined(separator: " · "))
-                            .font(.caption)
-                            .foregroundStyle(AppTheme.contentTertiary)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("EXERCISE \(String(format: "%02d", context.exercisePosition)) OF \(String(format: "%02d", context.exerciseTotal))")
+                        .font(.caption.weight(.semibold))
+                        .tracking(1.1)
+                        .foregroundStyle(AppTheme.action)
+                    Spacer()
+                    Button {
+                        exerciseInfo = currentExercise(context, session: session)
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .font(.title3)
+                            .frame(width: 44, height: 44)
+                    }
+                    .foregroundStyle(.white)
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("About \(currentExercise(context, session: session).name)")
+                    .accessibilityIdentifier("exercise-info")
+                }
+                Spacer(minLength: 8)
+                Text(currentExercise(context, session: session).name)
+                    .font(.system(size: 32, weight: .semibold))
+                    .tracking(-0.7)
+                    .foregroundStyle(.white)
+                if let cue = exerciseCue(context, session: session) {
+                    Text(cue)
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.83))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("exercise-cues")
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, minHeight: 145, alignment: .bottomLeading)
+            .background {
+                GeometryReader { geometry in
+                    ZStack {
+                        if currentExercise(context, session: session).name.caseInsensitiveCompare("Back Squat") == .orderedSame {
+                            Image("CampaignSquat")
+                                .resizable().scaledToFill()
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .clipped()
+                        } else {
+                            LinearGradient(colors: [AppTheme.surfaceTertiary, AppTheme.surfacePrimary], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        }
+                        LinearGradient(colors: [.black.opacity(0.05), .black.opacity(0.74), .black.opacity(0.90)], startPoint: .top, endPoint: .bottom)
                     }
                 }
-                Spacer()
-                Button {
-                    exerciseInfo = currentExercise(context, session: session)
-                } label: {
-                    Image(systemName: "info.circle")
-                        .font(.title3)
-                        .frame(width: 44, height: 44)
-                }
-                .foregroundStyle(AppTheme.contentSecondary)
-                .accessibilityLabel("About \(currentExercise(context, session: session).name)")
-                .accessibilityIdentifier("exercise-info")
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let cue = exerciseCue(context, session: session) {
-                Text(cue)
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.contentSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .accessibilityIdentifier("exercise-cues")
-                    .padding(.top, 8)
-            }
+            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
 
             let restSeconds = session.restDuration(for: context.set.id)?.seconds ?? 0
             Button {
@@ -239,21 +280,22 @@ struct ActiveWorkoutView: View {
             } label: {
                 Label(restSeconds == 0 ? "Rest between sets: Off" : "Rest between sets: \(restSeconds) sec", systemImage: "timer")
                     .font(.subheadline)
-                    .frame(minHeight: 56)
+                    .frame(minHeight: 46)
             }
-            .foregroundStyle(AppTheme.accentContent)
+            .foregroundStyle(AppTheme.action)
+            .buttonStyle(.plain)
             .frame(maxWidth: .infinity, alignment: .leading)
             .accessibilityHint("Change the rest after upcoming sets of this exercise")
             .accessibilityIdentifier("exercise-rest-default")
 
-            Spacer(minLength: 12)
+            Spacer(minLength: 4)
 
             Text(
                 adjustedResults[context.set.id]?.displayText
                     ?? session.resultOverride(for: context.set.id)?.displayText
                     ?? context.set.prescription.displayTarget
             )
-                .font(.system(size: 60, weight: .semibold, design: .rounded))
+                .font(.system(size: 52, weight: .semibold, design: .rounded))
                 .tracking(-1.2)
                 .minimumScaleFactor(0.52)
                 .lineLimit(1)
@@ -267,10 +309,11 @@ struct ActiveWorkoutView: View {
                     .accessibilityIdentifier("active-group-round")
             }
 
-            Text("Set \(context.setPosition) of \(context.setTotal)")
+            Text("WORKING SET \(context.setPosition) OF \(context.setTotal)")
                 .font(.body.weight(.medium).monospacedDigit())
-                .foregroundStyle(AppTheme.contentSecondary)
-                .padding(.top, 10)
+                .foregroundStyle(AppTheme.action)
+                .accessibilityLabel("Set \(context.setPosition) of \(context.setTotal)")
+                .padding(.top, 4)
 
             if context.exercise.group != nil,
                let next = session.executionOrder.first(where: { item in
@@ -284,13 +327,6 @@ struct ActiveWorkoutView: View {
             if context.set.role != .working || context.set.side != .bilateral || context.set.effortTarget != nil || context.set.tempo != nil {
                 Text(setDetails(context.set))
                     .font(.caption).foregroundStyle(AppTheme.contentSecondary)
-                    .padding(.top, 4)
-            }
-
-            if context.exercise.group == nil {
-                Text(remainingExerciseText(context))
-                    .font(.caption)
-                    .foregroundStyle(AppTheme.contentTertiary)
                     .padding(.top, 4)
             }
 
@@ -323,58 +359,78 @@ struct ActiveWorkoutView: View {
                     }
                 }
                 .id("\(context.set.id)-\(editorRevision)")
-                .padding(.top, 14)
+                .padding(.top, 10)
             }
 
-            Button {
-                if let result = adjustedResults[context.set.id]
-                    ?? session.resultOverride(for: context.set.id)
-                    ?? context.set.prescription.defaultResultForEditing {
-                    editorRequest = SetEditorRequest(
-                        plannedSetID: context.set.id, completedSetID: nil,
-                        title: "Set details", initialResult: result,
-                        initialDetails: setDetails[context.set.id] ?? SetDetailsDraft()
-                    )
-                }
-            } label: {
-                Label(setDetails[context.set.id]?.hasDetails == true ? "Effort & notes added" : "Set details · optional", systemImage: "slider.horizontal.3")
-                    .font(.subheadline).frame(minHeight: 44)
-            }
-            .foregroundStyle(AppTheme.accentContent)
-            .accessibilityIdentifier("set-details")
+        }
+    }
 
-            Button("Log set") {
+    private func activeLedger(context: CurrentSetContext, session: WorkoutSession) -> CurrentExerciseSetLedger {
+        CurrentExerciseSetLedger(
+            session: session,
+            context: context,
+            draftResults: adjustedResults,
+            onEditCompleted: editCompletedSet,
+            onEditCurrent: { editCurrentSet(context, session: session) },
+            onAddSet: {
                 let result = adjustedResults[context.set.id]
                     ?? session.resultOverride(for: context.set.id)
-                let shouldUpdateRemaining = manuallyAdjustedSetIDs.contains(context.set.id)
-                Task {
-                    await model.logCurrentSet(
-                        result: result,
-                        updateRemainingSets: shouldUpdateRemaining,
-                        effort: setDetails[context.set.id]?.effort,
-                        notes: setDetails[context.set.id]?.notes
+                Task { await model.addSetToCurrentExercise(result: result) }
+            },
+            onDeleteSet: { setID in Task { await model.deleteSet(setID) } }
+        )
+    }
+
+    private func editCurrentSet(_ context: CurrentSetContext, session: WorkoutSession) {
+        guard let result = adjustedResults[context.set.id]
+            ?? session.resultOverride(for: context.set.id)
+            ?? context.set.prescription.defaultResultForEditing else { return }
+        editorRequest = SetEditorRequest(
+            plannedSetID: context.set.id, completedSetID: nil,
+            title: "Set details", initialResult: result,
+            initialDetails: setDetails[context.set.id] ?? SetDetailsDraft()
+        )
+    }
+
+    private func logSetButton(context: CurrentSetContext, session: WorkoutSession) -> some View {
+        Button("Log set") {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            let result = adjustedResults[context.set.id]
+                ?? session.resultOverride(for: context.set.id)
+            let shouldUpdateRemaining = manuallyAdjustedSetIDs.contains(context.set.id)
+            let shouldAskEffort = shouldAskEffortAfterSet(context: context, session: session)
+            Task {
+                let saved = await model.logCurrentSet(
+                    result: result,
+                    updateRemainingSets: shouldUpdateRemaining,
+                    effort: setDetails[context.set.id]?.effort,
+                    notes: setDetails[context.set.id]?.notes
+                )
+                if saved, shouldAskEffort,
+                   let completed = model.activeSession?.completedSets.last(where: { $0.plannedSetID == context.set.id }) {
+                    effortPrompt = ExerciseEffortPromptRequest(
+                        completedSetID: completed.id,
+                        result: completed.result,
+                        notes: completed.notes,
+                        exerciseName: currentExercise(context, session: session).name
                     )
                 }
             }
-            .buttonStyle(PrimaryActionButtonStyle())
-            .disabled(invalidResultIDs.contains(context.set.id))
-            .padding(.top, 8)
-
-            Spacer(minLength: 18)
-
-            CurrentExerciseSetLedger(
-                session: session,
-                context: context,
-                draftResults: adjustedResults,
-                onEditCompleted: editCompletedSet,
-                onAddSet: {
-                    let result = adjustedResults[context.set.id]
-                        ?? session.resultOverride(for: context.set.id)
-                    Task { await model.addSetToCurrentExercise(result: result) }
-                },
-                onDeleteSet: { setID in Task { await model.deleteSet(setID) } }
-            )
         }
+        .buttonStyle(PrimaryActionButtonStyle())
+        .disabled(invalidResultIDs.contains(context.set.id))
+    }
+
+    private func shouldAskEffortAfterSet(context: CurrentSetContext, session: WorkoutSession) -> Bool {
+        guard context.set.role == .working, setDetails[context.set.id]?.effort == nil else { return false }
+        switch context.set.prescription {
+        case .weighted, .bodyweight, .assistedBodyweight, .amrap: break
+        case .timed, .distance: return false
+        }
+        let completedIDs = Set(session.completedSets.map(\.plannedSetID))
+        return (context.exercise.sets + session.addedSets[context.exercise.id, default: []])
+            .filter { !session.skippedSetIDs.contains($0.id) && !completedIDs.contains($0.id) }
+            .allSatisfy { $0.id == context.set.id }
     }
 
     private func currentExercise(_ context: CurrentSetContext, session: WorkoutSession) -> ExerciseDefinition {
@@ -472,6 +528,7 @@ struct ActiveWorkoutView: View {
                 context: context,
                 draftResults: adjustedResults,
                 onEditCompleted: editCompletedSet,
+                onEditCurrent: { editCurrentSet(context, session: session) },
                 onAddSet: {
                     let result = adjustedResults[context.set.id]
                         ?? session.resultOverride(for: context.set.id)
@@ -516,6 +573,7 @@ struct ActiveWorkoutView: View {
                 context: context,
                 draftResults: adjustedResults,
                 onEditCompleted: editCompletedSet,
+                onEditCurrent: { editCurrentSet(context, session: session) },
                 onAddSet: {
                     let result = adjustedResults[context.set.id]
                         ?? session.resultOverride(for: context.set.id)
@@ -533,6 +591,7 @@ struct ActiveWorkoutView: View {
         switch set.effortTarget {
         case let .rpe(value): details.append("RPE \(value.value.formatted())")
         case let .rir(value): details.append("RIR \(value.value)")
+        case let .rirAtLeast(value): details.append("\(value.value)+ reps left")
         case nil: break
         }
         if let tempo = set.tempo {
@@ -545,13 +604,6 @@ struct ActiveWorkoutView: View {
             details.append("Tempo " + phases.joined(separator: "–"))
         }
         return details.joined(separator: " · ")
-    }
-
-    private func remainingExerciseText(_ context: CurrentSetContext) -> String {
-        let remaining = context.exerciseTotal - context.exercisePosition
-        if remaining == 0 { return "Final exercise" }
-        if remaining == 1 { return "1 exercise after this" }
-        return "\(remaining) exercises after this"
     }
 
     private func updateRemainingDrafts(
@@ -670,6 +722,7 @@ private struct CurrentExerciseSetLedger: View {
     let context: CurrentSetContext
     let draftResults: [UUID: SetResult]
     let onEditCompleted: (CompletedSet) -> Void
+    let onEditCurrent: () -> Void
     let onAddSet: () -> Void
     let onDeleteSet: (UUID) -> Void
 
@@ -680,54 +733,70 @@ private struct CurrentExerciseSetLedger: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            adaptiveLayout {
-                Text("SETS")
-                    .font(.caption2.weight(.medium))
-                    .tracking(1.1)
-                    .foregroundStyle(AppTheme.contentTertiary)
-                if !dynamicTypeSize.isAccessibilitySize { Spacer() }
-                Text("\(completedCount) of \(sets.count) complete")
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(AppTheme.contentTertiary)
-
-                Button(action: onAddSet) {
-                    Label("Add set", systemImage: "plus")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(AppTheme.accentContent)
-                        .padding(.horizontal, 10)
-                        .frame(minHeight: 44)
-                        .background(AppTheme.surfaceSecondary, in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .disabled(!session.status.isActivelyTraining)
-                .accessibilityIdentifier("add-set")
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
-
+            header
             List {
-                ForEach(Array(sets.enumerated()), id: \.element.id) { index, set in
-                    ledgerRow(index: index, set: set)
-                        .listRowInsets(EdgeInsets())
-                        .listRowBackground(AppTheme.surfacePrimary)
-                        .listRowSeparatorTint(AppTheme.contentTertiary.opacity(0.16))
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            if session.completedSets.contains(where: { $0.plannedSetID == set.id }) == false,
-                               session.status.isActivelyTraining {
-                                Button("Delete", role: .destructive) {
-                                    onDeleteSet(set.id)
-                                }
-                            }
-                        }
-                }
+                rows
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
             .environment(\.defaultMinListRowHeight, 44)
-            .frame(height: min(CGFloat(sets.count) * (dynamicTypeSize.isAccessibilitySize ? 88 : 44), dynamicTypeSize.isAccessibilitySize ? 352 : 220))
+            .frame(height: CGFloat(sets.count) * (dynamicTypeSize.isAccessibilitySize ? 88 : 52))
         }
         .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 20))
         .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+
+    var listSection: some View {
+        Section {
+            rows
+        } header: {
+            header
+                .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 20))
+        }
+    }
+
+    private var header: some View {
+        adaptiveLayout {
+            Text("SETS")
+                .font(.caption2.weight(.medium))
+                .tracking(1.1)
+                .foregroundStyle(AppTheme.contentTertiary)
+            if !dynamicTypeSize.isAccessibilitySize { Spacer() }
+            Text("\(completedCount) of \(sets.count) complete")
+                .font(.caption.monospacedDigit())
+                .foregroundStyle(AppTheme.contentTertiary)
+
+            Button(action: onAddSet) {
+                Label("Add set", systemImage: "plus")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(AppTheme.accentContent)
+                    .padding(.horizontal, 10)
+                    .frame(minHeight: 44)
+                    .background(AppTheme.surfaceSecondary, in: Capsule())
+            }
+            .buttonStyle(.plain)
+            .disabled(!session.status.isActivelyTraining)
+            .accessibilityIdentifier("add-set")
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+    }
+
+    private var rows: some View {
+        ForEach(Array(sets.enumerated()), id: \.element.id) { index, set in
+            ledgerRow(index: index, set: set)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(AppTheme.surfacePrimary)
+                .listRowSeparatorTint(AppTheme.contentTertiary.opacity(0.16))
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    if session.completedSets.contains(where: { $0.plannedSetID == set.id }) == false,
+                       session.status.isActivelyTraining {
+                        Button("Delete", role: .destructive) {
+                            onDeleteSet(set.id)
+                        }
+                    }
+                }
+        }
     }
 
     private var adaptiveLayout: AnyLayout {
@@ -760,6 +829,13 @@ private struct CurrentExerciseSetLedger: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier("edit-completed-set-\(index + 1)")
             .accessibilityHint("Opens the completed set editor")
+        } else if isCurrent {
+            Button(action: onEditCurrent) {
+                ledgerRowContent(index: index, set: set, completed: nil, isCurrent: true)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("set-details")
+            .accessibilityHint("Opens weight, reps, effort, and notes for this set")
         } else {
             ledgerRowContent(
                 index: index,
@@ -804,7 +880,8 @@ private struct CurrentExerciseSetLedger: View {
             if !dynamicTypeSize.isAccessibilitySize { Spacer() }
 
             if completed != nil {
-                Image(systemName: "checkmark.circle.fill")
+                Label("Done", systemImage: "checkmark")
+                    .font(.caption)
                     .foregroundStyle(AppTheme.accentContent)
                     .accessibilityLabel("Completed")
             } else if isCurrent {
@@ -818,7 +895,7 @@ private struct CurrentExerciseSetLedger: View {
             }
         }
         .padding(.horizontal, 12)
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 88 : 44)
+        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 88 : 52)
         .background(isCurrent ? AppTheme.accent.opacity(0.10) : Color.clear)
         .contentShape(Rectangle())
     }
@@ -907,6 +984,71 @@ private struct SetEditorRequest: Identifiable {
     let title: String
     let initialResult: SetResult
     let initialDetails: SetDetailsDraft
+}
+
+private struct ExerciseEffortPromptRequest: Identifiable {
+    let id = UUID()
+    let completedSetID: UUID
+    let result: SetResult
+    let notes: String?
+    let exerciseName: String
+}
+
+private struct ExerciseEffortSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let exerciseName: String
+    let onAnswer: (Int?) async -> Bool
+    @State private var isSaving = false
+    @State private var saveFailed = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text(exerciseName.uppercased())
+                .font(.caption.weight(.semibold))
+                .tracking(1.2)
+                .foregroundStyle(AppTheme.action)
+            Text("How many more reps could you have done?")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(AppTheme.contentPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text("Count only reps you could have done with good form.")
+                .font(.subheadline)
+                .foregroundStyle(AppTheme.contentSecondary)
+
+            HStack(spacing: 8) {
+                ForEach(0...4, id: \.self) { value in
+                    Button(value == 4 ? "4+" : "\(value)") { answer(value) }
+                        .font(.title3.weight(.semibold).monospacedDigit())
+                        .foregroundStyle(AppTheme.contentPrimary)
+                        .frame(maxWidth: .infinity, minHeight: 58)
+                        .background(AppTheme.surfaceSecondary, in: RoundedRectangle(cornerRadius: 16))
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(value == 4 ? "Four or more reps left" : "\(value) reps left")
+                }
+            }
+
+            Button("Skip for now") { answer(nil) }
+                .buttonStyle(SecondaryActionButtonStyle())
+            if saveFailed {
+                Text("Your answer was not saved. Try again or skip for now.")
+                    .font(.footnote)
+                    .foregroundStyle(.red)
+            }
+        }
+        .disabled(isSaving)
+        .padding(AppTheme.Spacing.screenInset)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(AppTheme.background.ignoresSafeArea())
+    }
+
+    private func answer(_ value: Int?) {
+        isSaving = true
+        Task {
+            if await onAnswer(value) { dismiss() }
+            else { saveFailed = true }
+            isSaving = false
+        }
+    }
 }
 
 struct ActiveSetDraft {
@@ -1146,26 +1288,27 @@ private struct SetValueControls: View {
         step: Decimal,
         minimum: Decimal
     ) -> some View {
-        HStack(spacing: 0) {
-            Button {
-                adjust(text, by: -step, minimum: minimum)
-            } label: {
-                Image(systemName: "minus")
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(width: compact ? 42 : 56, height: compact ? 56 : 64)
-            }
-            .accessibilityLabel("Decrease \(title.lowercased())")
-            .accessibilityIdentifier("decrease-set-\(id)")
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title.uppercased())
+                .font(.caption2.weight(.medium))
+                .tracking(0.8)
+                .foregroundStyle(AppTheme.contentTertiary)
+            HStack(spacing: 2) {
+                Button {
+                    adjust(text, by: -step, minimum: minimum)
+                    UISelectionFeedbackGenerator().selectionChanged()
+                } label: {
+                    Image(systemName: "minus")
+                        .font(.system(size: 19, weight: .semibold))
+                }
+                .buttonStyle(CompactStepperButtonStyle())
+                .accessibilityLabel("Decrease \(title.lowercased())")
+                .accessibilityIdentifier("decrease-set-\(id)")
 
-            VStack(spacing: 2) {
-                Text(title.uppercased())
-                    .font(.caption2.weight(.medium))
-                    .tracking(0.8)
-                    .foregroundStyle(AppTheme.contentTertiary)
                 HStack(spacing: 3) {
                     TextField("0", text: text)
                         .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.trailing)
+                        .multilineTextAlignment(.center)
                         .font(.system(compact ? .body : .title3, design: .rounded, weight: .semibold))
                         .foregroundStyle(AppTheme.contentPrimary)
                         .accessibilityLabel(title)
@@ -1175,21 +1318,24 @@ private struct SetValueControls: View {
                         .foregroundStyle(AppTheme.contentTertiary)
                         .fixedSize()
                 }
-            }
-            .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
 
-            Button {
-                adjust(text, by: step, minimum: minimum)
-            } label: {
-                Image(systemName: "plus")
-                    .font(.system(size: 20, weight: .semibold))
-                    .frame(width: compact ? 42 : 56, height: compact ? 56 : 64)
+                Button {
+                    adjust(text, by: step, minimum: minimum)
+                    UISelectionFeedbackGenerator().selectionChanged()
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 19, weight: .semibold))
+                }
+                .buttonStyle(CompactStepperButtonStyle())
+                .accessibilityLabel("Increase \(title.lowercased())")
+                .accessibilityIdentifier("increase-set-\(id)")
             }
-            .accessibilityLabel("Increase \(title.lowercased())")
-            .accessibilityIdentifier("increase-set-\(id)")
+            .padding(.horizontal, 3)
+            .frame(minHeight: 58)
+            .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 19))
         }
         .foregroundStyle(AppTheme.contentPrimary)
-        .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 18))
     }
 
     private func adjust(_ binding: Binding<String>, by change: Decimal, minimum: Decimal) {

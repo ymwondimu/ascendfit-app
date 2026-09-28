@@ -10,6 +10,7 @@ final class HistorySettingsUITests: XCTestCase {
 
         app.tabBars.buttons["History"].tap()
         XCTAssertTrue(app.staticTexts["Lower A"].waitForExistence(timeout: 3))
+        reveal(app.buttons["exercise-progress"], in: app)
         app.buttons["exercise-progress"].tap()
         XCTAssertTrue(app.staticTexts["Back Squat"].waitForExistence(timeout: 3))
         app.staticTexts["Back Squat"].tap()
@@ -19,6 +20,7 @@ final class HistorySettingsUITests: XCTestCase {
         capture("Exercise progress with honest low-data state", in: app)
         app.navigationBars.buttons.element(boundBy: 0).tap()
         app.navigationBars.buttons.element(boundBy: 0).tap()
+        for _ in 0..<6 where !app.staticTexts["Lower A"].isHittable { app.swipeDown() }
         app.staticTexts["Lower A"].tap()
         let actions = app.buttons["history-workout-actions"]
         XCTAssertTrue(actions.waitForExistence(timeout: 3))

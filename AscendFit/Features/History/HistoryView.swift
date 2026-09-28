@@ -25,25 +25,6 @@ struct HistoryView: View {
     var body: some View {
         let recordCounts = Dictionary(grouping: ExerciseProgress.all(in: model.workoutHistory).flatMap(\.records), by: { $0.performance.sessionID }).mapValues(\.count)
         List {
-            if !model.workoutHistory.isEmpty {
-                Section {
-                    HistoryActivityStrip(history: model.workoutHistory, selectedDate: $selectedDate, filterByDate: $filterByDate)
-                    NavigationLink {
-                        ExerciseHistoryListView()
-                    } label: {
-                        Label("Exercise progress", systemImage: "chart.xyaxis.line")
-                    }
-                    .accessibilityIdentifier("exercise-progress")
-                    Toggle("Choose a date", isOn: $showsCalendar)
-                        .accessibilityIdentifier("history-date-filter")
-                    if showsCalendar {
-                        DatePicker("Workout date", selection: $selectedDate, displayedComponents: .date)
-                            .datePickerStyle(.graphical)
-                            .onChange(of: selectedDate) { _, _ in filterByDate = true }
-                    }
-                }
-                .listRowBackground(AppTheme.surfacePrimary)
-            }
             if model.workoutHistory.isEmpty {
                 ContentUnavailableView("No workouts yet", systemImage: "clock",
                     description: Text("Completed workouts will appear here. Build or import one from Today to get started."))
@@ -61,6 +42,25 @@ struct HistoryView: View {
                         .listRowBackground(AppTheme.surfacePrimary)
                     }
                 }
+            }
+            if !model.workoutHistory.isEmpty {
+                Section("Progress") {
+                    HistoryActivityStrip(history: model.workoutHistory, selectedDate: $selectedDate, filterByDate: $filterByDate)
+                    NavigationLink {
+                        ExerciseHistoryListView()
+                    } label: {
+                        Label("Exercise progress", systemImage: "chart.xyaxis.line")
+                    }
+                    .accessibilityIdentifier("exercise-progress")
+                    Toggle("Choose a date", isOn: $showsCalendar)
+                        .accessibilityIdentifier("history-date-filter")
+                    if showsCalendar {
+                        DatePicker("Workout date", selection: $selectedDate, displayedComponents: .date)
+                            .datePickerStyle(.graphical)
+                            .onChange(of: selectedDate) { _, _ in filterByDate = true }
+                    }
+                }
+                .listRowBackground(AppTheme.surfacePrimary)
             }
         }
         .listStyle(.insetGrouped)
@@ -329,6 +329,7 @@ extension EffortTarget {
         switch self {
         case let .rpe(value): "RPE \(value.value.formatted())"
         case let .rir(value): "\(value.value) RIR"
+        case let .rirAtLeast(value): "\(value.value)+ reps left"
         }
     }
 }

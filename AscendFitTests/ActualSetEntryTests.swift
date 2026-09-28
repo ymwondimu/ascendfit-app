@@ -45,6 +45,15 @@ struct ActualSetEntryTests {
         #expect(draft.hasDetails)
     }
 
+    @Test("Four or more reps stays distinct from exactly four through persistence and editing")
+    func fourOrMoreReps() throws {
+        let effort = EffortTarget.rirAtLeast(try RIR(4))
+        let restored = try JSONDecoder().decode(EffortTarget.self, from: JSONEncoder().encode(effort))
+        #expect(restored == effort)
+        #expect(SetDetailsDraft(effort: restored).effort == effort)
+        #expect(restored != .rir(try RIR(4)))
+    }
+
     @Test("Tempo supports explosive lifting and ignores hidden disabled values")
     func tempoTarget() throws {
         var draft = SetTempoDraft()

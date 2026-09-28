@@ -14,6 +14,7 @@ struct WorkoutImportTests {
             draft.exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
         }
         let plan = try draft.makePlan()
+        #expect(plan.title == "Lower Body")
         #expect(plan.exercises.count == 13)
         #expect(plan.exercises.flatMap(\.sets).count == 33)
         #expect(plan.importSource?.originalText == text)
@@ -23,6 +24,42 @@ struct WorkoutImportTests {
         #expect(plan.exercises[5].sets[1].prescription == .weighted(reps: try RepTarget(lower: 3, upper: 4), load: try Load(amount: 135, unit: .pounds)))
         #expect(plan.notes?.contains("stop that exercise rather than trying to work through it.") == true)
         #expect(plan.exercises.flatMap(\.sets).allSatisfy { $0.restAfter == nil })
+    }
+
+    @Test("Imported focus follows exercise regions; only a user-edited name overrides it")
+    func importedWorkoutTitles() throws {
+        var draft = try draft(fixture("lower-a-ready"))
+        var workout = try #require(draft.response?.workouts.first)
+        var upper = workout.exercises[0]
+        upper.name = "Bench Press"
+        var lower = workout.exercises[1]
+        lower.name = "Back Squat"
+        var neutral = workout.exercises[2]
+        neutral.name = "Plank"
+        var unknown = workout.exercises[3]
+        unknown.name = "Unlisted movement"
+
+        workout.exercises = [upper, neutral]
+        #expect(draft.title(for: workout) == "Upper Body")
+        draft.exerciseMappings[upper.id] = try #require(ExerciseCatalog.exercises.first { $0.name == "Back Squat" }).definition
+        #expect(draft.title(for: workout) == "Lower Body")
+        draft.exerciseMappings.removeValue(forKey: upper.id)
+        workout.exercises = [lower, neutral]
+        #expect(draft.title(for: workout) == "Lower Body")
+        workout.exercises = [upper, lower, neutral]
+        #expect(draft.title(for: workout) == "Full Body")
+        workout.exercises = [upper, unknown]
+        #expect(draft.title(for: workout) == "Workout")
+        neutral.name = "Rowing machine"
+        lower.name = "Hamstring curl"
+        workout.exercises = [lower, neutral]
+        #expect(draft.title(for: workout) == "Lower Body")
+
+        draft.setTitle("My Sunday Session", for: workout)
+        let reopened = try JSONDecoder().decode(WorkoutImportDraft.self, from: JSONEncoder().encode(draft))
+        #expect(reopened.title(for: workout) == "My Sunday Session")
+        draft.setTitle("  ", for: workout)
+        #expect(draft.title(for: workout) == "Lower Body")
     }
 
     @Test("Unresolved source cannot be acknowledged away, and incompatible targets are never silently dropped")

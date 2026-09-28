@@ -2,7 +2,7 @@
 
 **Prepared:** September 27, 2026  
 **Workspace:** repository root
-**Current milestone:** Expanded local workout execution, history/progress, and Settings/data ownership are implemented; simulator regression and changed-screen visual review are complete. Standardized JSON import, offline sharing and the configured-service text-conversion client are implemented. Text-client tests use controlled responses; live provider/service validation and physical-device checks remain outstanding.
+**Current milestone:** Campaign styling, native scrolling set rows with a pinned Log set action, and an optional plain-language effort prompt are implemented on `codex/campaign-ui`. The full iPhone 17 Pro / iOS 26.2 simulator run passed 69 Swift unit tests and 22 UI tests on September 27, 2026. Standardized JSON import, offline sharing and the configured-service text-conversion client are implemented. Live provider/service validation and physical-device checks remain outstanding.
 
 This file preserves implementation-specific context between development chats. Product intent remains authoritative in [PROJECT.md](PROJECT.md), current execution status in [PLAN.md](PLAN.md), build order in [implementation-roadmap.md](implementation-roadmap.md), and the approved interface contract in [UI-SPEC.md](UI-SPEC.md).
 
@@ -24,7 +24,8 @@ Treat the supplied design handoff in `Design/Handoff/ClaudeDesign/` as reference
 - Ascend Fit is an execution layer for workouts from a trusted external AI coach, not an automatic workout generator.
 - Paste and the iOS Share Sheet are the initial import paths. All imports and manually created workouts compile into the same provider-neutral workout domain.
 - Live workout execution is local-first and event-backed. A backend outage must not prevent starting, logging, resuming, or finishing a prepared workout.
-- The approved visual direction is **Lilac on ink-violet**, documented in `UI-SPEC.md`.
+- The approved visual direction is **Campaign**: ink and charcoal surfaces, citron primary actions, lilac current-set accents, and native system typography, documented in `UI-SPEC.md`. The pre-redesign v1 remains on `main`/`v1.0.0`; current UI work is on `codex/campaign-ui`.
+- The active screen keeps all set rows in one native scrolling list, with a pinned Log set button. After the final working set of a rep-based exercise, a skippable plain-language prompt records 0, 1, 2, 3, or 4+ clean reps left. The `4+` option is a distinct lower-bound value in persisted effort data.
 - Keep tests focused, small, and nonredundant. Add tests for new behavior and meaningful regression risk rather than duplicating coverage.
 - Do not silently invent ambiguous imported workout data. Uncertain values must be surfaced for human confirmation.
 
@@ -128,6 +129,12 @@ The user explicitly changed sequencing: accelerate ChatGPT import while fixing r
 - UI tests inject deterministic transport only under `--ui-testing`; unconfigured UI tests cannot make actual network/provider calls. No live provider evaluation, paid calls or deployment occurred. Existing backend process-local auth/budget limitations remain.
 - Backend now has 10 tests and 11 local evaluation cases (eight newly labeled synthetic cases plus the original three). These cover contracts/evidence/ambiguity/grouping/classification, not model correctness or the 20-clear-workout exit gate.
 
+### Imported workout naming and README cleanup
+
+- New imports ignore coach-supplied session titles as the saved plan name. Review derives Upper Body, Lower Body, or Full Body from the exercise list; core and general warm-up work are neutral, and unrecognized movements keep the safe generic Workout name unless both upper and lower work are identified.
+- A name explicitly entered in import review is persisted with the draft and used when adding to Today. The manual builder already supports naming before saving. Older saved workouts retain their historical titles because the app cannot tell whether the user previously edited them.
+- The root and backend READMEs describe app use and import behavior without presenting the user-provided workout fixture as a recommended plan.
+
 ### Backend and Share Extension
 
 - The Node backend includes health/404 and the private interpretation foundation described above. The configured-service text client is implemented; live evaluation, service deployment and private/public authentication enrollment remain incomplete.
@@ -154,6 +161,8 @@ Settings now includes units/profile, separate persisted planning and gym appeara
 Execution refinements still outstanding: mid-session set-type/plan editing and deliberate wall-clock timer/elapsed behavior. Replacements remain constrained to compatible remaining set types. Foreground notification reconciliation is implemented; physical notification delivery and the full accessibility audit remain outstanding. Do not claim REST-04 complete from the clock-lockout fix alone.
 
 ## Verification baseline
+
+Imported naming increment: 68 Swift unit tests and all six import/share UI tests passed on the iPhone 17 Pro / iOS 26.2 simulator. The previous full GitHub CI run passed all 21 UI tests before this import-only change; backend code was unchanged.
 
 September 27 text-client increment: all 67 Swift unit tests and all six import/share UI regression tests passed with zero failures/skips in `.build/DerivedData/Logs/Test/Test-AscendFit-2026.09.27_16-18-19--0400.xcresult` (73 iOS tests) on iPhone 17 Pro / iOS 26.2. The other 15 UI tests retain their unchanged September 26 passing baseline, for 21 known passing UI tests total. Backend tests expanded to 10 passing tests, with syntax checks and 11 local contract evaluation cases passing. Total known coverage is 98 tests; no live provider calls were performed. Text capture/canceled conversion and converted review screenshots were visually reviewed. Unit tests cover private transport boundaries, exact source verification, error redaction, cancellation and multiple-workout selection. UI tests cover explicit consent, in-flight cancel, no automatic restart, recovered review, and retained JSON/Share Sheet paths.
 
@@ -211,7 +220,7 @@ Before making changes, read CONTINUATION.md, PROJECT.md, PLAN.md, the relevant s
 
 Do not restart or re-scaffold the project, and do not reimplement completed behavior. Preserve the current local-first architecture and all interaction decisions recorded in CONTINUATION.md. The v1.0.0 baseline is committed; do not clean or reset the working tree.
 
-First inspect the current source and tests, confirm the handoff still matches the repository, and briefly state the next substantive milestone you will implement. The user prefers larger coherent batches and explicitly authorized parallel agent work with separate file ownership. Continue from PLAN.md without unnecessarily rerunning an unchanged verified baseline. Add small, nonredundant risk-focused tests, then run integrated regression suites and visually review changed screens before handing back. Keep the approved Lilac-on-ink-violet UI direction and prioritize frictionless, one-handed workout use.
+First inspect the current source and tests, confirm the handoff still matches the repository, and briefly state the next substantive milestone you will implement. The user prefers larger coherent batches. Continue from PLAN.md without unnecessarily rerunning an unchanged verified baseline. Add small, nonredundant risk-focused tests, then run integrated regression suites and visually review changed screens before handing back. Keep the approved Campaign UI direction and prioritize frictionless, one-handed workout use.
 
-Current coverage: 67 Swift unit tests and six import/share UI regression tests passed on September 27, with the other 15 UI tests retaining the September 26 baseline (21 known UI tests total). Ten backend tests and 11 local contract cases pass. Read verification details; no live provider calls performed. Read the verification report details. The user authorized standardized offline JSON import v0 in parallel with reliability. The shared schema, source-preserving paste/file review, reusable ChatGPT prompt and confirmed Lower A file are implemented; check final verification status. Offline Share Extension capture/App Group handoff is implemented and simulator-verified. The private text-conversion client is implemented but needs service/auth configuration and live model evaluation. Next work is real-service validation, ambiguity correction improvements and physical Share Sheet host checks, while physical-iPhone validation and wall-clock timer accuracy remain separate open tasks.
+Current coverage: 69 Swift unit tests and 22 simulator UI tests passed on September 27, 2026, in `.build/DerivedData/Logs/Test/Test-AscendFit-2026.09.27_22-12-23--0400.xcresult`. Ten backend tests and 11 local contract cases passed previously; no live provider calls were performed. The user authorized standardized offline JSON import v0 in parallel with reliability. The shared schema, source-preserving paste/file review, reusable ChatGPT prompt and offline Share Extension capture/App Group handoff are implemented. The private text-conversion client still needs service/auth configuration and live model evaluation. Next work is user review of Campaign on simulator or device, then real-service validation, ambiguity correction improvements and physical Share Sheet host checks, while wall-clock timer accuracy remains a separate open task.
 ```

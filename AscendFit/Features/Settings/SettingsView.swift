@@ -7,7 +7,7 @@ struct SettingsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     @EnvironmentObject private var model: AppModel
-    @AppStorage("preferences.appearance") private var appearance = AppAppearance.system
+    @AppStorage("preferences.appearance") private var appearance = AppAppearance.dark
     @AppStorage("preferences.gymAppearance") private var gymAppearance = AppAppearance.dark
     @AppStorage("preferences.restNotificationsEnabled") private var restNotificationsEnabled = true
     @State private var canRequestNotificationPermission = false
@@ -35,6 +35,10 @@ struct SettingsView: View {
 
     var body: some View {
         List {
+            Section {
+                CampaignScreenIntro(eyebrow: "Make it yours", title: "Settings", subtitle: "Your training preferences and data stay under your control.")
+            }
+            .listRowBackground(AppTheme.background)
             Section {
                 Picker("Preferred units", selection: $unit) {
                     Text("lb / in").tag(MassUnit.pounds)
