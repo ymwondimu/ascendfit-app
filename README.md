@@ -12,6 +12,12 @@ Ascend Fit turns a workout from your existing coach into an editable plan and a 
 
 The [WorkoutPlan v1 schema](Backend/schema/workout-plan-v1.schema.json) defines the repeatable import format. JSON paste and file import work offline without a provider account. The [ChatGPT format prompt](Backend/examples/CHATGPT-WORKOUT-PROMPT.md) is included in the app. Imported source text stays with the local workout. A configured private service can convert plain text, but live provider evaluation and service setup remain separate work.
 
+## Install on a personal iPhone
+
+Open `AscendFit.xcodeproj` in Xcode, connect and unlock your iPhone, and enable Developer Mode when prompted. In the Xcode toolbar, choose the **AscendFitPersonal** scheme and your iPhone as the destination. Under the **AscendFitPersonal** target's Signing & Capabilities tab, enable automatic signing and select your Personal Team. Press Run to install **Ascend Fit** with the Apex icon. If iOS blocks the first launch, trust your own Apple Development profile in iPhone Settings → General → VPN & Device Management, then open the app again. This build supports manual workouts and workout import by pasting JSON/text or choosing a JSON file. The iOS Share menu integration is omitted because it needs an App Group capability. Apple Personal Team provisioning expires after seven days; run the app from Xcode again to renew it.
+
+The **AscendFit** scheme is the full build with the Share extension. It requires the same App Group (`group.com.ymwondimu.ascendfit.app`) registered and provisioned for both the AscendFit and AscendFitShare targets. If Xcode offers an "Update to recommended settings" warning, it is unrelated to signing; leave the generated project settings as-is. Re-running `make generate` can replace team selections made only in Xcode, so select your team again afterward if needed.
+
 ## Local development
 
 Prerequisites: Xcode 26.3 with an iOS simulator, XcodeGen, and Node.js 22 or newer.

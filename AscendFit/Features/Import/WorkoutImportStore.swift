@@ -120,10 +120,14 @@ extension WorkoutImportStore {
 
 struct AppSharedWorkoutInbox {
     static func open() throws -> SharedWorkoutInbox {
+        #if ASCEND_FIT_PERSONAL
+        return SharedWorkoutInbox(directory: try WorkoutImportStore().directory.appendingPathComponent("SharedInbox"))
+        #else
         if ProcessInfo.processInfo.arguments.contains("--ui-testing"),
            !ProcessInfo.processInfo.arguments.contains("--ui-testing-share-host") {
             return SharedWorkoutInbox(directory: try WorkoutImportStore().directory.appendingPathComponent("SharedInbox"))
         }
         return SharedWorkoutInbox(directory: try SharedWorkoutInbox.defaultDirectory())
+        #endif
     }
 }

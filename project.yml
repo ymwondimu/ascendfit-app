@@ -35,10 +35,32 @@ targets:
     entitlements:
       path: AscendFitShare/App.entitlements
       properties:
-        com.apple.security.application-groups: [group.com.ascendfit.app]
+        com.apple.security.application-groups: [group.com.ymwondimu.ascendfit.app]
     dependencies:
       - target: AscendFitShare
         embed: true
+      - sdk: libsqlite3.tbd
+
+  AscendFitPersonal:
+    type: application
+    platform: iOS
+    sources:
+      - path: AscendFit
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ymwondimu.ascendfit.personal
+        PRODUCT_NAME: AscendFitPersonal
+        PRODUCT_MODULE_NAME: AscendFitPersonal
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Ascend Fit
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.healthcare-fitness
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) ASCEND_FIT_PERSONAL"
+    dependencies:
       - sdk: libsqlite3.tbd
 
   AscendFitShare:
@@ -50,7 +72,7 @@ targets:
     entitlements:
       path: AscendFitShare/Share.entitlements
       properties:
-        com.apple.security.application-groups: [group.com.ascendfit.app]
+        com.apple.security.application-groups: [group.com.ymwondimu.ascendfit.app]
     info:
       path: AscendFitShare/Info.plist
       properties:
@@ -111,3 +133,7 @@ schemes:
       targets:
         - AscendFitTests
         - AscendFitUITests
+  AscendFitPersonal:
+    build:
+      targets:
+        AscendFitPersonal: all

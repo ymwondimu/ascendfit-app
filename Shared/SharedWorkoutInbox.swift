@@ -22,7 +22,7 @@ enum SharedWorkoutInboxError: Error, LocalizedError {
 
 /// A bounded, cross-process inbox. Reading removes only expired items; acceptance is explicit.
 struct SharedWorkoutInbox: Sendable {
-    static let groupIdentifier = "group.com.ascendfit.app"
+    static let groupIdentifier = "group.com.ymwondimu.ascendfit.app"
     static let maximumBytes = 256 * 1024
     static let maximumCount = 20
     static let lifetime: TimeInterval = 7 * 24 * 60 * 60

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="430" viewBox="0 0 1500 430" role="img" aria-label="Ascend Fit logo">
+  <rect width="1500" height="430" rx="48" fill="#090E12"/>
+  <g transform="translate(25 8) scale(.4)">
+    <path d="M210 745 463 263 565 263 815 745 678 745 514 428 345 745Z" fill="#DBF165"/>
+    <path d="M430 590 626 590 668 668 388 668Z" fill="#090E12"/>
+    <path d="M609 263 683 263 814 512 737 512Z" fill="#BCA9FF"/>
+  </g>
+  <text x="405" y="267" fill="#F7F8F4" font-family="Helvetica Neue, Arial, sans-serif" font-size="165" font-weight="700" letter-spacing="-7">Ascend</text>
+  <text x="1050" y="267" fill="#BCA9FF" font-family="Helvetica Neue, Arial, sans-serif" font-size="165" font-weight="700" letter-spacing="-7">Fit</text>
+</svg>
