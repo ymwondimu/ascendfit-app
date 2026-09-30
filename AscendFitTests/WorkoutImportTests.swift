@@ -5,6 +5,15 @@ import Testing
 private final class WorkoutImportFixtures: NSObject {}
 
 struct WorkoutImportTests {
+    @Test("Smart quotes introduced by iOS paste are repaired before JSON validation")
+    func smartQuotePaste() throws {
+        let original = try fixture("lower-a-ready")
+        let pasted = original.replacingOccurrences(of: "\"", with: "“")
+        let response = try WorkoutJSONImporter.decode(pasted)
+        #expect(response.workouts.count == 1)
+        #expect(response.source?.originalText == original)
+    }
+
     @Test("The confirmed Lower A file produces all targets and exact source after explicit custom-name review")
     func confirmedWorkout() throws {
         let text = try fixture("lower-a-ready")

@@ -48,12 +48,28 @@ struct WorkoutJSONImporter {
     static let maximumBytes = 262_144
 
     static func decode(_ text: String, allowMultiple: Bool = false) throws -> WorkoutImportResponse {
-        guard let data = text.data(using: .utf8), data.count <= maximumBytes else {
+        guard let originalData = text.data(using: .utf8), originalData.count <= maximumBytes else {
             throw WorkoutImportError.invalid("Choose a JSON workout smaller than 256 KB.")
         }
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw WorkoutImportError.invalid("Paste the workout JSON or choose a .json file first.")
         }
+        // iOS can replace JSON's straight delimiters with smart quotes when pasted into TextEditor.
+        // Only repair a syntactically invalid paste, and only if the result is parseable JSON.
+        let source: String
+        if (try? JSONSerialization.jsonObject(with: originalData)) == nil,
+           text.contains("“") || text.contains("”") {
+            let repaired = text.replacingOccurrences(of: "“", with: "\"")
+                .replacingOccurrences(of: "”", with: "\"")
+            guard let repairedData = repaired.data(using: .utf8),
+                  (try? JSONSerialization.jsonObject(with: repairedData)) != nil else {
+                throw WorkoutImportError.invalid("This paste contains smart quotation marks. Use Paste JSON or choose a .json file, then try again.")
+            }
+            source = repaired
+        } else {
+            source = text
+        }
+        let data = Data(source.utf8)
         do {
             guard let object = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let version = object["schemaVersion"] as? Int else {
@@ -72,7 +88,7 @@ struct WorkoutJSONImporter {
             guard allowMultiple || response.classification != "multiple" else {
                 throw WorkoutImportError.invalid("This version imports one definite workout at a time. Ask your coach for a file containing only the workout you want to train.")
             }
-            response.source = WorkoutImportSource(kind: "workoutPlanFile", originalText: text, sourceURL: nil)
+            response.source = WorkoutImportSource(kind: "workoutPlanFile", originalText: source, sourceURL: nil)
             return response
         } catch let error as WorkoutImportError { throw error }
         catch let DecodingError.keyNotFound(key, context) {

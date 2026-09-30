@@ -365,6 +365,9 @@ struct ImportWorkoutView: View {
                 if let interpreter { response = try await interpreter.interpret(text: source, kind: kind, sourceURL: sourceURL) }
                 else { response = try await Task.detached { try WorkoutJSONImporter.decode(source) }.value }
                 guard !Task.isCancelled else { return }
+                if interpreter == nil, let normalized = response.source?.originalText {
+                    draft.originalText = normalized
+                }
                 draft.response = response
                 draft.manuallyNamedTitles = nil
                 draft.selectedWorkoutID = response.classification == "single" ? response.workouts.first?.id : nil
