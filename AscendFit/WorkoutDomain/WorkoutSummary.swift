@@ -260,6 +260,7 @@ private extension EffortTarget {
         switch self {
         case let .rpe(value): "RPE \(value.value.plainText)"
         case let .rir(value): "\(value.value) RIR"
+        case let .rirAtLeast(value): "\(value.value)+ reps left"
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct TodayView: View {
     @EnvironmentObject private var model: AppModel
@@ -28,7 +29,6 @@ struct TodayView: View {
                         .padding(.bottom, AppTheme.Spacing.large)
                 }
             } else {
-                Spacer()
                 emptyState
                 Spacer()
             }
@@ -39,6 +39,7 @@ struct TodayView: View {
             }
         }
         .padding(.horizontal, AppTheme.Spacing.screenInset)
+        .fontDesign(.default)
         .background(AppTheme.background.ignoresSafeArea())
         .toolbar(.hidden, for: .navigationBar)
         .task {
@@ -80,9 +81,9 @@ struct TodayView: View {
                 Text(Date.now, format: .dateTime.weekday(.wide).month(.wide).day())
                     .font(.caption)
                     .foregroundStyle(AppTheme.contentTertiary)
-                Text("Today")
-                    .font(.largeTitle.bold())
-                    .tracking(-0.7)
+                Text("ASCEND")
+                    .font(.system(size: 28, weight: .semibold, design: .default))
+                    .tracking(-0.9)
                     .foregroundStyle(AppTheme.contentPrimary)
             }
 
@@ -101,18 +102,21 @@ struct TodayView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: AppTheme.Spacing.medium) {
-            Text("Nothing on the bench yet.")
-                .font(.title2.weight(.semibold))
+        VStack(alignment: .leading, spacing: 18) {
+            Text("TODAY'S SESSION")
+                .font(.caption.weight(.semibold))
+                .tracking(1.2)
+                .foregroundStyle(AppTheme.action)
+            Text("Your next session starts here.")
+                .font(.system(size: 38, weight: .semibold))
+                .tracking(-1.4)
                 .foregroundStyle(AppTheme.contentPrimary)
-                .multilineTextAlignment(.center)
 
             Text("Bring in a workout from the coach you already trust.")
                 .font(.body)
                 .foregroundStyle(AppTheme.contentSecondary)
-                .multilineTextAlignment(.center)
 
-            VStack(spacing: AppTheme.Spacing.small) {
+            VStack(spacing: 12) {
                 Button("Import workout") {
                     presentedAction = .importWorkout
                 }
@@ -123,79 +127,106 @@ struct TodayView: View {
                 }
                 .buttonStyle(SecondaryActionButtonStyle())
             }
-            .padding(.top, AppTheme.Spacing.medium)
+            .padding(.top, 12)
         }
-        .frame(maxWidth: .infinity)
+        .padding(24)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(LinearGradient(colors: [AppTheme.surfaceSecondary, AppTheme.surfacePrimary], startPoint: .topLeading, endPoint: .bottomTrailing))
+        }
     }
 
     private func plannedState(_ plan: WorkoutPlan) -> some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.large) {
-            Text("READY FOR TODAY")
-                .font(.caption.weight(.semibold))
-                .tracking(1.2)
-                .foregroundStyle(AppTheme.accent)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.small) {
+        VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 12) {
+                Spacer(minLength: 30)
+                Text("TODAY'S SESSION")
+                    .font(.caption.weight(.semibold)).tracking(1.1)
+                    .foregroundStyle(AppTheme.action)
                 Text(plan.title)
-                    .font(.largeTitle.bold())
-                    .tracking(-0.6)
-                    .foregroundStyle(AppTheme.contentPrimary)
-                Text("\(plan.exercises.count) exercises · \(plan.exercises.flatMap(\.sets).count) sets")
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.contentSecondary)
+                    .font(.system(size: 42, weight: .semibold))
+                    .tracking(-1.4)
+                    .foregroundStyle(.white)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("\(plan.exercises.count) exercises  /  \(plan.exercises.flatMap(\.sets).count) sets")
+                    .font(.subheadline.monospacedDigit())
+                    .foregroundStyle(.white.opacity(0.82))
+                Button("Start workout") {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    Task { await model.startTodayWorkout() }
+                }
+                    .buttonStyle(PrimaryActionButtonStyle())
+                    .disabled(model.isStarting)
+                    .padding(.top, 12)
             }
+            .padding(24)
+            .frame(maxWidth: .infinity, minHeight: 330, alignment: .bottomLeading)
+            .background {
+                GeometryReader { geometry in
+                    ZStack {
+                        if plan.exercises.first?.exercise.name.caseInsensitiveCompare("Back Squat") == .orderedSame {
+                            Image("CampaignSquat")
+                                .resizable().scaledToFill()
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .clipped()
+                        } else {
+                            LinearGradient(colors: [AppTheme.surfaceTertiary, AppTheme.surfacePrimary], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        }
+                        LinearGradient(colors: [.black.opacity(0.05), .black.opacity(0.72), .black.opacity(0.93)], startPoint: .top, endPoint: .bottom)
+                    }
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
 
             if let notes = plan.notes {
-                Text(notes).font(.subheadline).foregroundStyle(AppTheme.contentSecondary)
+                Text(notes)
+                    .font(.subheadline)
+                    .foregroundStyle(AppTheme.contentSecondary)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 18))
             }
-
-            Button("Start workout") {
-                Task { await model.startTodayWorkout() }
-            }
-            .buttonStyle(PrimaryActionButtonStyle())
-            .disabled(model.isStarting)
-
-            Button("Import a different workout", systemImage: "square.and.arrow.down") {
-                presentedAction = .importWorkout
-            }
-            .frame(minHeight: 44)
-            .foregroundStyle(AppTheme.accentContent)
-
 
             VStack(alignment: .leading, spacing: AppTheme.Spacing.small) {
-                Text("EXERCISES")
+                Text("UP NEXT")
                     .font(.caption.weight(.medium))
                     .tracking(1.1)
-                    .foregroundStyle(AppTheme.contentTertiary)
+                    .foregroundStyle(AppTheme.action)
 
-                ForEach(plan.exercises) { exercise in
+                ForEach(Array(plan.exercises.enumerated()), id: \.element.id) { index, exercise in
                     NavigationLink {
                         PlannedExerciseDetailView(exercise: exercise)
                     } label: {
                         HStack(spacing: 12) {
-                            Text(exercise.exercise.name)
-                                .font(.headline)
-                                .foregroundStyle(AppTheme.contentPrimary)
-                                .lineLimit(2)
+                            Text(String(format: "%02d", index + 1))
+                                .font(.title3.monospacedDigit().weight(.semibold))
+                                .foregroundStyle(AppTheme.contentTertiary)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(exercise.exercise.name)
+                                    .font(.headline)
+                                    .foregroundStyle(AppTheme.contentPrimary)
+                                    .lineLimit(2)
+                                Text(exercise.compactSummary)
+                                    .font(.subheadline.monospacedDigit())
+                                    .foregroundStyle(AppTheme.contentSecondary)
+                                    .accessibilityIdentifier("today-exercise-summary-\(exercise.exercise.name)")
+                            }
                             Spacer()
-                            Text(exercise.compactSummary)
-                                .font(.subheadline.monospacedDigit())
-                                .foregroundStyle(AppTheme.contentSecondary)
-                                .multilineTextAlignment(.trailing)
-                                .accessibilityIdentifier("today-exercise-summary-\(exercise.exercise.name)")
                             Image(systemName: "chevron.right")
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(AppTheme.contentTertiary)
                         }
-                        .padding(AppTheme.Spacing.medium)
-                        .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 16)
+                        .frame(minHeight: 74)
+                        .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 18))
                     }
                     .buttonStyle(.plain)
                     .accessibilityHint("Opens set, weight, and rest details")
                 }
             }
 
-            Button("Import another workout") { presentedAction = .importWorkout }
+            Button("Import a different workout") { presentedAction = .importWorkout }
                 .buttonStyle(SecondaryActionButtonStyle())
         }
         .frame(maxWidth: .infinity, alignment: .leading)

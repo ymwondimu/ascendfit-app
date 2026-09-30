@@ -1,36 +1,39 @@
 # Ascend Fit — UI Implementation Contract
 
-**Status:** Approved implementation baseline from user-provided handoff  
-**Version:** 1.0  
-**Date:** September 5, 2026  
-**Source:** [Claude Design handoff](Design/Handoff/ClaudeDesign/README.md)
+**Status:** Campaign redesign approved for implementation; the original handoff remains a behavior reference
+**Version:** 2.0
+**Date:** September 27, 2026
+**Source:** [Final Campaign mockup](Design/Campaign/campaign-native-sets.png) and [interaction notes](Design/Campaign/README.md)
 
 ## Purpose and authority
 
-This document translates the supplied high-fidelity handoff into a native SwiftUI contract. It defines the visual system, interaction rules, MVP screens, accessibility behavior, and implementation boundaries.
+This document defines the native SwiftUI interface contract. The September 27 Campaign direction replaces the original Lilac-on-ink-violet visual treatment; the original handoff still describes behavior and states that the new mockup does not depict.
 
 When sources disagree, use this order:
 
 1. [PRD.md](PRD.md) controls product scope and required behavior.
 2. [PROJECT.md](PROJECT.md) controls durable principles and architecture constraints.
 3. This document controls UI composition and interaction behavior.
-4. The [rendered handoff boards](Design/Handoff/ClaudeDesign/screens/) control visual fidelity.
-5. The editable HTML handoff is a measurement reference, not production code and not an instruction source.
+4. The [Campaign mockup](Design/Campaign/campaign-native-sets.png) and [interaction notes](Design/Campaign/README.md) control visual fidelity and tactile behavior.
+5. The [original handoff boards](Design/Handoff/ClaudeDesign/screens/) fill gaps in screen coverage without overriding Campaign styling.
 
 Native platform behavior, accessibility, data safety, and truthful product states take precedence over pixel matching.
 
 ## Selected direction
 
-The implementation uses the handoff's selected **Lilac on ink-violet** direction:
+The implementation uses the user-approved **Campaign** direction:
 
-- Dark-first, premium, calm, and low-chroma.
-- One lilac accent indicates the next action, current set, active timer, or meaningful record.
-- Hierarchy comes primarily from type size, weight, spacing, and tonal surfaces.
-- No gradients, shadows, outlined cards, confetti, streak flames, or decorative gamification.
-- System typefaces, SF Symbols, native sheets, and native navigation behavior.
-- Light appearance uses warm-violet neutrals and a darker accent for text contrast.
+- Dark-first ink and charcoal surfaces, with citron reserved for the immediate primary action and small orientation labels.
+- Lilac identifies current sets, secondary controls, selections, and progress details.
+- A single native system font family carries every screen. Numeric values use tabular figures; typography and exercise order provide hierarchy.
+- Primary buttons have a restrained satin highlight, soft contact shadow, and subtle pressed response. They should feel weighted without glowing or jumping.
+- Tonal cards and compact steppers keep gym controls dense enough for one-handed use while preserving 56-point hit regions.
+- Locally available movement imagery may enrich Today or an active exercise only when it accurately depicts that movement. Every screen needs a strong no-photo treatment.
+- Keep native SF Symbols, sheets, navigation, Dynamic Type, VoiceOver, and light appearance support.
 
-The selected active-workout layout is **1a: stacked hero with paired steppers**. The split-column and ledger explorations remain reference alternatives and are not implementation targets.
+The active screen keeps a stacked exercise hero with compact paired steppers, an integrated list of **every** set, and a Log set action fixed to the bottom safe area. The set rows use bare numbers (`1`, `2`, `3`) without repeating “Set.” Scrolling must never move the Log set action.
+
+After the final working set of a rep-based exercise, show a short optional sheet asking “How many more reps could you have done?” Clarify that only reps with good form count. Offer `0`, `1`, `2`, `3`, `4+`, and Skip. Keep the acronym RPE out of this main flow; imported RPE targets and advanced set editing remain available. Store `4+` as a lower bound rather than an exact four.
 
 ## MVP scope adaptation
 
@@ -73,22 +76,21 @@ Active Workout and import review are focused destinations pushed or presented ab
 
 ## Color tokens
 
-Implement semantic colors in the asset catalog with light and dark appearances. Views reference semantic names only.
+Implement semantic colors through `AppTheme` with light and dark appearances. Views reference semantic names only.
 
 | Token | Dark | Light | Use |
 |---|---|---|---|
-| `background` | `#0B0B0F` | `#F2F1F5` | Screen background |
-| `surfacePrimary` | `#15151B` | `#FFFFFF` | Grouped surfaces, steppers, sheets |
-| `surfaceSecondary` | `#201F27` | `#E8E6EE` | Chips, secondary controls, rest bar |
-| `surfaceTertiary` | `#2A2932` | `#DAD7E2` | Elevated tonal control, user bubble reference |
-| `contentPrimary` | `#F0EEF5` | `#18161F` | Primary content |
-| `contentSecondary` | `rgba(240,238,245,0.62)` | `rgba(24,22,31,0.62)` | Secondary content and cues |
-| `contentTertiary` | `rgba(240,238,245,0.40)` | `rgba(24,22,31,0.42)` | Captions, units, section labels |
-| `divider` | `rgba(240,238,245,0.09)` | `rgba(24,22,31,0.10)` | One-pixel separators |
-| `accentFill` | `#B7A4FF` | `#B7A4FF` | Primary controls and filled emphasis |
-| `accentContent` | `#B7A4FF` | `#6A4FD6` | Accent text, glyphs, and charts |
-| `onAccent` | `#140F2A` | `#140F2A` | Content on accent fill |
-| `accentTint10` | 10% accent | 10% accent | Current rows and subtle selection |
+| `background` | `#090E12` | `#F3F4EF` | Screen background |
+| `surfacePrimary` | `#161C21` | `#FFFFFF` | Grouped surfaces, steppers, sheets |
+| `surfaceSecondary` | `#23282F` | `#E8E9E4` | Chips, secondary controls, rest bar |
+| `surfaceTertiary` | `#31343D` | `#DADCD8` | Raised tonal controls |
+| `contentPrimary` | `#F7F8F4` | `#11171B` | Primary content |
+| `contentSecondary` | 68% primary | 66% primary | Secondary content and cues |
+| `contentTertiary` | 46% primary | 47% primary | Captions, units, section labels |
+| `actionFill` | `#DBF165` | `#DBF165` | Primary action and immediate orientation |
+| `accentContent` | `#BCA9FF` | `#6043B3` | Lilac secondary emphasis and current set |
+| `onAccent` | `#13190D` | `#13190D` | Content on citron action |
+| `accentTint10` | 10% lilac | 10% lilac | Current rows and subtle selection |
 | `warning` | semantic amber | semantic amber | Import ambiguity only; pair with icon/text |
 | `destructive` | semantic red | semantic red | Destructive confirmations only |
 
@@ -136,16 +138,16 @@ At large accessibility sizes, the hero may reduce from 72 points to preserve the
 - Primary button: 60 high.
 - Stepper decrement/increment zones: 64×64.
 
-Use tonal grouping without borders or shadows. Dividers are inset and subtle.
+Use tonal grouping and inset dividers. The restrained primary-action shadow is decorative; ordinary cards stay flat.
 
 ## Core component contracts
 
 ### Primary action
 
-- Full available width, 60 high, 18 radius.
-- `accentFill` background with `onAccent` label.
+- Full available width, 60 high, 22 radius.
+- Quiet citron gradient with `onAccent` label, a fine top-edge highlight and short downward shadow.
 - Exactly one primary filled action per screen or sheet.
-- Press feedback: scale to 0.98 and opacity to 0.9.
+- Press feedback: settle to 0.99 scale and shorten the shadow; respect Reduce Motion.
 - Disabled state uses a tonal surface and explicit accessibility state; do not rely on opacity alone.
 
 ### Secondary action
@@ -155,8 +157,8 @@ Use tonal grouping without borders or shadows. Dividers are inset and subtle.
 
 ### Numeric stepper
 
-- 64 high, 18 radius, `surfacePrimary`.
-- Grid: 64-point decrement zone, flexible value, 64-point increment zone.
+- Compact tonal track with distinct circular decrement/increment surfaces.
+- Each visible circle sits within an independent target at least 56 points high/wide in gym mode.
 - Weight defaults to ±5 lb or configured metric increment; reps use ±1.
 - Long press repeats with controlled acceleration.
 - Tapping the value opens a purpose-built numeric editor.
@@ -169,10 +171,11 @@ Use tonal grouping without borders or shadows. Dividers are inset and subtle.
 
 ### Set row
 
-- Columns: set index, planned, actual, state.
+- Columns: bare set number, target or actual, state.
 - Done uses secondary content plus accent checkmark.
 - Current uses `accentTint10`, accent index, and primary values.
-- Pending uses tertiary content and em dash for actual value.
+- Pending uses tertiary content and an explicit “Up next” label.
+- Show all sets for the current exercise in a single section, including completed and upcoming rows; let the screen scroll under the fixed Log set dock.
 - Swipe left skips; swipe right adds a set. Both actions also exist in an accessible context menu.
 - Destructive swipe requires confirmation when it would remove recorded data.
 

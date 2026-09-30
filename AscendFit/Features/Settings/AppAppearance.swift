@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Planning follows the system by default; gym appearance defaults to dark independently.
+/// The Campaign interface defaults to dark; users can still choose system or light independently.
 enum AppAppearance: String, CaseIterable, Identifiable {
     case system, light, dark
 

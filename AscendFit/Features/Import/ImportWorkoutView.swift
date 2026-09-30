@@ -88,7 +88,7 @@ struct ImportWorkoutView: View {
     private var capture: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Bring your coach's workout").font(.title2.bold())
+                CampaignScreenIntro(eyebrow: "From your coach", title: "Import workout", subtitle: "Bring a ready plan into Ascend and review it before training.")
                 sharedNotice
                 Picker("Workout format", selection: Binding(get: { mode }, set: { draft.inputMode = $0; persist() })) {
                     Text("JSON").tag(WorkoutImportInputMode.json)
@@ -117,7 +117,7 @@ struct ImportWorkoutView: View {
                 if let response = draft.response, response.classification == "multiple" {
                     Text("Choose one workout to review").font(.headline)
                     ForEach(response.workouts) { workout in
-                        Button(workout.title) { draft.selectedWorkoutID = workout.id; persist() }
+                        Button(draft.title(for: workout)) { draft.selectedWorkoutID = workout.id; persist() }
                     }
                 }
                 statusMessage
@@ -161,11 +161,16 @@ struct ImportWorkoutView: View {
         List {
             if let index = draft.selectedIndex, let response = draft.response {
                 Section {
+                    CampaignScreenIntro(eyebrow: "Check the plan", title: "Review workout", subtitle: "Confirm every target before this becomes today's session.")
                     sharedNotice
-                    TextField("Workout title", text: Binding(
-                        get: { draft.response?.workouts[index].title ?? "" },
-                        set: { draft.response?.workouts[index].title = $0; persist() }
+                    TextField("Workout name", text: Binding(
+                        get: { draft.response.map { draft.title(for: $0.workouts[index]) } ?? "" },
+                        set: {
+                            if let workout = draft.response?.workouts[index] { draft.setTitle($0, for: workout); persist() }
+                        }
                     ))
+                    Text("Named from the exercises. Edit this name to save your own title.")
+                        .font(.caption).foregroundStyle(AppTheme.contentSecondary)
                     TextField("Workout notes", text: Binding(
                         get: { draft.response?.workouts[index].notes ?? "" },
                         set: { draft.response?.workouts[index].notes = $0; persist() }
@@ -287,7 +292,7 @@ struct ImportWorkoutView: View {
         draft.sourceURL = nil
         draft.sharedPayloadID = nil
         draft.response = nil; draft.selectedWorkoutID = nil
-        draft.exerciseMappings = [:]; draft.resolvedIssueIDs = []
+        draft.exerciseMappings = [:]; draft.resolvedIssueIDs = []; draft.manuallyNamedTitles = nil
         message = nil
         persist()
     }
@@ -360,7 +365,11 @@ struct ImportWorkoutView: View {
                 if let interpreter { response = try await interpreter.interpret(text: source, kind: kind, sourceURL: sourceURL) }
                 else { response = try await Task.detached { try WorkoutJSONImporter.decode(source) }.value }
                 guard !Task.isCancelled else { return }
+                if interpreter == nil, let normalized = response.source?.originalText {
+                    draft.originalText = normalized
+                }
                 draft.response = response
+                draft.manuallyNamedTitles = nil
                 draft.selectedWorkoutID = response.classification == "single" ? response.workouts.first?.id : nil
                 if response.classification == "none" { message = "No workout was found. Check your source or ask your coach for one complete workout." }
                 if response.classification == "multiple" { message = "Choose the workout you want to review. Nothing has been added to Today." }

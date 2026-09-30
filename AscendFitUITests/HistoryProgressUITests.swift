@@ -8,6 +8,7 @@ final class HistoryProgressUITests: XCTestCase {
         app.launchEnvironment["ASCEND_FIT_UI_TEST_STORE_ID"] = UUID().uuidString
         app.launch()
         app.tabBars.buttons["History"].tap()
+        reveal(app.staticTexts["Last 12 weeks"], in: app)
         XCTAssertTrue(app.staticTexts["Last 12 weeks"].waitForExistence(timeout: 3))
         let yesterday = Calendar.current.startOfDay(for: Date().addingTimeInterval(-86_400))
         let day = app.buttons["history-day-\(yesterday.timeIntervalSince1970)"]

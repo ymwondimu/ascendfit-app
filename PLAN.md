@@ -1,6 +1,6 @@
 # Ascend Fit — Current Execution Plan
 
-**Current status:** JSON import, offline sharing and private-service text conversion client implemented; simulator contract verification complete, live service evaluation outstanding  
+**Current status:** Campaign UI redesign and plain-language effort prompt implemented and simulator-verified on `codex/campaign-ui`; review and physical-device validation remain outstanding
 **Last updated:** September 27, 2026
 
 This is the current-status index for Ascend Fit. It records where the work stands and what happens next; it does not duplicate the detailed implementation roadmap.
@@ -23,8 +23,8 @@ This is the current-status index for Ascend Fit. It records where the work stand
 - Protected backend calls handle AI parsing; provider keys never ship in the iPhone app.
 - The first client is native iPhone software built with Swift and SwiftUI.
 - The personal MVP precedes accounts, cloud sync, HealthKit, direct provider tools, an in-app coach, and Apple Watch.
-- The product uses spacious editorial planning/import/history surfaces and a dark, high-focus gym mode.
-- No production UI implementation begins until `UI-SPEC.md` is designed and approved.
+- The product uses the approved Campaign direction: dark ink and charcoal, citron primary actions, lilac current-set accents, native system typography, and a high-focus gym mode.
+- The pre-redesign v1 checkpoint is preserved on `main` and tag `v1.0.0`.
 
 ## Immediate next sequence
 
@@ -42,7 +42,9 @@ After that foundation works reliably, continue through the ordered phases in the
 - [ ] `PRD.md` approved
 - [ ] Real anonymized import corpus collected and approved
 - [x] Visual directions and component states supplied in the Claude Design handoff
-- [x] Lilac-on-ink-violet production direction selected
+- [x] Campaign direction approved after the v1 checkpoint; lilac-on-ink-violet remains in the original handoff as historical context
+- [x] Campaign styling and one-handed active-workout layout implemented on `codex/campaign-ui`; all sets share a native scroll path under a pinned Log set action
+- [x] Plain-language effort prompt selected for the end of each rep-based exercise, with skippable 0–4+ answers and exact persistence of the `4+` lower bound
 - [x] `UI-SPEC.md` written from the approved handoff
 - [x] `UI-SPEC.md` approved as the implementation baseline
 - [x] Xcode and backend projects created
@@ -61,7 +63,7 @@ After that foundation works reliably, continue through the ordered phases in the
 - [x] Session commands serialize across asynchronous local writes; queued actions receive timestamps when processed to preserve replay order
 - [x] Workout completion supports optional notes and a deterministic coach-ready system share
 - [x] Completion persists in one event, supports retry after local-write failure, and recovers legacy interrupted finishing without inflating workout duration
-- [x] Latest verified coverage: 67 Swift unit tests and six import/share UI regression tests pass (September 27); other 15 UI tests retain the September 26 baseline (21 known passing UI tests). Ten backend tests, syntax checks and 11 local contract cases pass. Text UI tests use controlled responses, not a live provider
+- [x] Latest verified coverage: 69 Swift unit tests and 22 simulator UI tests pass (September 27). Ten backend tests, syntax checks and 11 local contract cases passed previously. Text UI tests use controlled responses, not a live provider
 - [x] Manual superset/circuit grouping and alternating execution, advanced set targets and planned effort/role/side
 - [x] Compatible exercise replacement preserves the identity of already logged sets through replay, history, previous cues, and export
 - [x] Pausing freezes remaining rest and shifts the resumed deadline; notification preference and cancellation follow workout state
@@ -79,6 +81,7 @@ After that foundation works reliably, continue through the ordered phases in the
 - [x] Import v0 full simulator and visual verification complete
 - [x] Offline Share Extension capture, protected App Group inbox, duplicate/recovery handling, explicit import review, and shared-data deletion
 - [x] Private-service text client, explicit transmission consent, safe retry/cancellation, source verification, multiple-workout selection and preserved review drafts
+- [x] New imports default to an exercise-derived Upper Body, Lower Body, or Full Body name; users can enter and save a personal name during review. Manual workout naming remains available in the builder
 - [ ] Live provider evaluation, service/auth setup and physical Share Sheet host validation complete
 
 ## Maintenance rule

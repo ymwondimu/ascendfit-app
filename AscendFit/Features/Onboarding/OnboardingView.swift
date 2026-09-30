@@ -27,15 +27,11 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: 28) {
                 VStack(alignment: .leading, spacing: 10) {
                     Image(systemName: "figure.strengthtraining.traditional")
-                        .font(.system(size: 34, weight: .semibold))
-                        .foregroundStyle(AppTheme.accentContent)
-                    Text("Set up your training profile")
-                        .font(.largeTitle.bold())
-                        .tracking(-0.7)
-                        .foregroundStyle(AppTheme.contentPrimary)
-                    Text("We’ll use this once to choose units and provide editable starting weights in manual workouts.")
-                        .font(.body)
-                        .foregroundStyle(AppTheme.contentSecondary)
+                        .font(.system(size: 26, weight: .semibold))
+                        .foregroundStyle(AppTheme.action)
+                        .frame(width: 62, height: 62)
+                        .background(AppTheme.surfacePrimary, in: RoundedRectangle(cornerRadius: 20))
+                    CampaignScreenIntro(eyebrow: "Welcome to Ascend", title: "Set your baseline.", subtitle: "Choose units and add your profile once. Every suggested starting weight remains editable.")
                 }
 
                 VStack(spacing: 0) {

@@ -60,6 +60,10 @@ struct TrainingProfileEditor: View {
         NavigationStack {
             List {
                 Section {
+                    CampaignScreenIntro(eyebrow: "Your baseline", title: "Training profile", subtitle: "We use this for editable starting-weight suggestions.")
+                }
+                .listRowBackground(AppTheme.background)
+                Section {
                     profileField(
                         "Height",
                         unitLabel: unit == .pounds ? "in" : "cm",

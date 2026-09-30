@@ -40,16 +40,19 @@ final class WorkoutImportUITests: XCTestCase {
         XCTAssertTrue(add.isEnabled)
         add.tap()
         app.buttons["Replace with reviewed workout"].tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 3))
         app.buttons["Start workout"].tap()
         XCTAssertTrue(app.staticTexts["145 lb × 8"].waitForExistence(timeout: 3))
         app.buttons["Log set"].tap()
+        if app.buttons["Skip for now"].waitForExistence(timeout: 2) {
+            app.buttons["Skip for now"].tap()
+        }
         XCTAssertTrue(app.staticTexts["All sets logged"].waitForExistence(timeout: 3))
         app.buttons["Finish workout"].tap()
         XCTAssertTrue(app.staticTexts["Workout complete"].waitForExistence(timeout: 3))
         app.buttons["Done"].tap()
         app.tabBars.buttons["History"].tap()
-        app.staticTexts["Imported Strength"].tap()
+        app.staticTexts["Lower Body"].tap()
         XCTAssertTrue(app.buttons["copy-coach-summary"].waitForExistence(timeout: 3))
         capture("Imported workout saved in History", in: app)
     }
@@ -102,7 +105,7 @@ final class WorkoutImportUITests: XCTestCase {
         let add = app.buttons["import-add-to-today"]
         for _ in 0..<5 where !add.isHittable { app.swipeUp() }
         add.tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 5))
     }
 
     func testDeletingLocalDataAlsoClearsAnUnacceptedImportDraft() {
@@ -157,7 +160,7 @@ final class WorkoutImportUITests: XCTestCase {
         let add = app.buttons["import-add-to-today"]
         for _ in 0..<5 where !add.isHittable { app.swipeUp() }
         add.tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 3))
     }
 
     func testCancelledConversionKeepsTextAndDoesNotResumeOnReopen() {

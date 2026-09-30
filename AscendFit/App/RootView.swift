@@ -3,7 +3,7 @@ import SwiftUI
 struct RootView: View {
     @StateObject private var model: AppModel
     @Environment(\.scenePhase) private var scenePhase
-    @AppStorage("preferences.appearance") private var appearance = AppAppearance.system
+    @AppStorage("preferences.appearance") private var appearance = AppAppearance.dark
     @AppStorage("preferences.gymAppearance") private var gymAppearance = AppAppearance.dark
 
     @AppStorage("trainingProfile.completed") private var hasCompletedTrainingProfile = false

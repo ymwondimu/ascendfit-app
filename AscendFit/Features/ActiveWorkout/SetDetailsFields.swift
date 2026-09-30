@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum SetEffortKind: String, CaseIterable {
-    case none = "None", rpe = "RPE", rir = "RIR"
+    case none = "None", rpe = "RPE", rir = "RIR", rirAtLeast = "4+"
 }
 
 struct SetDetailsDraft {
@@ -14,6 +14,7 @@ struct SetDetailsDraft {
         switch effort {
         case let .rpe(rpe): kind = .rpe; value = NSDecimalNumber(decimal: rpe.value).doubleValue
         case let .rir(rir): kind = .rir; value = Double(rir.value)
+        case let .rirAtLeast(rir): kind = .rirAtLeast; value = Double(rir.value)
         case nil: break
         }
     }
@@ -23,6 +24,7 @@ struct SetDetailsDraft {
         case .none: nil
         case .rpe: try? .rpe(RPE(Decimal(value)))
         case .rir: try? .rir(RIR(Int(value)))
+        case .rirAtLeast: try? .rirAtLeast(RIR(4))
         }
     }
 
@@ -43,7 +45,10 @@ struct SetDetailsFields: View {
             .onChange(of: draft.kind) { _, kind in
                 if kind == .rir { draft.value = draft.value.rounded() }
             }
-            if draft.kind != .none {
+            if draft.kind == .rirAtLeast {
+                Text("You could have done four or more extra reps with good form.")
+                    .font(.caption).foregroundStyle(AppTheme.contentSecondary)
+            } else if draft.kind != .none {
                 Stepper("\(draft.kind.rawValue) \(draft.value.formatted())", value: $draft.value,
                         in: 0...10, step: draft.kind == .rir ? 1 : 0.5)
                     .accessibilityIdentifier("actual-effort-value")
