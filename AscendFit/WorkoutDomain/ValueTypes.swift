@@ -114,6 +114,7 @@ struct RIR: Codable, Equatable, Sendable {
 enum EffortTarget: Codable, Equatable, Sendable {
     case rpe(RPE)
     case rir(RIR)
+    case rirAtLeast(RIR)
 }
 
 enum TempoPhase: Codable, Equatable, Sendable {

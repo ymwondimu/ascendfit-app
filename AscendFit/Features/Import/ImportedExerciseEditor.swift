@@ -45,6 +45,9 @@ struct ImportedExerciseEditor: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(AppTheme.background)
+        .tint(AppTheme.accentContent)
         .navigationTitle(exercise.name)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isMatching) {
@@ -62,6 +65,9 @@ private struct ImportExerciseMatcher: View {
             List(ExerciseCatalog.exercises.filter { query.isEmpty || $0.searchableText.localizedCaseInsensitiveContains(query) }) { exercise in
                 Button(exercise.name) { onSelect(exercise.definition); dismiss() }
             }
+            .scrollContentBackground(.hidden)
+            .background(AppTheme.background)
+            .tint(AppTheme.accentContent)
             .searchable(text: $query, prompt: "Search exercises")
             .navigationTitle("Match exercise")
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
@@ -130,6 +136,9 @@ private struct ImportedSetEditor: View {
             }
             if let message { Text(message).foregroundStyle(.red) }
         }
+        .scrollContentBackground(.hidden)
+        .background(AppTheme.background)
+        .tint(AppTheme.accentContent)
         .navigationTitle("Set \(position)")
         .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Save set") { save() } } }
     }

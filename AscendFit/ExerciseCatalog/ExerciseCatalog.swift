@@ -7,11 +7,16 @@ enum ExerciseCategory: String, CaseIterable, Sendable {
     case shoulders = "Shoulders"
     case arms = "Arms"
     case core = "Core"
+    case fullBody = "Full Body"
+    case cardio = "Cardio"
+    case mobility = "Mobility"
+    case other = "Other"
 }
 
 enum CatalogExerciseModality: Sendable {
     case weighted
     case bodyweight
+    case assisted
     case timed(defaultSeconds: Int)
 }
 
@@ -64,13 +69,50 @@ struct CatalogExercise: Identifiable, Sendable {
     }
 
     private var stableUUID: UUID {
-        let value = String(format: "00000000-0000-0000-0000-%012d", id)
+        let value = String(format: "00000000-0000-0000-0000-%012lld", Int64(id))
         return UUID(uuidString: value)!
     }
 }
 
+private final class ExerciseCatalogBundleMarker: NSObject {}
+
 enum ExerciseCatalog {
-    static let exercises: [CatalogExercise] = [
+    static let exercises: [CatalogExercise] = coreExercises + supplementalExercises
+
+    static func candidates(named name: String) -> [CatalogExercise] {
+        nameIndex[normalizedName(name)] ?? []
+    }
+
+    static func normalizedName(_ value: String) -> String {
+        let folded = value.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US_POSIX"))
+        let tokens = folded.lowercased().replacingOccurrences(of: "&", with: " and ")
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .filter { !$0.isEmpty }
+        return tokens.map { token in
+            switch token {
+            case "dumbbells": "dumbbell"
+            case "kettlebells": "kettlebell"
+            case "pullup", "pullups": "pull up"
+            case "pushup", "pushups": "push up"
+            case "chinup", "chinups": "chin up"
+            default: token
+            }
+        }.joined(separator: " ")
+    }
+
+    private static let nameIndex: [String: [CatalogExercise]] = {
+        var result: [String: [CatalogExercise]] = [:]
+        for exercise in exercises {
+            for key in Set(([exercise.name] + exercise.aliases).map(normalizedName)) {
+                if !result[key, default: []].contains(where: { $0.id == exercise.id }) {
+                    result[key, default: []].append(exercise)
+                }
+            }
+        }
+        return result
+    }()
+
+    private static let coreExercises: [CatalogExercise] = [
         e(1, "Back Squat", ["Barbell Squat"], .legs, "Barbell", ["Quadriceps", "Glutes"], "A barbell squat performed with the bar supported across the upper back.", 3, 5, 150),
         e(2, "Front Squat", [], .legs, "Barbell", ["Quadriceps", "Core"], "A squat with the bar held across the front of the shoulders.", 3, 5, 150),
         e(3, "Goblet Squat", [], .legs, "Dumbbell or kettlebell", ["Quadriceps", "Glutes"], "A squat holding one weight close to the chest.", 3, 10, 90),
@@ -89,7 +131,7 @@ enum ExerciseCatalog {
         e(16, "Barbell Bench Press", ["Bench Press"], .chest, "Barbell", ["Chest", "Triceps"], "A horizontal press performed lying on a flat bench.", 3, 8, 120),
         e(17, "Dumbbell Bench Press", [], .chest, "Dumbbells", ["Chest", "Triceps"], "A flat-bench press performed with independent dumbbells.", 3, 10, 90),
         e(18, "Incline Barbell Bench Press", ["Incline Bench Press"], .chest, "Barbell", ["Upper Chest", "Triceps"], "A barbell press performed on an inclined bench.", 3, 8, 120),
-        e(19, "Incline Dumbbell Press", [], .chest, "Dumbbells", ["Upper Chest", "Triceps"], "An incline press performed with independent dumbbells.", 3, 10, 90),
+        e(19, "Incline Dumbbell Press", ["Incline Dumbbell Bench Press"], .chest, "Dumbbells", ["Upper Chest", "Triceps"], "An incline press performed with independent dumbbells.", 3, 10, 90),
         e(20, "Machine Chest Press", [], .chest, "Chest press machine", ["Chest", "Triceps"], "A guided horizontal pressing movement.", 3, 10, 90),
         e(21, "Cable Fly", ["Cable Crossover"], .chest, "Cable machine", ["Chest"], "A cable adduction movement that brings the arms together.", 3, 12, 60),
         e(22, "Push-Up", ["Pushup"], .chest, "Bodyweight", ["Chest", "Triceps"], "A bodyweight press from a plank position.", 3, 10, 60, .bodyweight),
@@ -100,7 +142,7 @@ enum ExerciseCatalog {
         e(27, "Barbell Row", ["Bent-Over Row"], .back, "Barbell", ["Upper Back", "Lats"], "A hinged horizontal pull with a barbell.", 3, 8, 120),
         e(28, "One-Arm Dumbbell Row", ["Dumbbell Row"], .back, "Dumbbell", ["Lats", "Upper Back"], "A supported unilateral horizontal pull.", 3, 10, 90),
         e(29, "Seated Cable Row", [], .back, "Cable machine", ["Upper Back", "Lats"], "A seated horizontal cable pull toward the torso.", 3, 10, 90),
-        e(30, "Chest-Supported Row", [], .back, "Machine or dumbbells", ["Upper Back", "Lats"], "A row performed with the chest supported to limit torso movement.", 3, 10, 90),
+        e(30, "Chest-Supported Row", ["Chest-Supported Machine Row"], .back, "Machine or dumbbells", ["Upper Back", "Lats"], "A row performed with the chest supported to limit torso movement.", 3, 10, 90),
         e(31, "T-Bar Row", [], .back, "T-bar row machine", ["Upper Back", "Lats"], "A landmine or machine row using a neutral pulling path.", 3, 8, 120),
         e(32, "Straight-Arm Pulldown", [], .back, "Cable machine", ["Lats"], "A shoulder-extension cable movement performed with mostly straight arms.", 3, 12, 60),
         e(33, "Face Pull", [], .back, "Cable machine", ["Rear Delts", "Upper Back"], "A rope pull toward the face with external shoulder rotation.", 3, 15, 60),
@@ -116,7 +158,7 @@ enum ExerciseCatalog {
         e(43, "Hammer Curl", [], .arms, "Dumbbells", ["Biceps", "Brachialis"], "A dumbbell curl performed with a neutral grip.", 3, 10, 60),
         e(44, "Preacher Curl", [], .arms, "Preacher bench", ["Biceps"], "A curl performed with the upper arms supported on a pad.", 3, 10, 75),
         e(45, "Cable Curl", [], .arms, "Cable machine", ["Biceps"], "An elbow curl using continuous cable resistance.", 3, 12, 60),
-        e(46, "Triceps Pushdown", ["Cable Pushdown"], .arms, "Cable machine", ["Triceps"], "A cable elbow-extension movement performed with the arms by the torso.", 3, 12, 60),
+        e(46, "Triceps Pushdown", ["Cable Pushdown", "Cable Rope Triceps Pushdown"], .arms, "Cable machine", ["Triceps"], "A cable elbow-extension movement performed with the arms by the torso.", 3, 12, 60),
         e(47, "Overhead Triceps Extension", [], .arms, "Cable or dumbbell", ["Triceps"], "An elbow extension performed with the upper arms overhead.", 3, 12, 60),
         e(48, "Skull Crusher", ["Lying Triceps Extension"], .arms, "EZ bar or dumbbells", ["Triceps"], "A lying elbow-extension movement lowering weight toward the head.", 3, 10, 75),
         e(49, "Plank", ["Front Plank"], .core, "Bodyweight", ["Core"], "An isometric bracing hold supported on the forearms or hands.", 3, 1, 60, .timed(defaultSeconds: 30)),
@@ -138,9 +180,9 @@ enum ExerciseCatalog {
         e(65, "Hip Abduction", ["Machine Hip Abduction"], .legs, "Hip abduction machine", ["Glutes", "Hip Abductors"], "A seated machine movement pressing the knees outward.", 3, 15, 60),
         e(66, "Hip Adduction", ["Machine Hip Adduction"], .legs, "Hip adduction machine", ["Adductors"], "A seated machine movement drawing the knees inward.", 3, 15, 60),
         e(67, "Donkey Calf Raise", [], .legs, "Machine", ["Calves"], "A bent-over straight-leg calf raise emphasizing a deep ankle stretch.", 3, 12, 60),
-        e(68, "Seated Calf Raise", [], .legs, "Seated calf machine", ["Calves"], "A bent-knee calf raise performed with resistance over the thighs.", 3, 15, 60),
+        e(68, "Seated Calf Raise", ["Seated Calf Press"], .legs, "Seated calf machine", ["Calves"], "A bent-knee calf raise performed with resistance over the thighs.", 3, 15, 60),
         e(69, "Dumbbell Fly", ["Flat Dumbbell Fly"], .chest, "Dumbbells", ["Chest"], "A flat-bench chest fly moving the arms through a wide arc.", 3, 12, 60),
-        e(70, "Pec Deck", ["Machine Fly"], .chest, "Pec deck machine", ["Chest"], "A supported machine fly bringing the upper arms together.", 3, 12, 60),
+        e(70, "Pec Deck", ["Machine Fly", "Machine Chest Fly"], .chest, "Pec deck machine", ["Chest"], "A supported machine fly bringing the upper arms together.", 3, 12, 60),
         e(71, "Decline Bench Press", [], .chest, "Barbell", ["Chest", "Triceps"], "A barbell press performed on a declined bench.", 3, 8, 120),
         e(72, "Close-Grip Bench Press", [], .chest, "Barbell", ["Triceps", "Chest"], "A bench press using a narrower grip to emphasize elbow extension.", 3, 8, 120),
         e(73, "Floor Press", [], .chest, "Barbell or dumbbells", ["Chest", "Triceps"], "A horizontal press from the floor that limits shoulder extension.", 3, 8, 90),
@@ -170,8 +212,70 @@ enum ExerciseCatalog {
         e(97, "Russian Twist", [], .core, "Bodyweight or medicine ball", ["Obliques", "Core"], "A seated rotation moving the hands from side to side while bracing the trunk.", 3, 16, 45, .bodyweight),
         e(98, "Bird Dog", [], .core, "Bodyweight", ["Core", "Glutes"], "A quadruped stability drill extending the opposite arm and leg.", 3, 10, 45, .bodyweight),
         e(99, "Mountain Climber", [], .core, "Bodyweight", ["Core", "Hip Flexors"], "A plank movement alternating knee drives toward the chest.", 3, 20, 45, .bodyweight),
-        e(100, "Farmer Carry", ["Farmer's Walk"], .core, "Dumbbells or kettlebells", ["Grip", "Core", "Traps"], "A loaded carry performed while walking tall with a weight in each hand.", 3, 1, 60, .timed(defaultSeconds: 30))
+        e(100, "Farmer Carry", ["Farmer's Walk"], .core, "Dumbbells or kettlebells", ["Grip", "Core", "Traps"], "A loaded carry performed while walking tall with a weight in each hand.", 3, 1, 60, .timed(defaultSeconds: 30)),
+        e(101, "Assisted Pull-Up Machine", ["Assisted Pull-Up"], .back, "Assisted pull-up machine", ["Lats", "Upper Back", "Biceps"], "A pull-up performed with counterweight assistance from a machine.", 3, 8, 120, .assisted),
+        e(102, "Machine Biceps Curl", ["Machine Curl"], .arms, "Biceps curl machine", ["Biceps"], "A guided elbow curl performed with the upper arms supported by the machine.", 3, 10, 75),
+        e(103, "Adductor Rock-Back", ["Adductor Rock-Backs"], .mobility, "Bodyweight", ["Adductors"], "From hands and knees, extend one leg to the side and rock the hips back with control.", 1, 8, 30, .bodyweight)
     ]
+
+    private struct SupplementalCatalog: Decodable {
+        let sourceRevision: String
+        let exercises: [SupplementalExercise]
+    }
+
+    private struct SupplementalExercise: Decodable {
+        let id: Int
+        let sourceID: String
+        let name: String
+        let aliases: [String]
+        let category: String
+        let equipment: String
+        let muscles: [String]
+        let description: String
+        let modality: String
+        let defaultSeconds: Int?
+        let defaultSets: Int
+        let defaultReps: Int
+        let defaultRestSeconds: Int
+
+        var catalogExercise: CatalogExercise {
+            let category: ExerciseCategory = switch self.category {
+            case "legs": .legs
+            case "chest": .chest
+            case "back": .back
+            case "shoulders": .shoulders
+            case "arms": .arms
+            case "core": .core
+            case "fullBody": .fullBody
+            case "cardio": .cardio
+            case "mobility": .mobility
+            case "other": .other
+            default: preconditionFailure("Unknown bundled exercise category")
+            }
+            let modality: CatalogExerciseModality = switch self.modality {
+            case "weighted": .weighted
+            case "bodyweight": .bodyweight
+            case "assisted": .assisted
+            case "timed": .timed(defaultSeconds: defaultSeconds ?? 30)
+            default: preconditionFailure("Unknown bundled exercise modality")
+            }
+            return CatalogExercise(
+                id: id, name: name, aliases: aliases, category: category, equipment: equipment,
+                muscles: muscles, description: description, defaultSets: defaultSets,
+                defaultReps: defaultReps, defaultRestSeconds: defaultRestSeconds, modality: modality
+            )
+        }
+    }
+
+    private static let supplementalExercises: [CatalogExercise] = {
+        let bundle = Bundle(for: ExerciseCatalogBundleMarker.self)
+        guard let url = bundle.url(forResource: "free-exercise-db-catalog", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let catalog = try? JSONDecoder().decode(SupplementalCatalog.self, from: data),
+              catalog.sourceRevision == "f00c92c7dcf1216a928a52c3706c7ce8e2f71ed5"
+        else { preconditionFailure("Bundled exercise catalog is missing or invalid") }
+        return catalog.exercises.map(\.catalogExercise)
+    }()
 
     private static func e(
         _ id: Int,

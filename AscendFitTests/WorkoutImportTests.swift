@@ -5,15 +5,62 @@ import Testing
 private final class WorkoutImportFixtures: NSObject {}
 
 struct WorkoutImportTests {
-    @Test("The confirmed Lower A file produces all targets and exact source after explicit custom-name review")
+    @Test("Common imported exercise names match despite descriptive equipment wording")
+    func commonExerciseMatching() {
+        let cases = [
+            ("Assisted Pull-Up Machine", "Assisted pull-up machine"),
+            ("Incline Dumbbell Bench Press", "Dumbbells and incline bench"),
+            ("Chest-Supported Machine Row", "Chest-supported selectorized row machine"),
+            ("Seated Dumbbell Shoulder Press", "Dumbbells and bench"),
+            ("Lat Pulldown", "Cable lat pulldown"),
+            ("Reverse Pec Deck", "Reverse pec deck machine"),
+            ("Machine Chest Fly", "Pec deck machine"),
+            ("Machine Biceps Curl", "Biceps curl machine"),
+            ("Cable Rope Triceps Pushdown", "Cable machine with rope attachment")
+        ]
+        let draft = WorkoutImportDraft()
+        for (name, equipment) in cases {
+            let exercise = ImportedExercise(id: UUID(), name: name, equipment: equipment, notes: nil, group: nil, sets: [])
+            #expect(draft.definition(for: exercise) != nil, "Expected a library match for \(name)")
+        }
+        let conflicting = ImportedExercise(id: UUID(), name: "Bench Press", equipment: "Dumbbells", notes: nil, group: nil, sets: [])
+        #expect(draft.definition(for: conflicting) == nil)
+    }
+
+    @Test("Bundled exercise seed recognizes additional common variants offline")
+    func expandedExerciseMatching() {
+        let draft = WorkoutImportDraft()
+        let cases = [
+            ("Trap Bar Deadlift", "Trap-bar"),
+            ("Band Assisted Pull-Up", "Resistance bands"),
+            ("Walking, Treadmill", "Treadmill"),
+            ("Stationary Bike", "Stationary bike"),
+            ("Adductor rock-backs", "Bodyweight"),
+            ("Bodyweight squats", "Bodyweight"),
+            ("Seated calf press", "Seated calf press machine")
+        ]
+        for (name, equipment) in cases {
+            let exercise = ImportedExercise(id: UUID(), name: name, equipment: equipment, notes: nil, group: nil, sets: [])
+            #expect(draft.definition(for: exercise) != nil, "Expected an offline library match for \(name)")
+        }
+    }
+
+    @Test("Smart quotes introduced by iOS paste are repaired before JSON validation")
+    func smartQuotePaste() throws {
+        let original = try fixture("lower-a-ready")
+        let pasted = original.replacingOccurrences(of: "\"", with: "“")
+        let response = try WorkoutJSONImporter.decode(pasted)
+        #expect(response.workouts.count == 1)
+        #expect(response.source?.originalText == original)
+    }
+
+    @Test("A representative ready file imports every target without exercise-name corrections")
     func confirmedWorkout() throws {
         let text = try fixture("lower-a-ready")
-        var draft = try draft(text)
-        #expect(throws: WorkoutImportError.self) { try draft.makePlan() }
-        for exercise in draft.response!.workouts[0].exercises where draft.definition(for: exercise) == nil {
-            draft.exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
-        }
+        let draft = try draft(text)
+        #expect(draft.response!.workouts[0].exercises.allSatisfy { draft.definition(for: $0) != nil })
         let plan = try draft.makePlan()
+        #expect(plan.title == "Lower Body")
         #expect(plan.exercises.count == 13)
         #expect(plan.exercises.flatMap(\.sets).count == 33)
         #expect(plan.importSource?.originalText == text)
@@ -23,6 +70,42 @@ struct WorkoutImportTests {
         #expect(plan.exercises[5].sets[1].prescription == .weighted(reps: try RepTarget(lower: 3, upper: 4), load: try Load(amount: 135, unit: .pounds)))
         #expect(plan.notes?.contains("stop that exercise rather than trying to work through it.") == true)
         #expect(plan.exercises.flatMap(\.sets).allSatisfy { $0.restAfter == nil })
+    }
+
+    @Test("Imported focus follows exercise regions; only a user-edited name overrides it")
+    func importedWorkoutTitles() throws {
+        var draft = try draft(fixture("lower-a-ready"))
+        var workout = try #require(draft.response?.workouts.first)
+        var upper = workout.exercises[0]
+        upper.name = "Bench Press"
+        var lower = workout.exercises[1]
+        lower.name = "Back Squat"
+        var neutral = workout.exercises[2]
+        neutral.name = "Plank"
+        var unknown = workout.exercises[3]
+        unknown.name = "Unlisted movement"
+
+        workout.exercises = [upper, neutral]
+        #expect(draft.title(for: workout) == "Upper Body")
+        draft.exerciseMappings[upper.id] = try #require(ExerciseCatalog.exercises.first { $0.name == "Back Squat" }).definition
+        #expect(draft.title(for: workout) == "Lower Body")
+        draft.exerciseMappings.removeValue(forKey: upper.id)
+        workout.exercises = [lower, neutral]
+        #expect(draft.title(for: workout) == "Lower Body")
+        workout.exercises = [upper, lower, neutral]
+        #expect(draft.title(for: workout) == "Full Body")
+        workout.exercises = [upper, unknown]
+        #expect(draft.title(for: workout) == "Workout")
+        neutral.name = "Rowing machine"
+        lower.name = "Hamstring curl"
+        workout.exercises = [lower, neutral]
+        #expect(draft.title(for: workout) == "Lower Body")
+
+        draft.setTitle("My Sunday Session", for: workout)
+        let reopened = try JSONDecoder().decode(WorkoutImportDraft.self, from: JSONEncoder().encode(draft))
+        #expect(reopened.title(for: workout) == "My Sunday Session")
+        draft.setTitle("  ", for: workout)
+        #expect(draft.title(for: workout) == "Lower Body")
     }
 
     @Test("Unresolved source cannot be acknowledged away, and incompatible targets are never silently dropped")

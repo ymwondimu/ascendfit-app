@@ -2,6 +2,28 @@ import XCTest
 
 @MainActor
 final class WorkoutImportUITests: XCTestCase {
+    func testUnknownNameCanBeKeptFromAddAction() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launchEnvironment["ASCEND_FIT_UI_TEST_STORE_ID"] = UUID().uuidString
+        app.launch()
+        app.buttons["Import workout"].tap()
+        let source = app.textViews["import-source"]
+        XCTAssertTrue(source.waitForExistence(timeout: 3))
+        source.tap()
+        source.typeText(Self.workoutJSON.replacingOccurrences(of: "Back Squat", with: "Unlisted Squat Machine"))
+        let review = app.buttons["import-review-json"]
+        for _ in 0..<4 where !review.isHittable { app.swipeUp() }
+        review.tap()
+        XCTAssertTrue(app.navigationBars["Review workout"].waitForExistence(timeout: 5))
+        let add = app.buttons["import-add-to-today"]
+        for _ in 0..<5 where !add.isHittable { app.swipeUp() }
+        XCTAssertTrue(add.isEnabled)
+        XCTAssertEqual(add.label, "Keep 1 name & Add to Today")
+        add.tap()
+        XCTAssertTrue(app.buttons["Start workout"].waitForExistence(timeout: 5))
+    }
+
     func testJSONReviewRecoversAndBecomesAnOfflineWorkout() {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing", "--ui-testing-seed-plan"]
@@ -40,16 +62,19 @@ final class WorkoutImportUITests: XCTestCase {
         XCTAssertTrue(add.isEnabled)
         add.tap()
         app.buttons["Replace with reviewed workout"].tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 3))
         app.buttons["Start workout"].tap()
         XCTAssertTrue(app.staticTexts["145 lb × 8"].waitForExistence(timeout: 3))
         app.buttons["Log set"].tap()
+        if app.buttons["Skip for now"].waitForExistence(timeout: 2) {
+            app.buttons["Skip for now"].tap()
+        }
         XCTAssertTrue(app.staticTexts["All sets logged"].waitForExistence(timeout: 3))
         app.buttons["Finish workout"].tap()
         XCTAssertTrue(app.staticTexts["Workout complete"].waitForExistence(timeout: 3))
         app.buttons["Done"].tap()
         app.tabBars.buttons["History"].tap()
-        app.staticTexts["Imported Strength"].tap()
+        app.staticTexts["Lower Body"].tap()
         XCTAssertTrue(app.buttons["copy-coach-summary"].waitForExistence(timeout: 3))
         capture("Imported workout saved in History", in: app)
     }
@@ -102,7 +127,7 @@ final class WorkoutImportUITests: XCTestCase {
         let add = app.buttons["import-add-to-today"]
         for _ in 0..<5 where !add.isHittable { app.swipeUp() }
         add.tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 5))
     }
 
     func testDeletingLocalDataAlsoClearsAnUnacceptedImportDraft() {
@@ -157,7 +182,7 @@ final class WorkoutImportUITests: XCTestCase {
         let add = app.buttons["import-add-to-today"]
         for _ in 0..<5 where !add.isHittable { app.swipeUp() }
         add.tap()
-        XCTAssertTrue(app.staticTexts["Imported Strength"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Lower Body"].waitForExistence(timeout: 3))
     }
 
     func testCancelledConversionKeepsTextAndDoesNotResumeOnReopen() {

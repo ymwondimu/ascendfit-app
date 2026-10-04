@@ -11,6 +11,7 @@ struct WorkoutOverviewView: View {
             List {
                 if let session = model.activeSession {
                     Section {
+                        CampaignScreenIntro(eyebrow: "Your session", title: "Workout plan", subtitle: "Choose what to log next without losing your place.")
                         Text("Choose an unfinished set to log next. After that set, the remaining workout order resumes, including superset and circuit rounds.")
                             .font(.subheadline).foregroundStyle(AppTheme.contentSecondary)
                         if session.status != .active {

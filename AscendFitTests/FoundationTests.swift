@@ -12,9 +12,13 @@ struct FoundationTests {
     func exerciseCatalogIsReadyForSelection() {
         let exercises = ExerciseCatalog.exercises
 
-        #expect(exercises.count >= 100)
+        #expect(exercises.count >= 900)
         #expect(Set(exercises.map(\.id)).count == exercises.count)
         #expect(Set(exercises.map(\.name)).count == exercises.count)
+        #expect(Set(exercises.map { $0.definition.id }).count == exercises.count)
+        let collidingNames = exercises.filter { ExerciseCatalog.candidates(named: $0.name).count != 1 }.map(\.name)
+        #expect(collidingNames.isEmpty, "Ambiguous catalog names: \(collidingNames)")
+        #expect(exercises.first { $0.id == 1 }?.name == "Back Squat")
         #expect(exercises.allSatisfy { !$0.description.isEmpty })
         #expect(exercises.allSatisfy { $0.defaultSets > 0 && $0.defaultReps > 0 })
     }

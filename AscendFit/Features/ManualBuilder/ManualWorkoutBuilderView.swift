@@ -338,6 +338,7 @@ struct ManualSetDraft: Identifiable {
         switch catalog.modality {
         case .weighted: kind = .weighted; seconds = 30
         case .bodyweight: kind = .bodyweight; seconds = 30
+        case .assisted: kind = .assisted; seconds = 30
         case let .timed(value): kind = .timed; seconds = value
         }
     }
@@ -750,7 +751,7 @@ private struct ExerciseCatalogPicker: View {
 
     private func defaultTarget(for exercise: CatalogExercise) -> String {
         switch exercise.modality {
-        case .weighted, .bodyweight:
+        case .weighted, .bodyweight, .assisted:
             return "\(exercise.defaultReps) reps"
         case let .timed(defaultSeconds):
             return "\(defaultSeconds) sec"
@@ -805,6 +806,8 @@ private struct ManualGroupingEditor: View {
                     dismiss()
                 }.disabled(selected.isEmpty)
             }
+            .scrollContentBackground(.hidden)
+            .background(AppTheme.background)
             .navigationTitle("Supersets & circuits")
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } } }
         }.tint(AppTheme.accentContent)

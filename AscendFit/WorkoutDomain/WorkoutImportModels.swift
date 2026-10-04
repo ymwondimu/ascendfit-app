@@ -177,8 +177,20 @@ struct WorkoutImportDraft: Codable, Sendable {
     var selectedWorkoutID: UUID?
     var resolvedIssueIDs: Set<String> = []
     var exerciseMappings: [UUID: ExerciseDefinition] = [:]
+    var manuallyNamedTitles: [UUID: String]?
 
     var selectedIndex: Int? { response?.workouts.firstIndex(where: { $0.id == selectedWorkoutID }) }
+
+    func title(for workout: ImportedWorkout) -> String {
+        manuallyNamedTitles?[workout.id]?.nilIfBlank
+            ?? ImportedWorkoutFocus.title(for: workout.exercises, mappings: exerciseMappings)
+    }
+
+    mutating func setTitle(_ title: String, for workout: ImportedWorkout) {
+        var titles = manuallyNamedTitles ?? [:]
+        titles[workout.id] = title.nilIfBlank
+        manuallyNamedTitles = titles.isEmpty ? nil : titles
+    }
 
     func relevantIssues() -> [WorkoutImportIssue] {
         guard let response, let index = selectedIndex else { return [] }
@@ -188,12 +200,17 @@ struct WorkoutImportDraft: Codable, Sendable {
 
     func definition(for exercise: ImportedExercise) -> ExerciseDefinition? {
         if let mapped = exerciseMappings[exercise.id] { return mapped }
-        let name = Self.normalized(exercise.name)
-        let matches = ExerciseCatalog.exercises.filter {
-            ([ $0.name ] + $0.aliases).contains { Self.normalized($0) == name }
-                && (exercise.equipment == nil || Self.normalized(exercise.equipment!) == Self.normalized($0.equipment))
+        let matches = ExerciseCatalog.candidates(named: exercise.name).filter {
+            exercise.equipment == nil || Self.equipmentMatches(exercise.equipment!, $0.equipment)
         }
         return matches.count == 1 ? matches[0].definition : nil
+    }
+
+    mutating func keepUnmatchedNamesAsCustom() throws {
+        guard let response, let index = selectedIndex else { return }
+        for exercise in response.workouts[index].exercises where definition(for: exercise) == nil {
+            exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
+        }
     }
 
     func makePlan(requireResolved: Bool = true) throws -> WorkoutPlan {
@@ -243,11 +260,77 @@ struct WorkoutImportDraft: Codable, Sendable {
             } else { group = nil }
             return try PlannedExercise(id: exercise.id, exercise: definition, sets: exercise.sets.map { try $0.plannedSet() }, group: group, notes: exercise.notes)
         }
-        return try WorkoutPlan(id: workout.id, title: workout.title, exercises: exercises, notes: workout.notes,
+        return try WorkoutPlan(id: workout.id, title: title(for: workout), exercises: exercises, notes: workout.notes,
                                importSource: ImportSource(kind: sourceKind, originalText: originalText, sourceURL: sourceURL))
     }
 
     private static func normalized(_ text: String) -> String {
         text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
+
+    private static func equipmentMatches(_ imported: String, _ catalog: String) -> Bool {
+        let source = ExerciseCatalog.normalizedName(imported)
+        let target = ExerciseCatalog.normalizedName(catalog)
+        if source == target { return true }
+        if target == "unspecified" || target == "other" { return true }
+        let kinds = ["barbell", "dumbbell", "cable", "bodyweight", "kettlebell", "smith", "band", "ez bar", "trap bar"]
+        let sourceKinds = Set(kinds.filter { source.contains($0) })
+        let targetKinds = Set(kinds.filter { target.contains($0) })
+        if !sourceKinds.isEmpty || !targetKinds.isEmpty {
+            if !sourceKinds.isDisjoint(with: targetKinds) { return true }
+            return target.contains(" or ") && source.contains("machine") && target.contains("machine")
+        }
+        return source.contains("machine") && target.contains("machine")
+    }
+}
+
+enum ImportedWorkoutFocus {
+    private enum Region { case upper, lower, fullBody, neutral, unknown }
+
+    static func title(for exercises: [ImportedExercise], mappings: [UUID: ExerciseDefinition]) -> String {
+        let regions = exercises.map { region(for: $0, mapped: mappings[$0.id]) }
+        let upper = regions.contains { $0 == .upper || $0 == .fullBody }
+        let lower = regions.contains { $0 == .lower || $0 == .fullBody }
+        if upper && lower { return "Full Body" }
+        if regions.contains(where: { $0 == .unknown }) { return "Workout" }
+        if upper { return "Upper Body" }
+        if lower { return "Lower Body" }
+        return "Workout"
+    }
+
+    private static func region(for exercise: ImportedExercise, mapped: ExerciseDefinition?) -> Region {
+        let name = normalized(mapped?.name ?? exercise.name)
+        let catalog: CatalogExercise?
+        if let mapped {
+            catalog = ExerciseCatalog.exercises.first { mapped.id == $0.definition.id }
+        } else {
+            let candidates = ExerciseCatalog.candidates(named: name)
+            catalog = candidates.count == 1 ? candidates[0] : nil
+        }
+        if let catalog {
+            switch catalog.category {
+            case .legs: return .lower
+            case .chest, .back, .shoulders, .arms: return .upper
+            case .core, .cardio, .mobility, .other: return .neutral
+            case .fullBody: return .fullBody
+            }
+        }
+        if hasTerm(name, in: ["rowing machine", "rower", "ergometer", "bike", "cycle", "treadmill", "elliptical", "crunch", "plank", "twist", "leg raise", "sit-up", "dead bug", "bird dog", "mountain climber", "pallof", "ab wheel", "mobility", "stretch"]) { return .neutral }
+        let lower = hasTerm(name, in: ["squat", "deadlift", "lunge", "leg press", "leg curl", "leg extension", "calf", "hamstring", "quad", "glute", "hip", "adductor", "abductor", "step-up", "step up", "rock-back"])
+        let upper = hasTerm(name, in: ["bench press", "chest", "push-up", "pull-up", "pulldown", "row", "curl", "triceps", "biceps", "shoulder", "lat", "pec", "fly", "dip", "face pull", "overhead press"])
+        if lower && hasTerm(name, in: ["leg curl", "hamstring curl"]) { return .lower }
+        if upper && lower { return .unknown }
+        if upper { return .upper }
+        if lower { return .lower }
+        if hasTerm(name, in: ["warm-up", "warmup"]) || ["walk", "walking", "run", "running"].contains(name) { return .neutral }
+        return .unknown
+    }
+
+    private static func normalized(_ text: String) -> String {
+        text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
+
+    private static func hasTerm(_ name: String, in terms: [String]) -> Bool {
+        terms.contains { name.contains($0) }
     }
 }
