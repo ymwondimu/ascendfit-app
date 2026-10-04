@@ -184,9 +184,7 @@ struct ImportWorkoutView: View {
                             .font(.caption).foregroundStyle(AppTheme.contentSecondary)
                         Button("Keep \(unmatched.count) names as custom exercises") {
                             do {
-                                for exercise in unmatched {
-                                    draft.exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
-                                }
+                                try draft.keepUnmatchedNamesAsCustom()
                                 persist()
                             } catch { message = error.localizedDescription }
                         }
@@ -224,7 +222,12 @@ struct ImportWorkoutView: View {
                 Section {
                     statusMessage
                     if let error = validationMessage { Text(error).font(.footnote).foregroundStyle(AppTheme.contentSecondary) }
-                    Button("Add to Today") {
+                    Button(unmatchedCount == 0 ? "Add to Today" : "Keep \(unmatchedCount) \(unmatchedCount == 1 ? "name" : "names") & Add to Today") {
+                        do {
+                            try draft.keepUnmatchedNamesAsCustom()
+                            persist()
+                            guard !storageFailed else { return }
+                        } catch { message = error.localizedDescription; return }
                         if model.todayPlan != nil { confirmReplace = true }
                         else { Task { await savePlan() } }
                     }
@@ -252,8 +255,18 @@ struct ImportWorkoutView: View {
     }
 
     private var validationMessage: String? {
-        do { _ = try draft.makePlan(); return nil }
+        do {
+            var candidate = draft
+            try candidate.keepUnmatchedNamesAsCustom()
+            _ = try candidate.makePlan()
+            return nil
+        }
         catch { return error.localizedDescription }
+    }
+
+    private var unmatchedCount: Int {
+        guard let response = draft.response, let index = draft.selectedIndex else { return 0 }
+        return response.workouts[index].exercises.filter { draft.definition(for: $0) == nil }.count
     }
 
     @ViewBuilder private func issueRows(prefix: String, includeChildren: Bool) -> some View {

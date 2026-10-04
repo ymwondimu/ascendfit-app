@@ -2,6 +2,28 @@ import XCTest
 
 @MainActor
 final class WorkoutImportUITests: XCTestCase {
+    func testUnknownNameCanBeKeptFromAddAction() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launchEnvironment["ASCEND_FIT_UI_TEST_STORE_ID"] = UUID().uuidString
+        app.launch()
+        app.buttons["Import workout"].tap()
+        let source = app.textViews["import-source"]
+        XCTAssertTrue(source.waitForExistence(timeout: 3))
+        source.tap()
+        source.typeText(Self.workoutJSON.replacingOccurrences(of: "Back Squat", with: "Unlisted Squat Machine"))
+        let review = app.buttons["import-review-json"]
+        for _ in 0..<4 where !review.isHittable { app.swipeUp() }
+        review.tap()
+        XCTAssertTrue(app.navigationBars["Review workout"].waitForExistence(timeout: 5))
+        let add = app.buttons["import-add-to-today"]
+        for _ in 0..<5 where !add.isHittable { app.swipeUp() }
+        XCTAssertTrue(add.isEnabled)
+        XCTAssertEqual(add.label, "Keep 1 name & Add to Today")
+        add.tap()
+        XCTAssertTrue(app.buttons["Start workout"].waitForExistence(timeout: 5))
+    }
+
     func testJSONReviewRecoversAndBecomesAnOfflineWorkout() {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing", "--ui-testing-seed-plan"]

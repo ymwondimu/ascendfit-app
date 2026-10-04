@@ -203,9 +203,16 @@ struct WorkoutImportDraft: Codable, Sendable {
         let name = Self.normalized(exercise.name)
         let matches = ExerciseCatalog.exercises.filter {
             ([ $0.name ] + $0.aliases).contains { Self.normalized($0) == name }
-                && (exercise.equipment == nil || Self.normalized(exercise.equipment!) == Self.normalized($0.equipment))
+                && (exercise.equipment == nil || Self.equipmentMatches(exercise.equipment!, $0.equipment))
         }
         return matches.count == 1 ? matches[0].definition : nil
+    }
+
+    mutating func keepUnmatchedNamesAsCustom() throws {
+        guard let response, let index = selectedIndex else { return }
+        for exercise in response.workouts[index].exercises where definition(for: exercise) == nil {
+            exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
+        }
     }
 
     func makePlan(requireResolved: Bool = true) throws -> WorkoutPlan {
@@ -261,6 +268,20 @@ struct WorkoutImportDraft: Codable, Sendable {
 
     private static func normalized(_ text: String) -> String {
         text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
+
+    private static func equipmentMatches(_ imported: String, _ catalog: String) -> Bool {
+        let source = normalized(imported)
+        let target = normalized(catalog)
+        if source == target { return true }
+        let kinds = ["barbell", "dumbbell", "cable", "bodyweight", "kettlebell", "smith"]
+        let sourceKinds = Set(kinds.filter { source.contains($0) })
+        let targetKinds = Set(kinds.filter { target.contains($0) })
+        if !sourceKinds.isEmpty || !targetKinds.isEmpty {
+            if !sourceKinds.isDisjoint(with: targetKinds) { return true }
+            return target.contains(" or ") && source.contains("machine") && target.contains("machine")
+        }
+        return source.contains("machine") && target.contains("machine")
     }
 }
 

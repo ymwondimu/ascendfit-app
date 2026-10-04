@@ -5,6 +5,28 @@ import Testing
 private final class WorkoutImportFixtures: NSObject {}
 
 struct WorkoutImportTests {
+    @Test("Common imported exercise names match despite descriptive equipment wording")
+    func commonExerciseMatching() {
+        let cases = [
+            ("Assisted Pull-Up Machine", "Assisted pull-up machine"),
+            ("Incline Dumbbell Bench Press", "Dumbbells and incline bench"),
+            ("Chest-Supported Machine Row", "Chest-supported selectorized row machine"),
+            ("Seated Dumbbell Shoulder Press", "Dumbbells and bench"),
+            ("Lat Pulldown", "Cable lat pulldown"),
+            ("Reverse Pec Deck", "Reverse pec deck machine"),
+            ("Machine Chest Fly", "Pec deck machine"),
+            ("Machine Biceps Curl", "Biceps curl machine"),
+            ("Cable Rope Triceps Pushdown", "Cable machine with rope attachment")
+        ]
+        let draft = WorkoutImportDraft()
+        for (name, equipment) in cases {
+            let exercise = ImportedExercise(id: UUID(), name: name, equipment: equipment, notes: nil, group: nil, sets: [])
+            #expect(draft.definition(for: exercise) != nil, "Expected a library match for \(name)")
+        }
+        let conflicting = ImportedExercise(id: UUID(), name: "Bench Press", equipment: "Dumbbells", notes: nil, group: nil, sets: [])
+        #expect(draft.definition(for: conflicting) == nil)
+    }
+
     @Test("Smart quotes introduced by iOS paste are repaired before JSON validation")
     func smartQuotePaste() throws {
         let original = try fixture("lower-a-ready")
@@ -19,10 +41,12 @@ struct WorkoutImportTests {
         let text = try fixture("lower-a-ready")
         var draft = try draft(text)
         #expect(throws: WorkoutImportError.self) { try draft.makePlan() }
-        for exercise in draft.response!.workouts[0].exercises where draft.definition(for: exercise) == nil {
-            draft.exerciseMappings[exercise.id] = try ExerciseDefinition(name: exercise.name, equipment: exercise.equipment)
-        }
+        let unmatched = draft.response!.workouts[0].exercises.filter { draft.definition(for: $0) == nil }
+        try draft.keepUnmatchedNamesAsCustom()
         let plan = try draft.makePlan()
+        for exercise in unmatched {
+            #expect(plan.exercises.first { $0.id == exercise.id }?.exercise.name == exercise.name)
+        }
         #expect(plan.title == "Lower Body")
         #expect(plan.exercises.count == 13)
         #expect(plan.exercises.flatMap(\.sets).count == 33)
