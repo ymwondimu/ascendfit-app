@@ -41,6 +41,7 @@
 		40CC7BD7E34741472BF8B6B3 /* ManualWorkoutBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC65AA3DA03EB62ED8F31E /* ManualWorkoutBuilderView.swift */; };
 		41BBDF0392750245EF0E1638 /* AscendFitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A99704CA506D59A1A38D03C /* AscendFitUITests.swift */; };
 		421D06E305593F6A3963BD09 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DFBFE1BA0302A79CF41A /* AppModel.swift */; };
+		4287A24B05FEDF7B9982FE0E /* free-exercise-db-catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = C987AE01F7CB6187DD293FB0 /* free-exercise-db-catalog.json */; };
 		428F096FFE3D29AA8E398297 /* ImportedExerciseEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D16535C8C626AC23528EB0 /* ImportedExerciseEditor.swift */; };
 		43A44C25B764071A7F03FB7D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4595A21D9BC7B04AA04C2FE /* HistoryView.swift */; };
 		43C89CB0D63F2270A51E5B69 /* DomainValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD286CA1AA545BA4EA76675 /* DomainValidation.swift */; };
@@ -115,6 +116,7 @@
 		D445A0085A5F6A6FD7E5AB44 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019949F8556067FF9D3AE25D /* AppAppearance.swift */; };
 		DD19ED8FF8C613E81379183B /* lower-a-review.workout.json in Resources */ = {isa = PBXBuildFile; fileRef = 629AD9389C2CE4BDDE67ADB6 /* lower-a-review.workout.json */; };
 		DED1025290E067CF0C5ED9FA /* SessionEventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3625A173285621C5FE9B022C /* SessionEventStore.swift */; };
+		DFB092EB308921EAE546A808 /* free-exercise-db-catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = C987AE01F7CB6187DD293FB0 /* free-exercise-db-catalog.json */; };
 		E79CE5B984975880EAD868CA /* ManualWorkoutBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC65AA3DA03EB62ED8F31E /* ManualWorkoutBuilderView.swift */; };
 		E7C6FD340268059B392BC9D1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED951E37C05702A102FFF37 /* SettingsView.swift */; };
 		EB6E92554D689B7B926BAD0F /* WorkoutImportSchemaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C6D9F106BA15ACF59CBFC3 /* WorkoutImportSchemaValidator.swift */; };
@@ -239,6 +241,7 @@
 		BCD4E697E7647A811A6C59D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BFDF88009A2A777957D16D7B /* WorkoutImportSchemaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutImportSchemaTests.swift; sourceTree = "<group>"; };
 		C801AC4F4A1B0E63D2EA19BB /* StartingLoadSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingLoadSuggestion.swift; sourceTree = "<group>"; };
+		C987AE01F7CB6187DD293FB0 /* free-exercise-db-catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "free-exercise-db-catalog.json"; sourceTree = "<group>"; };
 		CB3DB92597A7743FF29E0882 /* WorkoutDeletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDeletionTests.swift; sourceTree = "<group>"; };
 		D02C29F4E51C6DF2B88A6B51 /* workout-plan-v1.schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "workout-plan-v1.schema.json"; sourceTree = "<group>"; };
 		D5CF229BD537A3FD2935C5F8 /* HistoryProgressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryProgressUITests.swift; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 			children = (
 				223612D09CB155273DB052C6 /* Assets.xcassets */,
 				255C4FA195116F50420DDDE5 /* CHATGPT-WORKOUT-PROMPT.txt */,
+				C987AE01F7CB6187DD293FB0 /* free-exercise-db-catalog.json */,
 				D02C29F4E51C6DF2B88A6B51 /* workout-plan-v1.schema.json */,
 			);
 			path = Resources;
@@ -647,7 +651,20 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					0C34989F1BFD8895F85FE783 = {
+						DevelopmentTeam = V8DXC4RV3Z;
 						TestTargetID = 8694A45450FDFE7041B02D85;
+					};
+					21D44AB31265433809B85DDD = {
+						DevelopmentTeam = V8DXC4RV3Z;
+					};
+					31C9CE2F3AA5F9B2F90FAA59 = {
+						DevelopmentTeam = V8DXC4RV3Z;
+					};
+					8694A45450FDFE7041B02D85 = {
+						DevelopmentTeam = V8DXC4RV3Z;
+					};
+					BEE69901F5F0563D8C8274B9 = {
+						DevelopmentTeam = V8DXC4RV3Z;
 					};
 				};
 			};
@@ -681,6 +698,7 @@
 			files = (
 				29A3FFD790BD9A1CA5885ED1 /* Assets.xcassets in Resources */,
 				CB56D326E2F97086F5E21166 /* CHATGPT-WORKOUT-PROMPT.txt in Resources */,
+				DFB092EB308921EAE546A808 /* free-exercise-db-catalog.json in Resources */,
 				F5400D81FD7110F9C1C962AD /* workout-plan-v1.schema.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,6 +718,7 @@
 			files = (
 				A8E32136D31A0848E4118351 /* Assets.xcassets in Resources */,
 				B19A651BDBCBD0CEA1D83595 /* CHATGPT-WORKOUT-PROMPT.txt in Resources */,
+				4287A24B05FEDF7B9982FE0E /* free-exercise-db-catalog.json in Resources */,
 				70EBF7F5DC9D7D681B4185E8 /* workout-plan-v1.schema.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +908,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ymwondimu.ascendfit.personal;
 				PRODUCT_MODULE_NAME = AscendFitPersonal;
 				PRODUCT_NAME = AscendFitPersonal;
@@ -952,6 +970,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1003,7 +1022,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascendfit.app.share;
 				PRODUCT_NAME = AscendFitShare;
 				SDKROOT = iphoneos;
@@ -1028,7 +1046,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascendfit.app;
 				PRODUCT_MODULE_NAME = AscendFit;
 				PRODUCT_NAME = AscendFit;
@@ -1048,7 +1065,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascendfit.app.share;
 				PRODUCT_NAME = AscendFitShare;
 				SDKROOT = iphoneos;
@@ -1090,7 +1106,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ascendfit.app;
 				PRODUCT_MODULE_NAME = AscendFit;
 				PRODUCT_NAME = AscendFit;
@@ -1114,7 +1129,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ymwondimu.ascendfit.personal;
 				PRODUCT_MODULE_NAME = AscendFitPersonal;
 				PRODUCT_NAME = AscendFitPersonal;
@@ -1160,6 +1174,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = V8DXC4RV3Z;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

@@ -4,6 +4,8 @@
 **Workspace:** repository root
 **Current milestone:** Campaign styling, native scrolling set rows with a pinned Log set action, and an optional plain-language effort prompt are implemented on `codex/campaign-ui`. The full iPhone 17 Pro / iOS 26.2 simulator run passed 69 Swift unit tests and 22 UI tests on September 27, 2026. Standardized JSON import, offline sharing and the configured-service text-conversion client are implemented. Live provider/service validation and physical-device checks remain outstanding.
 
+**October 4 update:** On `codex/apex-iphone-personal`, the offline catalog now contains 942 exercises (103 maintained, 839 generated from a pinned Free Exercise DB snapshot). Existing exercise IDs remain stable. All 95 iOS simulator tests passed with no failures or skips, and the Personal Team build installed and launched on the paired iPhone 16 Pro without resetting the app container. The actual rate of automatic recognition and false matches is not yet measured on a representative coach-workout corpus. See `EXERCISE-CATALOG.md` for source, license, and regeneration details.
+
 This file preserves implementation-specific context between development chats. Product intent remains authoritative in [PROJECT.md](PROJECT.md), current execution status in [PLAN.md](PLAN.md), build order in [implementation-roadmap.md](implementation-roadmap.md), and the approved interface contract in [UI-SPEC.md](UI-SPEC.md).
 
 ## Read first in a fresh chat
@@ -64,7 +66,7 @@ These behaviors were explicitly requested and should not regress:
 
 - First-launch onboarding persists units, sex, height, body weight, and lifting experience through `@AppStorage`.
 - Today Settings now supports unit selection and profile editing. `Features/Settings/TrainingProfileEditor.swift` is shared with the manual builder; it was moved rather than duplicated. Profile measurements remain stored in centimeters/kilograms, and changing display units does not reinterpret them. New manual workouts use the selected unit; existing plans and recorded results retain their original units.
-- The manual builder uses a searchable 100-exercise seed catalog with descriptions.
+- The manual builder uses a searchable 942-exercise offline catalog with descriptions. The original 103 IDs remain stable; 839 supplemental entries are generated from a pinned public-domain Free Exercise DB snapshot. See `EXERCISE-CATALOG.md` for provenance and regeneration.
 - Exercise rows are compact and reorderable; exercises and sets support native swipe deletion.
 - Exercise detail supports direct reps/weight/rest editing, add set, instructions, default prescriptions, first-set load propagation, and profile-based conservative load suggestions.
 - The workout builder no longer displays or edits mass units. It consumes the unit saved during onboarding.

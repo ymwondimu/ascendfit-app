@@ -13,6 +13,10 @@ xcuserdata/
 node_modules/
 npm-debug.log*
 
+# Python tooling
+__pycache__/
+*.pyc
+
 # Local workout data, exports, and private configuration
 *.sqlite
 *.sqlite-*

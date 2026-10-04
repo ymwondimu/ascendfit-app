@@ -200,10 +200,8 @@ struct WorkoutImportDraft: Codable, Sendable {
 
     func definition(for exercise: ImportedExercise) -> ExerciseDefinition? {
         if let mapped = exerciseMappings[exercise.id] { return mapped }
-        let name = Self.normalized(exercise.name)
-        let matches = ExerciseCatalog.exercises.filter {
-            ([ $0.name ] + $0.aliases).contains { Self.normalized($0) == name }
-                && (exercise.equipment == nil || Self.equipmentMatches(exercise.equipment!, $0.equipment))
+        let matches = ExerciseCatalog.candidates(named: exercise.name).filter {
+            exercise.equipment == nil || Self.equipmentMatches(exercise.equipment!, $0.equipment)
         }
         return matches.count == 1 ? matches[0].definition : nil
     }
@@ -271,10 +269,11 @@ struct WorkoutImportDraft: Codable, Sendable {
     }
 
     private static func equipmentMatches(_ imported: String, _ catalog: String) -> Bool {
-        let source = normalized(imported)
-        let target = normalized(catalog)
+        let source = ExerciseCatalog.normalizedName(imported)
+        let target = ExerciseCatalog.normalizedName(catalog)
         if source == target { return true }
-        let kinds = ["barbell", "dumbbell", "cable", "bodyweight", "kettlebell", "smith"]
+        if target == "unspecified" || target == "other" { return true }
+        let kinds = ["barbell", "dumbbell", "cable", "bodyweight", "kettlebell", "smith", "band", "ez bar", "trap bar"]
         let sourceKinds = Set(kinds.filter { source.contains($0) })
         let targetKinds = Set(kinds.filter { target.contains($0) })
         if !sourceKinds.isEmpty || !targetKinds.isEmpty {
@@ -286,12 +285,12 @@ struct WorkoutImportDraft: Codable, Sendable {
 }
 
 enum ImportedWorkoutFocus {
-    private enum Region { case upper, lower, neutral, unknown }
+    private enum Region { case upper, lower, fullBody, neutral, unknown }
 
     static func title(for exercises: [ImportedExercise], mappings: [UUID: ExerciseDefinition]) -> String {
         let regions = exercises.map { region(for: $0, mapped: mappings[$0.id]) }
-        let upper = regions.contains { $0 == .upper }
-        let lower = regions.contains { $0 == .lower }
+        let upper = regions.contains { $0 == .upper || $0 == .fullBody }
+        let lower = regions.contains { $0 == .lower || $0 == .fullBody }
         if upper && lower { return "Full Body" }
         if regions.contains(where: { $0 == .unknown }) { return "Workout" }
         if upper { return "Upper Body" }
@@ -305,15 +304,15 @@ enum ImportedWorkoutFocus {
         if let mapped {
             catalog = ExerciseCatalog.exercises.first { mapped.id == $0.definition.id }
         } else {
-            catalog = ExerciseCatalog.exercises.first {
-                ([$0.name] + $0.aliases).contains { normalized($0) == name }
-            }
+            let candidates = ExerciseCatalog.candidates(named: name)
+            catalog = candidates.count == 1 ? candidates[0] : nil
         }
         if let catalog {
             switch catalog.category {
             case .legs: return .lower
             case .chest, .back, .shoulders, .arms: return .upper
-            case .core: return .neutral
+            case .core, .cardio, .mobility, .other: return .neutral
+            case .fullBody: return .fullBody
             }
         }
         if hasTerm(name, in: ["rowing machine", "rower", "ergometer", "bike", "cycle", "treadmill", "elliptical", "crunch", "plank", "twist", "leg raise", "sit-up", "dead bug", "bird dog", "mountain climber", "pallof", "ab wheel", "mobility", "stretch"]) { return .neutral }

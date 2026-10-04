@@ -1,7 +1,7 @@
 # Ascend Fit — Current Execution Plan
 
-**Current status:** Campaign UI redesign and plain-language effort prompt implemented and simulator-verified on `codex/campaign-ui`; review and physical-device validation remain outstanding
-**Last updated:** September 27, 2026
+**Current status:** Campaign UI and the offline exercise catalog are implemented; 95 iOS simulator tests passed on October 4, 2026. The 942-exercise build was installed and launched on the paired iPhone 16 Pro. Real-world 95% recognition coverage still needs a representative import corpus.
+**Last updated:** October 4, 2026
 
 This is the current-status index for Ascend Fit. It records where the work stands and what happens next; it does not duplicate the detailed implementation roadmap.
 
@@ -51,7 +51,7 @@ After that foundation works reliably, continue through the ordered phases in the
 - [x] Canonical workout domain implemented and tested
 - [x] Manual builder → Today → Start → Log Set → Rest flow works in the simulator
 - [x] Saved Today plans persist in SQLite; starting atomically consumes the matching plan, and failed starts preserve it for retry
-- [x] Manual builder uses a searchable 100-exercise catalog, compact summaries, set-detail editing, profile-based starting loads, first-set propagation, direct numeric editing, and native swipe deletion
+- [x] Manual builder uses a searchable 942-exercise offline catalog, compact summaries, set-detail editing, profile-based starting loads, first-set propagation, direct numeric editing, and native swipe deletion
 - [x] First-launch training profile persists units, sex, height, body weight, and lifting experience
 - [x] Today Settings supports persisted unit selection and training-profile editing through the shared profile editor; new manual workouts use the preference while saved workouts retain their units
 - [x] Active workout preserves the current-set hero while showing exercise progress and a compact current-exercise set ledger
@@ -82,6 +82,8 @@ After that foundation works reliably, continue through the ordered phases in the
 - [x] Offline Share Extension capture, protected App Group inbox, duplicate/recovery handling, explicit import review, and shared-data deletion
 - [x] Private-service text client, explicit transmission consent, safe retry/cancellation, source verification, multiple-workout selection and preserved review drafts
 - [x] New imports default to an exercise-derived Upper Body, Lower Body, or Full Body name; users can enter and save a personal name during review. Manual workout naming remains available in the builder
+- [x] Offline catalog expanded to 942 uniquely named exercises from a pinned Free Exercise DB snapshot plus maintained entries, with stable existing IDs, common aliases, and a reproducible generator
+- [ ] Measure automatic recognition and wrong-match rates against a consented, representative coach-workout corpus; catalog count alone does not establish the 95% target
 - [ ] Live provider evaluation, service/auth setup and physical Share Sheet host validation complete
 
 ## Maintenance rule

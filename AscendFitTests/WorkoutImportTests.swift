@@ -27,6 +27,24 @@ struct WorkoutImportTests {
         #expect(draft.definition(for: conflicting) == nil)
     }
 
+    @Test("Bundled exercise seed recognizes additional common variants offline")
+    func expandedExerciseMatching() {
+        let draft = WorkoutImportDraft()
+        let cases = [
+            ("Trap Bar Deadlift", "Trap-bar"),
+            ("Band Assisted Pull-Up", "Resistance bands"),
+            ("Walking, Treadmill", "Treadmill"),
+            ("Stationary Bike", "Stationary bike"),
+            ("Adductor rock-backs", "Bodyweight"),
+            ("Bodyweight squats", "Bodyweight"),
+            ("Seated calf press", "Seated calf press machine")
+        ]
+        for (name, equipment) in cases {
+            let exercise = ImportedExercise(id: UUID(), name: name, equipment: equipment, notes: nil, group: nil, sets: [])
+            #expect(draft.definition(for: exercise) != nil, "Expected an offline library match for \(name)")
+        }
+    }
+
     @Test("Smart quotes introduced by iOS paste are repaired before JSON validation")
     func smartQuotePaste() throws {
         let original = try fixture("lower-a-ready")
@@ -36,17 +54,12 @@ struct WorkoutImportTests {
         #expect(response.source?.originalText == original)
     }
 
-    @Test("The confirmed Lower A file produces all targets and exact source after explicit custom-name review")
+    @Test("A representative ready file imports every target without exercise-name corrections")
     func confirmedWorkout() throws {
         let text = try fixture("lower-a-ready")
-        var draft = try draft(text)
-        #expect(throws: WorkoutImportError.self) { try draft.makePlan() }
-        let unmatched = draft.response!.workouts[0].exercises.filter { draft.definition(for: $0) == nil }
-        try draft.keepUnmatchedNamesAsCustom()
+        let draft = try draft(text)
+        #expect(draft.response!.workouts[0].exercises.allSatisfy { draft.definition(for: $0) != nil })
         let plan = try draft.makePlan()
-        for exercise in unmatched {
-            #expect(plan.exercises.first { $0.id == exercise.id }?.exercise.name == exercise.name)
-        }
         #expect(plan.title == "Lower Body")
         #expect(plan.exercises.count == 13)
         #expect(plan.exercises.flatMap(\.sets).count == 33)
